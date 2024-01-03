@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eminus5.viewController.desarrollador.controllers.FXMLPantallaInicioDController">
+   <children>
+      <Pane fx:id="pnInsideSceneD" layoutX="170.0" layoutY="80.0" prefHeight="550.0" prefWidth="830.0" />
+      <Pane prefHeight="80.0" prefWidth="1000.0" style="-fx-background-color: #18419D;">
+         <children>
+            <Label layoutX="815.0" layoutY="15.0" text="EMINUS 5">
+               <font>
+                  <Font name="System Bold" size="36.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="53.0" fitWidth="34.0" layoutX="20.0" layoutY="24.0" onMouseClicked="#showSceneLogin" pickOnBounds="true" preserveRatio="true" rotate="180.0">
+               <image>
+                  <Image url="@../../../sources/icon/logout_icon.png" />
+               </image>
+            </ImageView>
+         </children></Pane>
+      <Pane layoutY="80.0" prefHeight="550.0" prefWidth="170.0" style="-fx-background-color: lightGray;">
+         <children>
+            <Button layoutX="10.0" layoutY="450.0" mnemonicParsing="false" onAction="#btnBitacoras" prefHeight="31.0" prefWidth="151.0" text="Bitacoras" />
+            <Button layoutX="10.0" layoutY="315.0" mnemonicParsing="false" onAction="#btnActividades" prefHeight="31.0" prefWidth="151.0" text="Actividades" />
+            <Button layoutX="10.0" layoutY="175.0" mnemonicParsing="false" onAction="#btnCambios" prefHeight="31.0" prefWidth="151.0" text="Cambios" />
+            <Button layoutX="10.0" layoutY="50.0" mnemonicParsing="false" onAction="#btnDefectos" prefHeight="31.0" prefWidth="151.0" text="Defectos" />
+         </children></Pane>
+      <Label fx:id="lbTituloVentana" layoutX="170.0" layoutY="80.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

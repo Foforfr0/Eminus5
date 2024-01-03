@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="560.0" prefWidth="630.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eminus5.viewController.desarrollador.controllers.FXMLFormularioModCambioController">
+   <children>
+      <Pane prefHeight="80.0" prefWidth="630.0" style="-fx-background-color: #18419D;">
+         <children>
+            <Label layoutX="455.0" layoutY="14.0" text="EMINUS 5">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Label>
+         </children></Pane>
+      <Label layoutX="24.0" layoutY="80.0" text="Modificar cambio">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Label>
+      <Label layoutX="24.0" layoutY="133.0" text="Ingrese los datos requeridos (*)">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="24.0" layoutY="191.0" text="Titulo (*)">
+         <font>
+            <Font size="24.0" />
+         </font></Label>
+      <TextField fx:id="tfTituloCambio" layoutX="23.0" layoutY="228.0" />
+      <Label layoutX="22.0" layoutY="263.0" text="Descripcion (*)">
+         <font>
+            <Font size="24.0" />
+         </font></Label>
+      <TextField fx:id="tfDescCambio" layoutX="23.0" layoutY="305.0" prefHeight="95.0" prefWidth="187.0" />
+      <Label layoutX="24.0" layoutY="419.0" prefHeight="35.0" prefWidth="110.0" text="Estado">
+         <font>
+            <Font size="24.0" />
+         </font></Label>
+      <ComboBox fx:id="cbEstadoCambio" layoutX="28.0" layoutY="458.0" prefHeight="31.0" prefWidth="187.0" />
+      <Label layoutX="327.0" layoutY="191.0" text="Tipo (*)">
+         <font>
+            <Font size="24.0" />
+         </font></Label>
+      <ComboBox fx:id="cbTipoCambio" layoutX="321.0" layoutY="228.0" prefHeight="31.0" prefWidth="187.0" />
+      <Label layoutX="320.0" layoutY="263.0" text="Fecha de inicio (*)">
+         <font>
+            <Font size="24.0" />
+         </font></Label>
+      <DatePicker fx:id="dpFechaInicioCambio" layoutX="321.0" layoutY="298.0" prefHeight="31.0" prefWidth="187.0" />
+      <Label layoutX="319.0" layoutY="332.0" text="Fecha de fin (*)">
+         <font>
+            <Font size="24.0" />
+         </font></Label>
+      <DatePicker fx:id="dpFechaFinCambio" layoutX="321.0" layoutY="369.0" prefHeight="31.0" prefWidth="187.0" />
+      <Label layoutX="324.0" layoutY="419.0" text="Esfuerzo">
+         <font>
+            <Font size="24.0" />
+         </font></Label>
+      <TextField fx:id="tfEsfuerzo" layoutX="324.0" layoutY="458.0" />
+      <Button layoutX="435.0" layoutY="505.0" mnemonicParsing="false" onAction="#btnGuardarCambio" text="Guardar" />
+      <Button layoutX="527.0" layoutY="505.0" mnemonicParsing="false" onAction="#btnCancelarCambio" text="Cancelar" />
+   </children>
+</AnchorPane>

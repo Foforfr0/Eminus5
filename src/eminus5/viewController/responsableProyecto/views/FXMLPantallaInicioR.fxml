@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="630.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eminus5.viewController.responsableProyecto.controllers.FXMLPantallaInicioRController">
+   <children>
+      <Pane prefHeight="90.0" prefWidth="1000.0" style="-fx-background-color: #1C6CE3;">
+         <children>
+            <Label fx:id="lbTittleWindow" contentDisplay="CENTER" layoutX="373.0" layoutY="19.0" nodeOrientation="LEFT_TO_RIGHT" style="-fx-text-alignment: center; -fx-alignment: center;" text="Menú principal" textAlignment="CENTER" textFill="WHITE" textOverrun="CENTER_WORD_ELLIPSIS">
+               <font>
+                  <Font name="System Bold" size="35.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="57.0" fitWidth="51.0" layoutX="26.0" layoutY="20.0" onMouseClicked="#showSceneLogin" pickOnBounds="true" preserveRatio="true" rotate="180.0">
+               <image>
+                  <Image url="@../../../sources/icon/logout_icon.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <Button fx:id="btInicio" layoutX="90.0" layoutY="59.0" mnemonicParsing="false" onMouseClicked="#clearInsideScene" style="-fx-background-color: inherit;" text="Inicio" textFill="WHITE">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
+            <Button fx:id="btGestionarActividades" layoutX="146.0" layoutY="59.0" mnemonicParsing="false" onMouseClicked="#clicShowGestionarActividadesScene" style="-fx-background-color: inherit;" text="Gestionar actividades" textFill="WHITE">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
+         </children>
+      </Pane>
+      <ImageView fitHeight="98.0" fitWidth="358.0" layoutX="340.0" layoutY="274.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../sources/img/Captura%20de%20pantalla%202023-11-16%20130759.png" />
+         </image>
+      </ImageView>
+      <Pane fx:id="pnInsideScene" layoutY="90.0" onKeyPressed="#clicClearScene" prefHeight="540.0" prefWidth="1000.0" />
+   </children>
+</AnchorPane>

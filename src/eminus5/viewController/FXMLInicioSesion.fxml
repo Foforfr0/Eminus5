@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane onKeyPressed="#clicGetLogin" prefHeight="630.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eminus5.viewController.FXMLInicioSesionController">
+    <children>
+      <Pane layoutY="1.0" prefHeight="630.0" prefWidth="500.0">
+         <children>
+            <Label focusTraversable="false" layoutX="129.0" layoutY="36.0" text="Inicio sesión">
+               <font>
+                  <Font size="54.0" />
+               </font>
+            </Label>
+            <Label focusTraversable="false" layoutX="91.0" layoutY="165.0" text="Usuario: ">
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </Label>
+            <TextField fx:id="tfUserLogin" layoutX="207.0" layoutY="161.0" prefHeight="54.0" prefWidth="251.0">
+               <font>
+                  <Font size="25.0" />
+               </font></TextField>
+            <Label fx:id="lbErrorUser" focusTraversable="false" layoutX="92.0" layoutY="215.0" prefHeight="40.0" prefWidth="365.0" textFill="RED">
+               <font>
+                  <Font size="26.0" />
+               </font>
+            </Label>
+            <Label focusTraversable="false" layoutX="42.0" layoutY="295.0" text="Contraseña: ">
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </Label>
+            <PasswordField fx:id="tfPasswordLogin" layoutX="207.0" layoutY="290.0" prefHeight="54.0" prefWidth="251.0">
+               <font>
+                  <Font size="25.0" />
+               </font></PasswordField>
+            <Label fx:id="lbErrorPassword" focusTraversable="false" layoutX="92.0" layoutY="346.0" prefHeight="40.0" prefWidth="365.0" textFill="RED">
+               <font>
+                  <Font size="26.0" />
+               </font></Label>
+            <Button fx:id="btLogin" defaultButton="true" layoutX="176.0" layoutY="423.0" mnemonicParsing="false" prefHeight="57.0" prefWidth="197.0" text="Iniciar sesión">
+               <font>
+                  <Font size="27.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Button>
+         </children>
+      </Pane>
+      <Pane layoutX="504.0" layoutY="1.0" prefHeight="630.0" prefWidth="500.0">
+         <children>
+            <ImageView fitHeight="464.0" fitWidth="500.0" layoutX="15.0" layoutY="83.0" opacity="0.8" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../sources/img/background_login.png" />
+               </image>
+               <viewport>
+                  <Rectangle2D />
+               </viewport>
+            </ImageView>
+         </children>
+      </Pane>
+    </children>
+</AnchorPane>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="560.0" prefWidth="630.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eminus5.viewController.desarrollador.controllers.FXMLFormularioModDefectoController">
+   <children>
+      <Pane prefHeight="80.0" prefWidth="630.0" style="-fx-background-color: #18419D;">
+         <children>
+            <Label layoutX="455.0" layoutY="14.0" text="EMINUS 5">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Label>
+         </children></Pane>
+      <Label layoutX="31.0" layoutY="80.0" text="Modificar defecto">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Label>
+      <Label layoutX="31.0" layoutY="133.0" text="Ingrese los datos requeridos (*)">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="33.0" layoutY="193.0" text="Titulo (*)">
+         <font>
+            <Font size="24.0" />
+         </font></Label>
+      <TextField fx:id="tfTituloDefecto" layoutX="34.0" layoutY="222.0" />
+      <Label layoutX="34.0" layoutY="273.0" text="Descripcion (*)">
+         <font>
+            <Font size="24.0" />
+         </font></Label>
+      <TextArea fx:id="taDescripcion" layoutX="32.0" layoutY="310.0" prefHeight="100.0" prefWidth="187.0" />
+      <Label layoutX="34.0" layoutY="413.0" text="Estado">
+         <font>
+            <Font size="24.0" />
+         </font></Label>
+      <ComboBox fx:id="cbEstadoDefecto" layoutX="34.0" layoutY="449.0" prefHeight="31.0" prefWidth="187.0" />
+      <Label layoutX="330.0" layoutY="193.0" text="Tipo (*)">
+         <font>
+            <Font size="24.0" />
+         </font></Label>
+      <ComboBox fx:id="cbTipoDefecto" layoutX="330.0" layoutY="222.0" prefHeight="31.0" prefWidth="187.0" />
+      <Label layoutX="326.0" layoutY="273.0" text="Fecha encontrado (*)">
+         <font>
+            <Font size="24.0" />
+         </font></Label>
+      <DatePicker fx:id="dpFechaEncontrado" layoutX="327.0" layoutY="308.0" prefHeight="31.0" prefWidth="187.0" />
+      <Label layoutX="326.0" layoutY="343.0" text="Fecha solucionado (*)">
+         <font>
+            <Font size="24.0" />
+         </font></Label>
+      <DatePicker fx:id="dpFechaSolucionado" layoutX="327.0" layoutY="379.0" prefHeight="31.0" prefWidth="187.0" />
+      <Label layoutX="330.0" layoutY="413.0" text="Esfuerzo">
+         <font>
+            <Font size="24.0" />
+         </font></Label>
+      <TextField fx:id="tfEsfuerzo" layoutX="329.0" layoutY="449.0" />
+      <Button layoutX="440.0" layoutY="500.0" mnemonicParsing="false" onAction="#btnGuardarDefecto" text="Guardar" />
+      <Button layoutX="530.0" layoutY="500.0" mnemonicParsing="false" onAction="#btnCancelarDefecto" text="Cancelar" />
+   </children>
+</AnchorPane>

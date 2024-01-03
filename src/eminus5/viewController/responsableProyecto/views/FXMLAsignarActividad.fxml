@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="440.0" prefWidth="770.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eminus5.viewController.responsableProyecto.controllers.FXMLAsignarActividadController">
+   <children>
+      <Pane fx:id="pnPrincipal" prefHeight="60.0" prefWidth="770.0" style="-fx-background-color: #2c87cf;">
+         <children>
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="263.0" layoutY="8.0" text="Asignar actividad" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="30.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Pane layoutY="60.0" prefHeight="380.0" prefWidth="770.0">
+         <children>
+            <Label layoutX="23.0" layoutY="1.0" text="Seleccione un desarrollador para asignar">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="33.0" layoutY="21.0" text="De clic en &quot;Desasignar&quot; para quitar selección de desarrollador">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <ScrollPane hbarPolicy="NEVER" layoutX="23.0" layoutY="76.0" prefHeight="282.0" prefWidth="724.0">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="280.0" prefWidth="722.0">
+                     <children>
+                        <TableView fx:id="tvDesarrolladores" prefHeight="282.0" prefWidth="724.0">
+                           <columns>
+                              <TableColumn fx:id="tcNumDesarrollador" prefWidth="29.0" text="#" />
+                              <TableColumn fx:id="tcApellidoPaterno" prefWidth="127.0" text="Apellido paterno" />
+                              <TableColumn fx:id="tcApellidoMaterno" prefWidth="116.0" text="Apellido materno" />
+                              <TableColumn fx:id="tcNombre" prefWidth="97.0" text="Nombre" />
+                              <TableColumn fx:id="tcMatricula" prefWidth="82.0" text="Matrícula" />
+                              <TableColumn fx:id="tcCorreoInstitucional" prefWidth="128.0" text="Correo institucional" />
+                              <TableColumn fx:id="tcSemestre" prefWidth="69.0" text="Semestre" />
+                              <TableColumn fx:id="tcAsignado" prefWidth="75.0" text="Asignado" />
+                           </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </ScrollPane>
+            <Button layoutX="688.0" layoutY="45.0" mnemonicParsing="false" onMouseClicked="#clicSaveAsignacion" text="Guardar" />
+            <Button layoutX="603.0" layoutY="45.0" mnemonicParsing="false" onMouseClicked="#clicCleanAsignacion" text="Desasignar" />
+            <Button layoutX="531.0" layoutY="45.0" mnemonicParsing="false" onMouseClicked="#clicCancelAsignacion" text="Cancelar" />
+            <Label layoutX="33.0" layoutY="37.0" text="De clic en &quot;Desasignar&quot; para quitar selección de desarrollador">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

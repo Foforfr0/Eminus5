@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="540.0" prefWidth="790.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eminus5.viewController.desarrollador.controllers.FXMLDefectosProyectoController">
+   <children>
+      <ScrollPane layoutX="94.0" layoutY="138.0" prefHeight="302.0" prefWidth="603.0">
+         <content>
+            <TableView fx:id="tvDefectos" prefHeight="300.0" prefWidth="600.0">
+              <columns>
+                <TableColumn fx:id="tcNombre" prefWidth="223.0" text="Nombre" />
+                  <TableColumn fx:id="tcEstado" prefWidth="79.0" text="Estado" />
+                <TableColumn fx:id="tcEsfuerzo" prefWidth="65.0" text="Esfuerzo" />
+                  <TableColumn fx:id="tcTipo" prefWidth="89.0" text="Tipo" />
+                  <TableColumn fx:id="tcSolCambio" prefWidth="140.0" text="Sol. cambio" />
+              </columns>
+            </TableView>
+         </content>
+      </ScrollPane>
+      <Button layoutX="596.0" layoutY="105.0" mnemonicParsing="false" onMouseClicked="#clicAddSolicitud" text="Solicitar cambio" />
+      <Label layoutX="94.0" layoutY="25.0" text="Defectos del proyecto">
+         <font>
+            <Font size="35.0" />
+         </font>
+      </Label>
+      <Button layoutX="94.0" layoutY="105.0" mnemonicParsing="false" onMouseClicked="#clicAddDefecto" text="Registrar" />
+      <Button layoutX="167.0" layoutY="105.0" mnemonicParsing="false" onMouseClicked="#clicModifyDefecto" text="Modificar" />
+   </children>
+</AnchorPane>

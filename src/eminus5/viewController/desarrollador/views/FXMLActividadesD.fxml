@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="540.0" prefWidth="790.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eminus5.viewController.desarrollador.controllers.FXMLActividadesDController">
+   <children>
+      <TableView fx:id="tvActividades" layoutX="76.0" layoutY="122.0" prefHeight="318.0" prefWidth="639.0">
+        <columns>
+          <TableColumn fx:id="tcNombreActividad" prefWidth="256.0" resizable="false" text="Nombre" />
+            <TableColumn fx:id="tcDescripcionActividad" editable="false" prefWidth="382.0" text="Descripcion" />
+        </columns>
+      </TableView>
+      <Button layoutX="606.0" layoutY="91.0" mnemonicParsing="false" onAction="#btnEntregarActividad" text="Entregar actividad" />
+      <Label layoutX="76.0" layoutY="25.0" text="Actividades del proyecto">
+         <font>
+            <Font size="35.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

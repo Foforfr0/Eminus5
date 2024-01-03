@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="630.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eminus5.viewController.desarrollador.controllers.FXMLDefectosDController">
+   <children>
+      <Pane prefHeight="80.0" prefWidth="1000.0" style="-fx-background-color: #18419D;" />
+      <Pane layoutY="80.0" prefHeight="550.0" prefWidth="170.0" style="-fx-background-color: lightgrey;" />
+      <TableView fx:id="tvDefectos" layoutX="189.0" layoutY="103.0" prefHeight="455.0" prefWidth="785.0">
+        <columns>
+          <TableColumn fx:id="tcNombreDefecto" prefWidth="188.0" resizable="false" text="Titulo" />
+          <TableColumn fx:id="tcDescripcionDefecto" prefWidth="596.0" resizable="false" text="Descripcion" />
+        </columns>
+      </TableView>
+      <Button layoutX="680.0" layoutY="575.0" mnemonicParsing="false" onAction="#btnRegistrarDefecto" prefHeight="31.0" prefWidth="137.0" text="Registrar defecto" />
+      <Button fx:id="btModificarDefecto" layoutX="837.0" layoutY="575.0" mnemonicParsing="false" onAction="#btnModificarDefecto" text="Modificar defecto" />
+      <Button fx:id="btSolicitudCambio" layoutX="189.0" layoutY="575.0" mnemonicParsing="false" onAction="#btnSolicitudCambio" style="-fx-background-color: ivory;" text="Solicitud de cambio" />
+   </children>
+</AnchorPane>

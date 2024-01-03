@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="630.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eminus5.viewController.desarrollador.controllers.FXMLDetallesActividadDController">
+   <children>
+      <Pane prefHeight="80.0" prefWidth="1000.0" style="-fx-background-color: #18419D;">
+         <children>
+            <ImageView fitHeight="40.0" fitWidth="45.0" layoutX="14.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true" />
+         </children>
+      </Pane>
+      <Button layoutX="410.0" layoutY="574.0" mnemonicParsing="false" onAction="#btnEntregar" text="Entregar" />
+      <Button layoutX="515.0" layoutY="574.0" mnemonicParsing="false" onAction="#btnCancelarActividad" text="Cancelar" />
+      <Label layoutX="14.0" layoutY="86.0" prefHeight="98.0" prefWidth="385.0" text="Actividad">
+         <font>
+            <Font name="System Bold" size="64.0" />
+         </font>
+      </Label>
+      <Label fx:id="lbTituloActividad" layoutX="13.0" layoutY="183.0" prefHeight="98.0" prefWidth="974.0" wrapText="true">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="14.0" layoutY="281.0" prefHeight="53.0" prefWidth="406.0" text="Descripcion">
+         <font>
+            <Font name="System Bold" size="36.0" />
+         </font>
+      </Label>
+      <Label fx:id="lbDescripcionActividad" layoutX="14.0" layoutY="334.0" prefHeight="218.0" prefWidth="961.0" wrapText="true" />
+   </children>
+</AnchorPane>
