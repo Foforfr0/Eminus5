@@ -36,7 +36,7 @@
                         </Label>
                         <ScrollPane layoutX="53.0" layoutY="114.0" prefHeight="245.0" prefWidth="373.0">
                            <content>
-                              <TextArea fx:id="tfDescripcion" prefHeight="243.0" prefWidth="371.0" />
+                              <TextArea fx:id="tfDescripcion" prefHeight="243.0" prefWidth="371.0" wrapText="true" />
                            </content>
                         </ScrollPane>
                         <Button fx:id="btAddSolicitud" defaultButton="true" layoutX="688.0" layoutY="14.0" mnemonicParsing="false" onAction="#clicAddSolicitud" text="Guardar" />
@@ -47,7 +47,7 @@
                         </Label>
                         <ScrollPane layoutX="58.0" layoutY="405.0" prefHeight="245.0" prefWidth="322.0">
                            <content>
-                              <TextArea fx:id="tfRazon" prefHeight="243.0" prefWidth="320.0" />
+                              <TextArea fx:id="tfRazon" prefHeight="243.0" prefWidth="320.0" wrapText="true" />
                            </content>
                         </ScrollPane>
                         <Label layoutX="395.0" layoutY="378.0" text="Impacto: ">
@@ -57,7 +57,7 @@
                         </Label>
                         <ScrollPane layoutX="405.0" layoutY="405.0" prefHeight="245.0" prefWidth="322.0">
                            <content>
-                              <TextArea fx:id="tfImpacto" prefHeight="243.0" prefWidth="320.0" />
+                              <TextArea fx:id="tfImpacto" prefHeight="243.0" prefWidth="320.0" wrapText="true" />
                            </content>
                         </ScrollPane>
                         <Label layoutX="48.0" layoutY="659.0" text="Acción propuesta:">
@@ -67,7 +67,7 @@
                         </Label>
                         <ScrollPane layoutX="58.0" layoutY="686.0" prefHeight="245.0" prefWidth="373.0">
                            <content>
-                              <TextArea fx:id="tfAccionPropuesta" prefHeight="243.0" prefWidth="371.0" />
+                              <TextArea fx:id="tfAccionPropuesta" prefHeight="243.0" prefWidth="371.0" wrapText="true" />
                            </content>
                         </ScrollPane>
                         <TextField fx:id="tfNombre" layoutX="55.0" layoutY="59.0" prefHeight="25.0" prefWidth="275.0" />

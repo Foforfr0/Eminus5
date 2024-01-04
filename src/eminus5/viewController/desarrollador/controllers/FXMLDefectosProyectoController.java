@@ -200,6 +200,7 @@ public class FXMLDefectosProyectoController implements Initializable {
     
     @FXML
     private void clicAddSolicitud(MouseEvent event) {
+        createSolicitudCambio(0);
     }
 
     @FXML

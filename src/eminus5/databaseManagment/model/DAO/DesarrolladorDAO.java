@@ -23,10 +23,10 @@ public class DesarrolladorDAO {
         
         if (connectionDB != null) {    
             try {            
-                String sqlQuery = "SELECT U.IDUsuario, U.ApellidoPaterno, U.ApellidoMaterno, U.Nombre, U.Matricula, " +
+                String sqlQuery = "SELECT U.IdUsuario, U.ApellidoPaterno, U.ApellidoMaterno, U.Nombre, U.Usuario, " +
                                   "U.CorreoInstitucional, U.Semestre FROM Usuario U RIGHT JOIN Proyecto P " +
-                                  "ON U.IDProyecto = P.IDProyecto " +
-                                  "WHERE U.RolSistema = 2 AND P.IDProyecto = ?;";
+                                  "ON U.IdProyecto = P.IdProyecto " +
+                                  "WHERE U.IdRolSistema = 2 AND P.IdProyecto = ?;";
                 PreparedStatement prepareQuery = connectionDB.prepareStatement(sqlQuery);
                     prepareQuery.setInt(1, idProyecto);
                 ResultSet resultQuery = prepareQuery.executeQuery();
@@ -34,11 +34,11 @@ public class DesarrolladorDAO {
                 ObservableList<Desarrollador> listDesarrolladores = FXCollections.observableArrayList();
                 while(resultQuery.next()){
                     Desarrollador newDesarrollador = new Desarrollador();
-                        newDesarrollador.setIdDesarrollador(resultQuery.getInt("IDUsuario"));
+                        newDesarrollador.setIdDesarrollador(resultQuery.getInt("IdUsuario"));
                         newDesarrollador.setNombre(resultQuery.getString("Nombre"));
                         newDesarrollador.setApellidoPaterno(resultQuery.getString("ApellidoPaterno"));
                         newDesarrollador.setApellidoMaterno(resultQuery.getString("ApellidoMaterno"));
-                        newDesarrollador.setMatricula(resultQuery.getString("Matricula"));
+                        newDesarrollador.setMatricula(resultQuery.getString("Usuario"));
                         newDesarrollador.setCorreoInstitucional(resultQuery.getString("CorreoInstitucional"));
                         newDesarrollador.setSemestre(String.valueOf(resultQuery.getInt("Semestre"))+"°");
                     listDesarrolladores.add(newDesarrollador);

@@ -1,5 +1,5 @@
 -- MySQL Workbench Forward Engineering
-
+DROP DATABASE Eminus5;
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
@@ -351,76 +351,73 @@ INSERT INTO Periodo (Inicio, Fin) VALUES ('2023-01-01', '2023-06-08');
 INSERT INTO Periodo (Inicio, Fin) VALUES ('2023-07-01', '2024-01-01');
 /*EXPERIENCIA EDUCATIVA------------------------------------------------------------------------------------------------------------------------*/
 INSERT INTO ExperienciaEducativa (Nombre, Descripcion, idPeriodo) 
-	VALUES ('Proyecto guiado', 'Descripción de ejemplo de proyecto guiado', 2);
+    VALUES ('Proyecto guiado', 'Descripción de ejemplo de proyecto guiado', 2);
 /*PROYECTO------------------------------------------------------------------------------------------------------------------------*/
 INSERT INTO Proyecto (Nombre, NumIntegrantes, Descripcion, IdExperienciaEducativa) 
-	VALUES ('SPGER', 10, 'Descripción de ejemplo del proyecto SPGER', 1);
+    VALUES ('SPGER', 10, 'Descripción de ejemplo del proyecto SPGER', 1);
 /*USUARIO-------------------------------------------------------------------------------------------------------------------------*/
 INSERT INTO Usuario (Usuario, Password, Nombre, ApellidoPaterno, ApellidoMaterno, CorreoPersonal, CorreoInstitucional, Semestre, IdRolSistema, IDproyecto, IdExperienciaEducativa) 
-	VALUES('P21013908', '1234', 'Abraham David', 'Fernández', 'Rodríguez', 
-	'abrakadabra007@gmail.com', 'ps21013908@profesor.uv.mx', NULL, 1, 1, 1);
+    VALUES('P21013908', '1234', 'Abraham David', 'Fernández', 'Rodríguez', 
+    'abrakadabra007@gmail.com', 'ps21013908@profesor.uv.mx', NULL, 1, 1, 1);
 INSERT INTO Usuario (Usuario, Password, Nombre, ApellidoPaterno, ApellidoMaterno, CorreoPersonal, CorreoInstitucional, Semestre, IdRolSistema, IDproyecto, IdExperienciaEducativa) 
-	VALUES('S21013909', '1234', 'Rodolfo', 'Fernández', 'Rodríguez', 
-	'foforfr007@gmail.com', 'zs21013909@estudiantes.uv.mx', 6, 2, 1, 1);
+    VALUES('S21013909', '1234', 'Rodolfo', 'Fernández', 'Rodríguez', 
+    'foforfr007@gmail.com', 'zs21013909@estudiantes.uv.mx', 6, 2, 1, 1);
 INSERT INTO Usuario (Usuario, Password, Nombre, ApellidoPaterno, ApellidoMaterno, CorreoPersonal, CorreoInstitucional, Semestre, IdRolSistema, IDproyecto, IdExperienciaEducativa) 
-	VALUES('S21013910', '1234', 'Andrés', 'Arellano', 'García', 
-	'andargar@gmail.com', 'zs21013910@estudiantes.uv.mx', 6, 2, 1, 1);
+    VALUES('S21013910', '1234', 'Andrés', 'Arellano', 'García', 
+    'andargar@gmail.com', 'zs21013910@estudiantes.uv.mx', 6, 2, 1, 1);
 INSERT INTO Usuario (Usuario, Password, Nombre, ApellidoPaterno, ApellidoMaterno, CorreoPersonal, CorreoInstitucional, Semestre, IdRolSistema, IDProyecto, IdExperienciaEducativa)
-	VALUES('S21013885', 'saijiki', 'Papu', 'Vazquez', 'Quinto', 'lol2021@gmail.com', 'zs21013885@estudiantes.uv.mx', 6, 2, 1, 1);
+    VALUES('S21013885', 'saijiki', 'Papu', 'Vazquez', 'Quinto', 'lol2021@gmail.com', 'zs21013885@estudiantes.uv.mx', 6, 2, 1, 1);
 /*ACTIVIDAD-------------------------------------------------------------------------------------------------------------------------*/
 USE Eminus5;
 INSERT INTO Actividad (Nombre, Descripcion, IdEstado, IdTipo, FechaInicio, FechaTermino, IdProyecto, IdDesarrollador) VALUES 
-('Creación de base de datos', 'Descripción de ejemplo para la actividad Creación de base de datos', 
-1, 3, '2023-06-01', '2023-06-04', 1, 2);
+    ('Creación de base de datos', 'Descripción de ejemplo para la actividad Creación de base de datos', 
+    1, 3, '2023-06-01', '2023-06-04', 1, 2);
 INSERT INTO Actividad (Nombre, Descripcion, IdEstado, IdTipo, FechaInicio, FechaTermino, IdProyecto, IdDesarrollador) VALUES 
-('Creación de vistas', 'Descripción de ejemplo para la actividad Creación de vistas', 
-1, 1, '2023-06-01', '2023-06-04', 1, 3);
+    ('Creación de vistas', 'Descripción de ejemplo para la actividad Creación de vistas', 
+    1, 1, '2023-06-01', '2023-06-04', 1, 3);
 INSERT INTO Actividad (Nombre, Descripcion, IdEstado, IdTipo, FechaInicio, FechaTermino, IdProyecto, IdDesarrollador) VALUES 
-('Creación de controladores', 'Descripción de ejemplo para la actividad Creación de controladores', 
-NULL, 4, '2023-06-01', '2023-06-04', 1, NULL);
+    ('Creación de controladores', 'Descripción de ejemplo para la actividad Creación de controladores', 
+    NULL, 4, '2023-06-01', '2023-06-04', 1, NULL);
 INSERT INTO Actividad (Nombre, Descripcion, IdEstado, IdTipo, FechaInicio, FechaTermino, IdProyecto, IdDesarrollador) VALUES 
-('Creación de bitacora', 'Descripción de ejemplo para la actividad Creación de bitacora, relacionada con una actividad', 
-NULL, 4, '2023-06-01', '2023-06-04', 1, 4);
+    ('Creación de bitacora', 'Descripción de ejemplo para la actividad Creación de bitacora, relacionada con una actividad', 
+    1, 4, '2023-06-01', '2023-06-04', 1, 4);
 
 INSERT INTO Actividad (Nombre, Descripcion, IdEstado, IdTipo, FechaInicio, FechaTermino, IdProyecto, IdDesarrollador) VALUES 
-('Creación query', 'Query para getActividadesDesarrollador', 
-1, 2, '2023-12-24', '2023-12-25', 1, 4);
+    ('Creación query', 'Query para getActividadesDesarrollador', 
+    1, 2, '2023-12-24', '2023-12-25', 1, 4);
 INSERT INTO Actividad (Nombre, Descripcion, IdEstado, IdTipo, FechaInicio, FechaTermino, IdProyecto, IdDesarrollador) VALUES 
-('Comprobacion de query', 'Query para getActividadesDesarrollador sin terminar', 
-2, 2, '2023-12-24', '2023-12-25', 1, 4);
+    ('Comprobacion de query', 'Query para getActividadesDesarrollador sin terminar', 
+    2, 2, '2023-12-24', '2023-12-25', 1, 4);
 INSERT INTO Actividad (Nombre, Descripcion, IdEstado, IdTipo, FechaInicio, FechaTermino, IdProyecto, IdDesarrollador) VALUES 
-('Creacion de', 'Query para modificar actividades', 
-1, 2, '2023-12-24', '2023-12-26', 1, 4);
+    ('Creacion de', 'Query para modificar actividades', 
+    1, 2, '2023-12-24', '2023-12-26', 1, 4);
 
 INSERT INTO Actividad (Nombre, Descripcion, IdEstado, IdTipo, FechaInicio, FechaTermino, IdProyecto, IdDesarrollador) VALUES 
-('Creación alert', 'alert para confirmar modificacion', 
-1, 2, '2023-12-24', '2023-12-25', 1, 4);
+    ('Creación alert', 'alert para confirmar modificacion', 
+    1, 2, '2023-12-24', '2023-12-25', 1, 4);
 INSERT INTO Actividad (Nombre, Descripcion, IdEstado, IdTipo, FechaInicio, FechaTermino, IdProyecto, IdDesarrollador) VALUES 
-('Comprobacion de alert', 'comprobar alerts para confirmar', 
-2, 2, '2023-12-24', '2023-12-25', 1, 4);
+    ('Comprobacion de alert', 'comprobar alerts para confirmar', 
+    2, 2, '2023-12-24', '2023-12-25', 1, 4);
 INSERT INTO Actividad (Nombre, Descripcion, IdEstado, IdTipo, FechaInicio, FechaTermino, IdProyecto, IdDesarrollador) VALUES 
-('XD', 'lol nomas por si no me sale', 
-1, 2, '2023-12-24', '2023-12-26', 1, 4);
+    ('XD', 'lol nomas por si no me sale', 
+    1, 2, '2023-12-24', '2023-12-26', 1, 4);
 /*BITACORA-------------------------------------------------------------------------------------------------------------------------*/
 INSERT INTO BitacoraActividad (NumBitacora, Nombre, Descripción, IdActividad, IdDesarrollador)
-VALUES (1, 'Bitacora de ejemplo', 'Prueba para hacer mi CU13, creo jajaj no recuerdo cual era. Ni pex', 4, 4);
-
+    VALUES (1, 'Bitacora de ejemplo', 'Prueba para hacer mi CU13, creo jajaj no recuerdo cual era. Ni pex', 4, 4);
 /*CAMBIO-------------------------------------------------------------------------------------------------------------------------*/
 INSERT INTO Cambio (Nombre, Descripcion, FechaInicio, IdDesarrollador, IdEstado, IdTipo)
-VALUES ('Cambio de ejemplo', 'Ejemplo para ver si mi query funciona', '2023-12-21', 4, 1, 2);
-
+    VALUES ('Cambio de ejemplo', 'Ejemplo para ver si mi query funciona', '2023-12-21', 4, 1, 2);
 INSERT INTO Cambio (Nombre, Descripcion, FechaInicio, IdDesarrollador, IdEstado, IdTipo)
-VALUES ('Cambio de ejemplo 2', 'Ejemplo para modificar', '2023-12-21', 4,  2, 2);
-
+    VALUES ('Cambio de ejemplo 2', 'Ejemplo para modificar', '2023-12-21', 4,  2, 2);
 /*DEFECTO-------------------------------------------------------------------------------------------------------------------------*/
 INSERT INTO Defecto (Nombre, Descripcion, FechaEncontrado, IdProyecto, IdEstado, IdTipo)
-VALUES ('Primer defecto', 'Query regresa null', '2023-12-26', 1, 1, 3);
+    VALUES ('Primer defecto', 'Query regresa null', '2023-12-26', 1, 1, 3);
 INSERT INTO Defecto (Nombre, Descripcion, FechaEncontrado, IdProyecto, IdEstado, IdTipo)
-VALUES ('Defecto de ejemplo', 'Para comprobar query', '2023-12-26', 1, 1, 3);
+    VALUES ('Defecto de ejemplo', 'Para comprobar query', '2023-12-26', 1, 1, 3);
 INSERT INTO Defecto (Nombre, Descripcion, FechaEncontrado, IdProyecto, IdEstado, IdTipo)
-VALUES ('Fallo al no haber defectos', 'Programa falla cuando no halla defectos', '2023-12-28', 1, 1, 1);
+    VALUES ('Fallo al no haber defectos', 'Programa falla cuando no halla defectos', '2023-12-28', 1, 1, 1);
 INSERT INTO Defecto (Nombre, Descripcion, FechaEncontrado, IdProyecto, IdEstado, IdTipo)
-VALUES ('Comprobacion de arreglo', 'Arreglo de controlador', '2023-12-28', 1, 1, 3);
+    VALUES ('Comprobacion de arreglo', 'Arreglo de controlador', '2023-12-28', 1, 1, 3);
 /*-------------------------------------------------------------------------------------------------------------------------*/
 
 SELECT BA.Nombre, BA.Descripción FROM bitacoraactividad BA

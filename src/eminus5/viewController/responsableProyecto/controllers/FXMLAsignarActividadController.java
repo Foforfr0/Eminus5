@@ -15,7 +15,6 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -24,7 +23,6 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
@@ -83,6 +81,9 @@ public class FXMLAsignarActividadController implements Initializable {
                     break;
                 }
             }
+            this.desarrolladores = this.desarrolladores.sorted((desarrollador1, desarrollador2) -> 
+                desarrollador1.getApellidoPaterno().compareTo(desarrollador2.getApellidoPaterno())
+            );
             this.tvDesarrolladores.setItems(this.desarrolladores);
         }catch(SQLException sqlex){
             showMessageFailureConnection();
@@ -120,7 +121,6 @@ public class FXMLAsignarActividadController implements Initializable {
                         radioButton.selectedProperty().addListener((observable, oldValue, newValue) -> {
                             if (newValue == true) {
                                 radioSelected = Integer.parseInt(radioButton.getId());
-                                System.out.println("        RadioSelected: "+radioSelected);
                             }
                         });
                         if (item == true) {
@@ -147,7 +147,6 @@ public class FXMLAsignarActividadController implements Initializable {
     }
     
     private void saveChanges(int idActividad, int newIdDesarrollador) {
-        System.out.println("        Iddesarrollador: "+radioSelected);
         try {
             ResultOperation resultAsignacion = ActividadDAO.setAsignacionActividad(idActividad, newIdDesarrollador);
             if (resultAsignacion.getIsError() == true) {
@@ -160,8 +159,8 @@ public class FXMLAsignarActividadController implements Initializable {
             } else {
                 showMessage(
                     "INFORMATION",
-                    "Se ha asignado correctamente",
-                    "Se ha asignado con éxito la actividad",
+                    "Se han guardado los cambios correctamente",
+                    "Se han guardado los cambios con éxito",
                     ""
                 );
                 closeWindow();
@@ -216,7 +215,7 @@ public class FXMLAsignarActividadController implements Initializable {
         //Was assigned and is assigned to another developer
         if (idDesarrolladorAsignado>0 && getNewDesarrolladorSelected()!= idDesarrolladorAsignado && tgAsignado.getSelectedToggle()!=null) {
             Alert messageConfirmation = new Alert(Alert.AlertType.CONFIRMATION);
-                messageConfirmation.setTitle("Reasignar a otro desarrollador");
+                messageConfirmation.setTitle("Re-asignar a otro desarrollador");
                 messageConfirmation.setHeaderText("Confirme RE-ASIGNACIÓN");
                 messageConfirmation.setContentText("YA ESTABA ASIGNADA LA ACTIVIDAD ¿Quiere asignar la actividad a OTRO DESARROLLADOR?");
                 messageConfirmation.showAndWait().ifPresent(response -> {
@@ -247,7 +246,7 @@ public class FXMLAsignarActividadController implements Initializable {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("¿Está seguro?");
         alert.setHeaderText("¿Está seguro de cancelar?");
-        alert.setContentText("¿Ésta acción no se podrá revertir?");
+        alert.setContentText("No se guardarán los cambios efectuados");
 
 
         alert.showAndWait().ifPresent(response -> {

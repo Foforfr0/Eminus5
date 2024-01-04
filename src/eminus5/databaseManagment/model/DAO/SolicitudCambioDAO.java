@@ -92,17 +92,31 @@ public class SolicitudCambioDAO {
         
         if (connectionDB != null) { 
             try {            
-                String sqlQuery = "INSERT INTO SolicitudCambio (Nombre, Descripcion, Razon, Impacto, AccionPropuesta, " +
-                                  "FechaCreacion, FechaAceptada, EstadoAceptacion, IdDefecto) " +
-                                  "VALUES (?, ?, ?, ?, ?, (STR_TO_DATE(?, '%d-%m-%Y')), NULL, 'Sin aceptar', ?);";
-                PreparedStatement prepareQuery = connectionDB.prepareStatement(sqlQuery);
-                    prepareQuery.setString(1, newSolicitud.getNombre());
-                    prepareQuery.setString(2, newSolicitud.getDescripcion());
-                    prepareQuery.setString(3, newSolicitud.getRazon());
-                    prepareQuery.setString(4, newSolicitud.getImpacto());
-                    prepareQuery.setString(5, newSolicitud.getAccionPropuesta());
-                    prepareQuery.setString(6, newSolicitud.getFechaCreacion().replace("/}", "-"));
-                    prepareQuery.setInt(7, newSolicitud.getIdDefecto() <= 0 ? null : newSolicitud.getIdDefecto());
+                PreparedStatement prepareQuery;
+                if (newSolicitud.getIdDefecto() <= 0) {
+                    String sqlQuery = "INSERT INTO SolicitudCambio (Nombre, Descripcion, Razon, Impacto, AccionPropuesta, " +
+                                      "FechaCreacion, FechaAceptada, EstadoAceptacion, IdDefecto) " +
+                                      "VALUES (?, ?, ?, ?, ?, (STR_TO_DATE(?, '%d-%m-%Y')), NULL, 'Sin aceptar', NULL);";
+                    prepareQuery = connectionDB.prepareStatement(sqlQuery);
+                        prepareQuery.setString(1, newSolicitud.getNombre());
+                        prepareQuery.setString(2, newSolicitud.getDescripcion());
+                        prepareQuery.setString(3, newSolicitud.getRazon());
+                        prepareQuery.setString(4, newSolicitud.getImpacto());
+                        prepareQuery.setString(5, newSolicitud.getAccionPropuesta());
+                        prepareQuery.setString(6, newSolicitud.getFechaCreacion().replace("/}", "-"));
+                } else {
+                    String sqlQuery = "INSERT INTO SolicitudCambio (Nombre, Descripcion, Razon, Impacto, AccionPropuesta, " +
+                                      "FechaCreacion, FechaAceptada, EstadoAceptacion, IdDefecto) " +
+                                      "VALUES (?, ?, ?, ?, ?, (STR_TO_DATE(?, '%d-%m-%Y')), NULL, 'Sin aceptar', ?);";
+                    prepareQuery = connectionDB.prepareStatement(sqlQuery);
+                        prepareQuery.setString(1, newSolicitud.getNombre());
+                        prepareQuery.setString(2, newSolicitud.getDescripcion());
+                        prepareQuery.setString(3, newSolicitud.getRazon());
+                        prepareQuery.setString(4, newSolicitud.getImpacto());
+                        prepareQuery.setString(5, newSolicitud.getAccionPropuesta());
+                        prepareQuery.setString(6, newSolicitud.getFechaCreacion().replace("/}", "-"));
+                        prepareQuery.setInt(7, newSolicitud.getIdDefecto());
+                }
                 int numberAffectedRows = prepareQuery.executeUpdate();
                 
                 if (numberAffectedRows > 0) {
