@@ -17,7 +17,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
+import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -42,7 +44,7 @@ public class FXMLDefectosProyectoController implements Initializable {
     @FXML
     private TableColumn<Defecto, String> tcEstado;
     @FXML
-    private TableColumn<Defecto, Integer> tcEsfuerzo;
+    private TableColumn<Defecto, String> tcEsfuerzo;
     @FXML
     private TableColumn<Defecto, String> tcTipo;
     @FXML
@@ -64,7 +66,9 @@ public class FXMLDefectosProyectoController implements Initializable {
     private void initializeTable() {
         this.tcNombre.setCellValueFactory(new PropertyValueFactory("nombre"));
         this.tcEstado.setCellValueFactory(new PropertyValueFactory("estado"));
-        this.tcEsfuerzo.setCellValueFactory(new PropertyValueFactory("esfurzoMin"));
+        this.tcEsfuerzo.setCellValueFactory(dataCell -> {
+            return new ReadOnlyStringWrapper(String.valueOf(dataCell.getValue().getEsfuerzoMin()) + " min");
+        });
         this.tcTipo.setCellValueFactory(new PropertyValueFactory("tipo"));
         this.tcSolCambio.setCellValueFactory(p -> {
             Button button = null;

@@ -250,8 +250,8 @@ CREATE TABLE IF NOT EXISTS `Eminus5`.`SolicitudCambio` (
   `AccionPropuesta` VARCHAR(45) NULL,
   `FechaCreacion` DATE NULL,
   `FechaAceptada` DATE NULL,
-  `estadoAceptacion` VARCHAR(2) NULL,
-  `IdDefecto` INT NOT NULL,
+  `EstadoAceptacion` VARCHAR(12) NULL,
+  `IdDefecto` INT,
   PRIMARY KEY (`IdSolicitud`),
   UNIQUE INDEX `IDDefecto_UNIQUE` (`IdDefecto` ASC) VISIBLE,
   CONSTRAINT `IDDefecto_Solicitud`
@@ -347,11 +347,11 @@ INSERT INTO TipoActividad (Nombre) VALUES ('Base de datos');
 INSERT INTO TipoActividad (Nombre) VALUES ('Controlador');
 INSERT INTO TipoActividad (Nombre) VALUES ('JavaScript');
 /*PERIODO------------------------------------------------------------------------------------------------------------------------*/
-INSERT INTO Periodo (Inicio, Fin) VALUES ('2023-01-01', '2023-06-08');
-INSERT INTO Periodo (Inicio, Fin) VALUES ('2023-07-01', '2024-01-01');
+INSERT INTO Periodo (Inicio, Fin) VALUES ('2024-01-01', '2024-06-01');
+INSERT INTO Periodo (Inicio, Fin) VALUES ('2024-07-01', '2024-12-31');
 /*EXPERIENCIA EDUCATIVA------------------------------------------------------------------------------------------------------------------------*/
 INSERT INTO ExperienciaEducativa (Nombre, Descripcion, idPeriodo) 
-    VALUES ('Proyecto guiado', 'Descripción de ejemplo de proyecto guiado', 2);
+    VALUES ('Proyecto guiado', 'Descripción de ejemplo de proyecto guiado', 1);
 /*PROYECTO------------------------------------------------------------------------------------------------------------------------*/
 INSERT INTO Proyecto (Nombre, NumIntegrantes, Descripcion, IdExperienciaEducativa) 
     VALUES ('SPGER', 10, 'Descripción de ejemplo del proyecto SPGER', 1);
@@ -371,82 +371,66 @@ INSERT INTO Usuario (Usuario, Password, Nombre, ApellidoPaterno, ApellidoMaterno
 USE Eminus5;
 INSERT INTO Actividad (Nombre, Descripcion, IdEstado, IdTipo, FechaInicio, FechaTermino, IdProyecto, IdDesarrollador) VALUES 
     ('Creación de base de datos', 'Descripción de ejemplo para la actividad Creación de base de datos', 
-    1, 3, '2023-06-01', '2023-06-04', 1, 2);
+    1, 3, '2024-01-15', '2024-01-25', 1, 2);
 INSERT INTO Actividad (Nombre, Descripcion, IdEstado, IdTipo, FechaInicio, FechaTermino, IdProyecto, IdDesarrollador) VALUES 
     ('Creación de vistas', 'Descripción de ejemplo para la actividad Creación de vistas', 
-    1, 1, '2023-06-01', '2023-06-04', 1, 3);
+    1, 1, '2024-01-14', '2024-01-14', 1, 3);
 INSERT INTO Actividad (Nombre, Descripcion, IdEstado, IdTipo, FechaInicio, FechaTermino, IdProyecto, IdDesarrollador) VALUES 
     ('Creación de controladores', 'Descripción de ejemplo para la actividad Creación de controladores', 
-    NULL, 4, '2023-06-01', '2023-06-04', 1, NULL);
+    1, 4, '2024-02-01', '2024-02-03', 1, NULL);
 INSERT INTO Actividad (Nombre, Descripcion, IdEstado, IdTipo, FechaInicio, FechaTermino, IdProyecto, IdDesarrollador) VALUES 
     ('Creación de bitacora', 'Descripción de ejemplo para la actividad Creación de bitacora, relacionada con una actividad', 
-    1, 4, '2023-06-01', '2023-06-04', 1, 4);
+    1, 4, '2024-02-02', '2024-02-07', 1, 4);
 
 INSERT INTO Actividad (Nombre, Descripcion, IdEstado, IdTipo, FechaInicio, FechaTermino, IdProyecto, IdDesarrollador) VALUES 
     ('Creación query', 'Query para getActividadesDesarrollador', 
-    1, 2, '2023-12-24', '2023-12-25', 1, 4);
+    1, 2, '2024-03-01', '2024-03-25', 1, 4);
 INSERT INTO Actividad (Nombre, Descripcion, IdEstado, IdTipo, FechaInicio, FechaTermino, IdProyecto, IdDesarrollador) VALUES 
     ('Comprobacion de query', 'Query para getActividadesDesarrollador sin terminar', 
-    2, 2, '2023-12-24', '2023-12-25', 1, 4);
+    2, 2, '2024-03-24', '2024-03-25', 1, 4);
 INSERT INTO Actividad (Nombre, Descripcion, IdEstado, IdTipo, FechaInicio, FechaTermino, IdProyecto, IdDesarrollador) VALUES 
     ('Creacion de', 'Query para modificar actividades', 
-    1, 2, '2023-12-24', '2023-12-26', 1, 4);
+    1, 2, '2024-03-24', '2024-03-26', 1, 4);
 
 INSERT INTO Actividad (Nombre, Descripcion, IdEstado, IdTipo, FechaInicio, FechaTermino, IdProyecto, IdDesarrollador) VALUES 
     ('Creación alert', 'alert para confirmar modificacion', 
-    1, 2, '2023-12-24', '2023-12-25', 1, 4);
+    1, 2, '2024-04-02', '2024-12-09', 1, 4);
 INSERT INTO Actividad (Nombre, Descripcion, IdEstado, IdTipo, FechaInicio, FechaTermino, IdProyecto, IdDesarrollador) VALUES 
     ('Comprobacion de alert', 'comprobar alerts para confirmar', 
-    2, 2, '2023-12-24', '2023-12-25', 1, 4);
+    2, 2, '2024-04-10', '2024-12-15', 1, 4);
 INSERT INTO Actividad (Nombre, Descripcion, IdEstado, IdTipo, FechaInicio, FechaTermino, IdProyecto, IdDesarrollador) VALUES 
     ('XD', 'lol nomas por si no me sale', 
-    1, 2, '2023-12-24', '2023-12-26', 1, 4);
+    1, 2, '2024-04-28', '2024-12-30', 1, 4);
 /*BITACORA-------------------------------------------------------------------------------------------------------------------------*/
 INSERT INTO BitacoraActividad (NumBitacora, Nombre, Descripción, IdActividad, IdDesarrollador)
     VALUES (1, 'Bitacora de ejemplo', 'Prueba para hacer mi CU13, creo jajaj no recuerdo cual era. Ni pex', 4, 4);
 /*CAMBIO-------------------------------------------------------------------------------------------------------------------------*/
 INSERT INTO Cambio (Nombre, Descripcion, FechaInicio, IdDesarrollador, IdEstado, IdTipo)
-    VALUES ('Cambio de ejemplo', 'Ejemplo para ver si mi query funciona', '2023-12-21', 4, 1, 2);
+    VALUES ('Cambio de ejemplo', 'Ejemplo para ver si mi query funciona', '2024-02-21', 4, 1, 2);
 INSERT INTO Cambio (Nombre, Descripcion, FechaInicio, IdDesarrollador, IdEstado, IdTipo)
-    VALUES ('Cambio de ejemplo 2', 'Ejemplo para modificar', '2023-12-21', 4,  2, 2);
+    VALUES ('Cambio de ejemplo 2', 'Ejemplo para modificar', '2024-02-23', 4,  2, 2);
 /*DEFECTO-------------------------------------------------------------------------------------------------------------------------*/
 INSERT INTO Defecto (Nombre, Descripcion, FechaEncontrado, IdProyecto, IdEstado, IdTipo)
-    VALUES ('Primer defecto', 'Query regresa null', '2023-12-26', 1, 1, 3);
+    VALUES ('Primer defecto', 'Query regresa null', '2024-02-16', 1, 1, 3);
 INSERT INTO Defecto (Nombre, Descripcion, FechaEncontrado, IdProyecto, IdEstado, IdTipo)
-    VALUES ('Defecto de ejemplo', 'Para comprobar query', '2023-12-26', 1, 1, 3);
+    VALUES ('Defecto de ejemplo', 'Para comprobar query', '2024-03-06', 1, 1, 3);
 INSERT INTO Defecto (Nombre, Descripcion, FechaEncontrado, IdProyecto, IdEstado, IdTipo)
-    VALUES ('Fallo al no haber defectos', 'Programa falla cuando no halla defectos', '2023-12-28', 1, 1, 1);
+    VALUES ('Fallo al no haber defectos', 'Programa falla cuando no halla defectos', '2024-03-10', 1, 1, 1);
 INSERT INTO Defecto (Nombre, Descripcion, FechaEncontrado, IdProyecto, IdEstado, IdTipo)
-    VALUES ('Comprobacion de arreglo', 'Arreglo de controlador', '2023-12-28', 1, 1, 3);
-/*-------------------------------------------------------------------------------------------------------------------------*/
-
-SELECT BA.Nombre, BA.Descripción FROM bitacoraactividad BA
-JOIN Usuario U ON BA.IdDesarrollador = U.IDUsuario 
-WHERE U.IDUsuario = 4
-UNION SELECT BC.Nombre, BC.Descripción FROM bitacoracambio BC
-JOIN  Usuario U ON BC.IdDesarrollador = U.IDUsuario
-WHERE U.IDUsuario = 4;
-
-SELECT C.IdCambio, C.Nombre, C.Descripcion, C.Esfuerzo, C.FechaInicio, C.FechaFin, E.Nombre AS 'Estado', TA.Nombre AS 'TipoActividad'
-FROM Cambio C
-JOIN Estado E ON E.IdEstado = C.IdEstado
-JOIN TipoActividad TA ON TA.IdTipoActividad = C.IdTipo
-JOIN Usuario U ON C.IdDesarrollador = U.IDUsuario
-WHERE U.IDUsuario = 4 AND C.IdEstado = 1;
-
-SELECT A.IdActividad, A.Nombre, A.Descripcion, E.Nombre AS 'Estado'
-FROM Actividad A
-JOIN Estado E ON E.IdEstado = A.IdEstado
-LEFT JOIN Usuario U ON A.IdDesarrollador = U.IDUsuario
-WHERE IDUsuario = 4 AND A.IdEstado = 1;
-
-SELECT DE.IdDefecto, DE.Nombre, DE.Descripcion, E.Nombre AS 'Estado', DE.Esfuerzo, DE.FechaEncontrado, DE.FechaSolucionado, TA.Nombre AS 'Tipo'
-FROM Defecto DE 
-JOIN Estado E ON E.IdEstado = DE.IdEstado
-JOIN TipoActividad TA ON TA.IdTipoActividad = DE.IdTipo
-JOIN Proyecto P ON DE.IdProyecto = P.IdProyecto
-WHERE P.IdProyecto = 1 AND DE.IdEstado = 1;
-
-UPDATE Defecto DE
-SET DE.Esfuerzo = 22, DE.IdEstado = 2, DE.FechaSolucionado = '2023-12-27'
-WHERE DE.IdDefecto = 1;
+    VALUES ('Comprobacion de arreglo', 'Arreglo de controlador', '2024-03-19', 1, 1, 3);
+/*SOLICITUD DE CAMBIO-------------------------------------------------------------------------------------------------------------------------*/
+INSERT INTO SolicitudCambio (Nombre, Descripcion, Razon, Impacto, AccionPropuesta, 
+    FechaCreacion, FechaAceptada, EstadoAceptacion, IdDefecto) 
+    VALUES ('Nombre de SC 1 CON defecto', 'Descripción de ejemplo de solicitud de cambio', 
+    'Razón: Ralentización del registro', 'Impacto: Archivo o estructuras a modificar', 
+    'Acción propuesta: Usar API de Spring', '2024-02-18', '2024-02-19', 'Aceptado', 1);
+INSERT INTO SolicitudCambio (Nombre, Descripcion, Razon, Impacto, AccionPropuesta, 
+    FechaCreacion, FechaAceptada, EstadoAceptacion, IdDefecto) 
+    VALUES ('Nombre de SC 2 SIN defecto', 'Descripción de ejemplo de solicitud de cambio', 
+    'Razón: Ralentización dol FRONTEND', 'Impacto: Archivo o estructuras a modificar', 
+    'Acción propuesta: Usar framework', '2024-02-25', '2024-02-29', 'Aceptado', NULL);
+INSERT INTO SolicitudCambio (Nombre, Descripcion, Razon, Impacto, AccionPropuesta, 
+    FechaCreacion, FechaAceptada, EstadoAceptacion, IdDefecto) 
+    VALUES ('Nombre de SC 3 CON defecto', 'Descripción de ejemplo de solicitud de cambio', 
+    'Razón: Ralentización del wifi', 'Impacto: Archivo o estructuras a modificar', 
+    'Acción propuesta: Comprar módem', '2024-03-10', '2024-03-12', 'Aceptado', 2);
