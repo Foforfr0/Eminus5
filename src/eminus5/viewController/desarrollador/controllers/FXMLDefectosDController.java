@@ -118,30 +118,30 @@ public class FXMLDefectosDController implements Initializable {
     @FXML
     private void btnRegistrarDefecto(ActionEvent event) {
         try {
-        Stage clicRegistrarDefecto = new Stage();
-        FXMLFormularioDefectoController.idUser = idUser;
-        clicRegistrarDefecto.setScene(loadScene("viewController/desarrollador/views/FXMLFormularioDefecto.fxml"));
-        clicRegistrarDefecto.setTitle("Formulario defecto");
-        clicRegistrarDefecto.initModality(Modality.WINDOW_MODAL);
-        clicRegistrarDefecto.initOwner(
-                (Stage) this.tvDefectos.getScene().getWindow()
-        );
-        clicRegistrarDefecto.initStyle(StageStyle.UTILITY);
-        clicRegistrarDefecto.setOnCloseRequest(eventStage -> {
-            eventStage.consume();
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("¿Está seguro?");
-            alert.setHeaderText("¿Está seguro de cancelar?");
-            alert.setContentText("¿Ésta acción no se podrá revertir?");
-            
-            alert.showAndWait().ifPresent(response -> {
-                String responseMessage = response.getText();
-                if (responseMessage.equals("Aceptar")) {
-                    clicRegistrarDefecto.close();
-                }
+            Stage clicRegistrarDefecto = new Stage();
+            FXMLFormularioDefectoController.idUser = idUser;
+            clicRegistrarDefecto.setScene(loadScene("viewController/desarrollador/views/FXMLFormularioDefecto.fxml"));
+            clicRegistrarDefecto.setTitle("Formulario defecto");
+            clicRegistrarDefecto.initModality(Modality.WINDOW_MODAL);
+            clicRegistrarDefecto.initOwner(
+                    (Stage) this.tvDefectos.getScene().getWindow()
+            );
+            clicRegistrarDefecto.initStyle(StageStyle.UTILITY);
+            clicRegistrarDefecto.setOnCloseRequest(eventStage -> {
+                eventStage.consume();
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("¿Está seguro?");
+                alert.setHeaderText("¿Está seguro de cancelar?");
+                alert.setContentText("¿Ésta acción no se podrá revertir?");
+
+                alert.showAndWait().ifPresent(response -> {
+                    String responseMessage = response.getText();
+                    if (responseMessage.equals("Aceptar")) {
+                        clicRegistrarDefecto.close();
+                    }
+                });
             });
-        });
-        clicRegistrarDefecto.showAndWait();
+            clicRegistrarDefecto.showAndWait();
         
         } catch (IOException ioex) {
             System.err.println("Error de \"IOException\" en archivo \"FXMLDefectosDController\""

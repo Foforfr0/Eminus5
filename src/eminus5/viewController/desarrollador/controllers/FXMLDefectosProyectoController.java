@@ -13,13 +13,13 @@ import eminus5.databaseManagment.model.ResultOperation;
 import static eminus5.utils.ShowMessage.showMessage;
 import static eminus5.utils.ShowMessage.showMessageFailureConnection;
 import static eminus5.utils.loadView.loadScene;
+import static eminus5.viewController.desarrollador.controllers.FXMLDefectosDController.idUser;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -49,11 +49,14 @@ public class FXMLDefectosProyectoController implements Initializable {
     private TableColumn<Defecto, String> tcTipo;
     @FXML
     private TableColumn<Defecto, Button> tcSolCambio;
+    @FXML
+    private Button btModificarDefecto;
     
     
     public static int idUser = 0;
     private ObservableList<Defecto> defectos = FXCollections.observableArrayList();
     private Defecto selectedDefecto = null;
+    private Defecto defectoSeleccionado = null;
     
     
     @Override
@@ -209,9 +212,121 @@ public class FXMLDefectosProyectoController implements Initializable {
 
     @FXML
     private void clicAddDefecto(MouseEvent event) {
+        try {
+            Stage clicRegistrarDefecto = new Stage();
+            FXMLFormularioDefectoController.idUser = idUser;
+            clicRegistrarDefecto.setScene(loadScene("viewController/desarrollador/views/FXMLFormularioDefecto.fxml"));
+            clicRegistrarDefecto.setTitle("Formulario defecto");
+            clicRegistrarDefecto.initModality(Modality.WINDOW_MODAL);
+            clicRegistrarDefecto.initOwner(
+                    (Stage) this.tvDefectos.getScene().getWindow()
+            );
+            clicRegistrarDefecto.initStyle(StageStyle.UTILITY);
+            clicRegistrarDefecto.setOnCloseRequest(eventStage -> {
+                eventStage.consume();
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("¿Está seguro?");
+                alert.setHeaderText("¿Está seguro de cancelar?");
+                alert.setContentText("¿Ésta acción no se podrá revertir?");
+
+                alert.showAndWait().ifPresent(response -> {
+                    String responseMessage = response.getText();
+                    if (responseMessage.equals("Aceptar")) {
+                        clicRegistrarDefecto.close();
+                    }
+                });
+            });
+            clicRegistrarDefecto.showAndWait();
+        
+        } catch (IOException ioex) {
+            System.err.println("Error de \"IOException\" en archivo \"FXMLDefectosDController\""
+                    + " en método \"clicRegistrarDefecto\"");
+            ioex.printStackTrace();
+        }
     }
 
     @FXML
     private void clicModifyDefecto(MouseEvent event) {
+        if (verifySelectedDefecto() != null) {
+            this.btModificarDefecto.setVisible(true);
+            try {
+                Stage modificarDefecto = new Stage();
+                FXMLFormularioModDefectoController.currentDefecto = verifySelectedDefecto();
+                modificarDefecto.setScene(loadScene("viewController/desarrollador/views/FXMLFormularioModDefecto.fxml"));
+                modificarDefecto.setTitle("Modificar defecto");
+                modificarDefecto.initModality(Modality.WINDOW_MODAL);
+                modificarDefecto.initOwner(
+                        (Stage) this.tvDefectos.getScene().getWindow()
+                );
+                modificarDefecto.initStyle(StageStyle.UTILITY);
+                modificarDefecto.setOnCloseRequest(eventStage -> {
+                    eventStage.consume();
+                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                    alert.setTitle("¿Está seguro?");
+                    alert.setHeaderText("¿Está seguro de cancelar?");
+                    alert.setContentText("¿Ésta acción no se podrá revertir?");
+                    
+                    alert.showAndWait().ifPresent(response -> {
+                        String responseMessage = response.getText();
+                        if (responseMessage.equals("Aceptar")) {
+                            modificarDefecto.close();
+                        }
+                    });
+                });
+                modificarDefecto.showAndWait();
+                cargarDefectos();
+            } catch (IOException ioex) {
+                System.err.println("Error de \"IOException\" en archivo \"FXMLFormularioModDefecto\" en método \"btModificarDefecto\"");
+                ioex.printStackTrace();
+            }
+        } else {
+            showMessage(
+                "WARNING",
+                "Seleccion requerida",
+                "Primero selecciona un defecto",
+                "Elije un defecto para modificarlo"
+            );
+        }
+    }
+        
+    public void cargarDefectos() {
+        try{
+            ResultOperation resultGetProyecto = ProyectoDAO.getProyectoUsuario(idUser);
+
+            if(resultGetProyecto.getIsError() == true && resultGetProyecto.getData() == null ||
+               resultGetProyecto.getNumberRowsAffected() <= 0){
+                showMessage(
+                        "ERROR",
+                        "Error inesperado",
+                        resultGetProyecto.getMessage(),
+                        "Intente mas tarde"
+                );
+            } else {
+                System.out.println("Rows affected: " + resultGetProyecto.getNumberRowsAffected());
+
+                Object data = DefectoDAO.getDefectosDesarrollador(resultGetProyecto.getNumberRowsAffected()).getData();
+                System.out.println("Data from DAO: " + data);
+
+                if (data instanceof ObservableList) {
+                    this.defectos = (ObservableList<Defecto>) data;
+                    this.tvDefectos.setItems(this.defectos);
+                }
+                /*this.defectos = FXCollections.observableArrayList(
+                        (ObservableList) DefectoDAO.getDefectosDesarrollador(resultGetProyecto.getNumberRowsAffected()).getData()
+                );
+                this.tvDefectos.setItems(this.defectos);
+                */
+            }
+        } catch (SQLException sqlex) {
+            showMessageFailureConnection();
+           System.out.println("\"Error de \"SQLException\" en archivo \"FXMLDefectosDController\"");
+           sqlex.printStackTrace();
+        }
+    }
+        
+    private Defecto verifySelectedDefecto(){
+        int selectedRow = this.tvDefectos.getSelectionModel().getSelectedIndex();
+        this.defectoSeleccionado = (selectedRow >= 0) ? this.defectos.get(selectedRow) : null;
+        return defectoSeleccionado;
     }
 }
