@@ -37,21 +37,21 @@ public class BitacoraDAO {
                     newBitacora.setNombre(resultQuery.getString("Nombre"));
                     newBitacora.setDescripcion(resultQuery.getString("Descripción"));
                     listBitacoras.add(newBitacora);
-                resultOperation = new ResultOperation(
-                        false,
-                        "Se encontraron bitacoras",
-                        listBitacoras.size(),
-                        listBitacoras
-                );
-                System.out.println("BitacoraDAO//BITACORAS ENCONTRADAS: " + listBitacoras.size() + " DEL DESARROLLADOR ID" + idUser);
+                    resultOperation = new ResultOperation(
+                            false,
+                            "Se encontraron bitacoras",
+                            listBitacoras.size(),
+                            listBitacoras
+                    );
+                    System.out.println("BitacoraDAO//BITACORAS ENCONTRADAS: " + listBitacoras.size() + " DEL DESARROLLADOR ID" + idUser);
                 }
                 
                 if(listBitacoras.size() <= 0) {
                     resultOperation = new ResultOperation(
-                            false,
-                            "Sin registros",
-                            0,
-                            null
+                        false,
+                        "Sin registros",
+                        0,
+                        null
                     );
                     System.out.println("BitacoraDAO//NO SE ENCONTRARON BITACORAS DEL DESARROLLADOR ID" + idUser);
                 }

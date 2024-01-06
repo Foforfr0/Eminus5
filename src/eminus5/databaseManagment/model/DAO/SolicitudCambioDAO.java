@@ -7,13 +7,14 @@ package eminus5.databaseManagment.model.DAO;
 
 import eminus5.databaseManagment.model.POJO.SolicitudCambio;
 import eminus5.databaseManagment.model.OpenConnectionDB;
-import eminus5.databaseManagment.model.POJO.Actividad;
 import eminus5.databaseManagment.model.ResultOperation;
 import static eminus5.utils.ShowMessage.showMessageFailureConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 
 public class SolicitudCambioDAO {
@@ -69,6 +70,78 @@ public class SolicitudCambioDAO {
                     null
                 );
                 System.err.println("Error de \"SQLException\" en archivo \"SolicitudCambioDAO\" en método \"getSolicitudCambioDefecto\"");
+                sqlex.printStackTrace();
+            } finally {
+                connectionDB.close();
+            }
+        } else {
+            resultOperation = new ResultOperation(                 //Could not connect to database
+                true, 
+                "Falló conexión con la base de datos", 
+                -1, 
+                null
+            );
+            showMessageFailureConnection();
+        }  
+        
+        return resultOperation;
+    }
+    
+    public static ResultOperation getSolicitudesCambioProyecto (int idProyecto) throws SQLException{
+        Connection connectionDB = OpenConnectionDB.getConnection();
+        ResultOperation resultOperation = null;
+        
+        if (connectionDB != null) {    
+            try {            
+                String sqlQuery = "SELECT SC.IdSolicitud, SC.Nombre, SC.Descripcion, SC.Razon, SC.Impacto, SC.AccionPropuesta, " +
+                                  "SC.FechaCreacion, SC.FechaAceptada, D.IdDefecto, D.Nombre " +
+                                  "FROM SolicitudCambio SC LEFT JOIN Defecto D ON SC.IdDefecto = D.IdDefecto " +
+                                  "LEFT JOIN Proyecto P ON D.IdProyecto = P.IdProyecto " +
+                                  "WHERE P.IdProyecto = ?;";
+                PreparedStatement prepareQuery = connectionDB.prepareStatement(sqlQuery);
+                    prepareQuery.setInt(1, idProyecto);
+                ResultSet resultQuery = prepareQuery.executeQuery();
+                
+                ObservableList<SolicitudCambio> listSolicitudes = FXCollections.observableArrayList();
+                while (resultQuery.next()) {
+                    listSolicitudes.add(
+                        new SolicitudCambio(
+                            resultQuery.getInt("IdSolicitud"), 
+                            resultQuery.getString("Nombre"), 
+                            resultQuery.getString("Descripcion"), 
+                            resultQuery.getString("Razon"), 
+                            resultQuery.getString("Impacto"), 
+                            resultQuery.getString("AccionPropuesta"), 
+                            resultQuery.getString("FechaCreacion"), 
+                            resultQuery.getString("FechaAceptada").equals("") ? "Sin aceptar" : resultQuery.getString("FechaAceptada"), 
+                            resultQuery.getInt("IdDefecto")
+                        )
+                    );
+                    resultOperation = new ResultOperation(            //It´s exists
+                        false, 
+                        "Se encontró la solicitud", 
+                        listSolicitudes.size(),
+                        listSolicitudes
+                    );
+                    System.out.println("SolicitudCambioDAO//SOLICITUD ENCONTRADA "+resultQuery.getInt("IdSolicitud")+" PROYECTO: "+idProyecto);
+                }
+                if (listSolicitudes.size() <= 0) {
+                    resultOperation = new ResultOperation(            //It doesn't exist but it wasn't an error
+                        false, 
+                        "El proyecto no contiene solicitudes relacionadas", 
+                        0, 
+                        null
+                    );
+                    System.out.println("SolicitudCambioDAO//NO SE ENCONTRÓ SOLICITUD DE CAMBIO");
+                }
+            } catch (SQLException sqlex) {
+                resultOperation = new ResultOperation(               
+                    true, 
+                    "Falló conexión con la base de datos", 
+                    -1, 
+                    null
+                );
+                System.err.println("Error de \"SQLException\" en archivo \"SolicitudCambioDAO\" en método \"getSolicitudCambioProyecto\"");
                 sqlex.printStackTrace();
             } finally {
                 connectionDB.close();

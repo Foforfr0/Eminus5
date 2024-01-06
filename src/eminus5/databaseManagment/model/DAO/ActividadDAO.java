@@ -46,7 +46,7 @@ public class ActividadDAO {
                         0, 
                         null
                     );
-                    System.out.println("ActividadDAO//NO SE ENCONTRARON TIPOS DE ACTIVIDAD");
+                    System.err.println("ActividadDAO//NO SE ENCONTRARON TIPOS DE ACTIVIDAD");
                 }
             } catch (SQLException sqlex) {
                 resultOperation = new ResultOperation(               

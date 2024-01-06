@@ -13,7 +13,6 @@ import eminus5.databaseManagment.model.ResultOperation;
 import static eminus5.utils.ShowMessage.showMessage;
 import static eminus5.utils.ShowMessage.showMessageFailureConnection;
 import static eminus5.utils.loadView.loadScene;
-import static eminus5.viewController.desarrollador.controllers.FXMLDefectosDController.idUser;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -61,13 +60,13 @@ public class FXMLDefectosProyectoController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        System.out.println("IdUser controller: "+idUser);
         initializeData();
         initializeTable();
+        System.out.println("IDUser: "+idUser);
     }    
     
     private void initializeTable() {
-        this.tcNombre.setCellValueFactory(new PropertyValueFactory("nombre"));
+    this.tcNombre.setCellValueFactory(new PropertyValueFactory("nombre"));
         this.tcEstado.setCellValueFactory(new PropertyValueFactory("estado"));
         this.tcEsfuerzo.setCellValueFactory(dataCell -> {
             return new ReadOnlyStringWrapper(String.valueOf(dataCell.getValue().getEsfuerzoMin()) + " min");
@@ -328,5 +327,25 @@ public class FXMLDefectosProyectoController implements Initializable {
         int selectedRow = this.tvDefectos.getSelectionModel().getSelectedIndex();
         this.defectoSeleccionado = (selectedRow >= 0) ? this.defectos.get(selectedRow) : null;
         return defectoSeleccionado;
+    }
+
+    @FXML
+    private void clicGetSolicitudes(MouseEvent event) {
+        try {
+            Stage stageConsultSolicitudes = new Stage();
+            FXMLSolicitudesCambioProyectoController.idUser = idUser;
+            stageConsultSolicitudes.setScene(loadScene("viewController/desarrollador/views/FXMLSolicitudesCambioProyecto.fxml"));
+            stageConsultSolicitudes.setTitle("Solicitudes de cambio");
+            stageConsultSolicitudes.initModality(Modality.WINDOW_MODAL);
+            stageConsultSolicitudes.initOwner(
+                (Stage) this.tvDefectos.getScene().getWindow()
+            );
+            stageConsultSolicitudes.initStyle(StageStyle.UTILITY);
+            stageConsultSolicitudes.showAndWait();
+            cargarDefectos();
+        } catch (IOException ioex) {
+            System.err.println("Error de \"IOException\" en archivo \"FXMLFormularioModDefecto\" en método \"btModificarDefecto\"");
+            ioex.printStackTrace();
+        }
     }
 }
