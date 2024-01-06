@@ -31,7 +31,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `Eminus5`.`ExperienciaEducativa` (
   `IdExperienciaEducativa` INT NOT NULL AUTO_INCREMENT,
   `Nombre` VARCHAR(45) NOT NULL,
-  `Descripcion` VARCHAR(45) NOT NULL,
+  `Descripcion` TEXT NOT NULL,
   `idPeriodo` INT NOT NULL,
   PRIMARY KEY (`IdExperienciaEducativa`),
   INDEX `IDExperienciaEducativa_Periodo_idx` (`idPeriodo` ASC) VISIBLE,
@@ -209,7 +209,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `Eminus5`.`Defecto` (
   `IdDefecto` INT NOT NULL AUTO_INCREMENT,
   `Nombre` VARCHAR(45) NULL,
-  `Descripcion` VARCHAR(45) NULL,
+  `Descripcion` TEXT NULL,
   `IdEstado` INT NULL,
   `Esfuerzo` INT NULL,
   `FechaEncontrado` DATE NULL,
@@ -239,26 +239,50 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
+-- Table `Eminus5`.`EstadoSolicitud`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `Eminus5`.`EstadoSolicitud` (
+  `IdSolicitud` INT NOT NULL AUTO_INCREMENT,
+  `Nombre` VARCHAR(15) NOT NULL,
+  PRIMARY KEY (`IdSolicitud`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
 -- Table `Eminus5`.`SolicitudCambio`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Eminus5`.`SolicitudCambio` (
   `IdSolicitud` INT NOT NULL AUTO_INCREMENT,
   `Nombre` VARCHAR(45) NULL,
-  `Descripcion` VARCHAR(45) NULL,
-  `Razon` VARCHAR(45) NULL,
-  `Impacto` VARCHAR(45) NULL,
-  `AccionPropuesta` VARCHAR(45) NULL,
+  `Descripcion` TEXT NULL,
+  `Razon` TEXT NULL,
+  `Impacto` TEXT NULL,
+  `AccionPropuesta` TEXT NULL,
   `FechaCreacion` DATE NULL,
   `FechaAceptada` DATE NULL,
-  `EstadoAceptacion` VARCHAR(12) NULL,
-  `IdDefecto` INT,
+  `IdEstadoAceptacion` INT NULL,
+  `IdDefecto` INT NULL,
+  `IdProyecto` INT NULL,
   PRIMARY KEY (`IdSolicitud`),
   UNIQUE INDEX `IDDefecto_UNIQUE` (`IdDefecto` ASC) VISIBLE,
+  INDEX `IDProyecto_Solicitud_idx` (`IdProyecto` ASC) VISIBLE,
+  INDEX `IDSolicitud_Estado_idx` (`IdEstadoAceptacion` ASC) VISIBLE,
+  UNIQUE INDEX `IdProyecto_UNIQUE` (`IdProyecto` ASC) VISIBLE,
   CONSTRAINT `IDDefecto_Solicitud`
     FOREIGN KEY (`IdDefecto`)
     REFERENCES `Eminus5`.`Defecto` (`IdDefecto`)
     ON DELETE CASCADE
-    ON UPDATE CASCADE)
+    ON UPDATE CASCADE,
+  CONSTRAINT `IDProyecto_Solicitud`
+    FOREIGN KEY (`IdProyecto`)
+    REFERENCES `Eminus5`.`Proyecto` (`IdProyecto`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT `IDSolicitud_Estado`
+    FOREIGN KEY (`IdEstadoAceptacion`)
+    REFERENCES `Eminus5`.`EstadoSolicitud` (`IdSolicitud`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
@@ -268,7 +292,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `Eminus5`.`Cambio` (
   `IdCambio` INT NOT NULL AUTO_INCREMENT,
   `Nombre` VARCHAR(45) NOT NULL,
-  `Descripcion` VARCHAR(45) NOT NULL,
+  `Descripcion` TEXT NOT NULL,
   `Esfuerzo` INT NULL,
   `FechaInicio` DATE NULL,
   `FechaFin` DATE NULL,
@@ -334,10 +358,16 @@ SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
 
+
+
 /*ROLES SISTEMA--------------------------------------------------------------------------------------------------------------------*/
 INSERT INTO RolSistema (Nombre) VALUES ('Responsable');
 INSERT INTO RolSistema (Nombre) VALUES ('Desarrollador');
 /*ESTADO ACTIVIDAD--------------------------------------------------------------------------------------------------------------------------*/
+INSERT INTO EstadoSolicitud (Nombre) VALUES ('Creado');
+INSERT INTO EstadoSolicitud (Nombre) VALUES ('Aceptado');
+INSERT INTO EstadoSolicitud (Nombre) VALUES ('Rechazado');
+/*ESTADO SOLICITUD CAMBIO--------------------------------------------------------------------------------------------------------------------------*/
 INSERT INTO Estado (Nombre) VALUES ('Iniciado');
 INSERT INTO Estado (Nombre) VALUES ('Entregado');
 /*TIPO ACTIVIDAD----------------------------------------------------------------------------------------------------------------------------*/
@@ -370,67 +400,67 @@ INSERT INTO Usuario (Usuario, Password, Nombre, ApellidoPaterno, ApellidoMaterno
 /*ACTIVIDAD-------------------------------------------------------------------------------------------------------------------------*/
 USE Eminus5;
 INSERT INTO Actividad (Nombre, Descripcion, IdEstado, IdTipo, FechaInicio, FechaTermino, IdProyecto, IdDesarrollador) VALUES 
-    ('Creación de base de datos', 'Descripción de ejemplo para la actividad Creación de base de datos', 
+    ('Ejemplo Actividad 1', 'Descripción de ejemplo para la actividad 1', 
     1, 3, '2024-01-15', '2024-01-25', 1, 2);
 INSERT INTO Actividad (Nombre, Descripcion, IdEstado, IdTipo, FechaInicio, FechaTermino, IdProyecto, IdDesarrollador) VALUES 
-    ('Creación de vistas', 'Descripción de ejemplo para la actividad Creación de vistas', 
+    ('Ejemplo Actividad 2', 'Descripción de ejemplo para la actividad 2', 
     1, 1, '2024-01-14', '2024-01-14', 1, 3);
 INSERT INTO Actividad (Nombre, Descripcion, IdEstado, IdTipo, FechaInicio, FechaTermino, IdProyecto, IdDesarrollador) VALUES 
-    ('Creación de controladores', 'Descripción de ejemplo para la actividad Creación de controladores', 
+    ('Ejemplo Actividad 3', 'Descripción de ejemplo para la actividad 3', 
     1, 4, '2024-02-01', '2024-02-03', 1, NULL);
 INSERT INTO Actividad (Nombre, Descripcion, IdEstado, IdTipo, FechaInicio, FechaTermino, IdProyecto, IdDesarrollador) VALUES 
-    ('Creación de bitacora', 'Descripción de ejemplo para la actividad Creación de bitacora, relacionada con una actividad', 
+    ('Ejemplo Actividad 4', 'Descripción de ejemplo para la actividad 4', 
     1, 4, '2024-02-02', '2024-02-07', 1, 4);
 
 INSERT INTO Actividad (Nombre, Descripcion, IdEstado, IdTipo, FechaInicio, FechaTermino, IdProyecto, IdDesarrollador) VALUES 
-    ('Creación query', 'Query para getActividadesDesarrollador', 
+    ('Ejemplo Actividad 5', 'Descripción de ejemplo para la actividad 5', 
     1, 2, '2024-03-01', '2024-03-25', 1, 4);
 INSERT INTO Actividad (Nombre, Descripcion, IdEstado, IdTipo, FechaInicio, FechaTermino, IdProyecto, IdDesarrollador) VALUES 
-    ('Comprobacion de query', 'Query para getActividadesDesarrollador sin terminar', 
+    ('Ejemplo Actividad 6', 'Descripción de ejemplo para la actividad 6', 
     2, 2, '2024-03-24', '2024-03-25', 1, 4);
 INSERT INTO Actividad (Nombre, Descripcion, IdEstado, IdTipo, FechaInicio, FechaTermino, IdProyecto, IdDesarrollador) VALUES 
-    ('Creacion de', 'Query para modificar actividades', 
+    ('Ejemplo Actividad 7', 'Descripción de ejemplo para la actividad 7', 
     1, 2, '2024-03-24', '2024-03-26', 1, 4);
 
 INSERT INTO Actividad (Nombre, Descripcion, IdEstado, IdTipo, FechaInicio, FechaTermino, IdProyecto, IdDesarrollador) VALUES 
-    ('Creación alert', 'alert para confirmar modificacion', 
+    ('Ejemplo Actividad 8', 'Descripción de ejemplo para la actividad 8', 
     1, 2, '2024-04-02', '2024-12-09', 1, 4);
 INSERT INTO Actividad (Nombre, Descripcion, IdEstado, IdTipo, FechaInicio, FechaTermino, IdProyecto, IdDesarrollador) VALUES 
-    ('Comprobacion de alert', 'comprobar alerts para confirmar', 
+    ('Ejemplo Actividad 9', 'Descripción de ejemplo para la actividad 9', 
     2, 2, '2024-04-10', '2024-12-15', 1, 4);
 INSERT INTO Actividad (Nombre, Descripcion, IdEstado, IdTipo, FechaInicio, FechaTermino, IdProyecto, IdDesarrollador) VALUES 
-    ('XD', 'lol nomas por si no me sale', 
+    ('Ejemplo Actividad 10', 'Descripción de ejemplo para la actividad 10', 
     1, 2, '2024-04-28', '2024-12-30', 1, 4);
 /*BITACORA-------------------------------------------------------------------------------------------------------------------------*/
 INSERT INTO BitacoraActividad (NumBitacora, Nombre, Descripción, IdActividad, IdDesarrollador)
-    VALUES (1, 'Bitacora de ejemplo', 'Prueba para hacer mi CU13, creo jajaj no recuerdo cual era. Ni pex', 4, 4);
+    VALUES (1, 'Ejemplo bitácora 1', 'Descripción de ejemplo de bitácora 1', 4, 4);
 /*CAMBIO-------------------------------------------------------------------------------------------------------------------------*/
 INSERT INTO Cambio (Nombre, Descripcion, FechaInicio, IdDesarrollador, IdEstado, IdTipo)
-    VALUES ('Cambio de ejemplo', 'Ejemplo para ver si mi query funciona', '2024-02-21', 4, 1, 2);
+    VALUES ('Ejemplo de cambio 1', 'Descripción de ejemplo de cambio 1', '2024-02-21', 4, 1, 2);
 INSERT INTO Cambio (Nombre, Descripcion, FechaInicio, IdDesarrollador, IdEstado, IdTipo)
-    VALUES ('Cambio de ejemplo 2', 'Ejemplo para modificar', '2024-02-23', 4,  2, 2);
+    VALUES ('Ejemplo de cambio 2', 'Descripción de ejemplo de cambio 2', '2024-02-23', 4,  2, 2);
 /*DEFECTO-------------------------------------------------------------------------------------------------------------------------*/
-INSERT INTO Defecto (Nombre, Descripcion, FechaEncontrado, IdProyecto, IdEstado, IdTipo)
-    VALUES ('Primer defecto', 'Query regresa null', '2024-02-16', 1, 1, 3);
-INSERT INTO Defecto (Nombre, Descripcion, FechaEncontrado, IdProyecto, IdEstado, IdTipo)
-    VALUES ('Defecto de ejemplo', 'Para comprobar query', '2024-03-06', 1, 1, 3);
-INSERT INTO Defecto (Nombre, Descripcion, FechaEncontrado, IdProyecto, IdEstado, IdTipo)
-    VALUES ('Fallo al no haber defectos', 'Programa falla cuando no halla defectos', '2024-03-10', 1, 1, 1);
-INSERT INTO Defecto (Nombre, Descripcion, FechaEncontrado, IdProyecto, IdEstado, IdTipo)
-    VALUES ('Comprobacion de arreglo', 'Arreglo de controlador', '2024-03-19', 1, 1, 3);
+INSERT INTO Defecto (Nombre, Descripcion, Esfuerzo, FechaEncontrado, IdProyecto, IdEstado, IdTipo)
+    VALUES ('Ejemplo defecto 1', 'Descripción de ejemplo defecto 1', 50, '2024-02-16', 1, 1, 3);
+INSERT INTO Defecto (Nombre, Descripcion, Esfuerzo, FechaEncontrado, IdProyecto, IdEstado, IdTipo)
+    VALUES ('Ejemplo defecto 2', 'Descripción de ejemplo defecto 2', 45, '2024-03-06', 1, 1, 3);
+INSERT INTO Defecto (Nombre, Descripcion, Esfuerzo, FechaEncontrado, IdProyecto, IdEstado, IdTipo)
+    VALUES ('Ejemplo defecto 3', 'Descripción de ejemplo defecto 3', 60, '2024-03-10', 1, 1, 1);
+INSERT INTO Defecto (Nombre, Descripcion, Esfuerzo, FechaEncontrado, IdProyecto, IdEstado, IdTipo)
+    VALUES ('Ejemplo defecto 4', 'Descripción de ejemplo defecto 3', 120, '2024-03-19', 1, 1, 3);
 /*SOLICITUD DE CAMBIO-------------------------------------------------------------------------------------------------------------------------*/
 INSERT INTO SolicitudCambio (Nombre, Descripcion, Razon, Impacto, AccionPropuesta, 
-    FechaCreacion, FechaAceptada, EstadoAceptacion, IdDefecto) 
-    VALUES ('Nombre de SC 1 CON defecto', 'Descripción de ejemplo de solicitud de cambio', 
-    'Razón: Ralentización del registro', 'Impacto: Archivo o estructuras a modificar', 
-    'Acción propuesta: Usar API de Spring', '2024-02-18', '2024-02-19', 'Aceptado', 1);
+    FechaCreacion, FechaAceptada, IdEstadoAceptacion, IdDefecto, IdProyecto) 
+    VALUES ('Ejemplo de solicitud de cambio 1', 'Descripción de ejemplo de solicitud de cambio 1',
+    'Razón: Razón de ejemplo de solicitud de cambio 1', 'Impacto: Impacto de ejemplo de solicitud de cambio 1', 
+    'Acción propuesta: Acción propuesta de ejemplo de solicitud de cambio 1', '2024-02-18', NULL, 1, 1, NULL);
 INSERT INTO SolicitudCambio (Nombre, Descripcion, Razon, Impacto, AccionPropuesta, 
-    FechaCreacion, FechaAceptada, EstadoAceptacion, IdDefecto) 
-    VALUES ('Nombre de SC 2 SIN defecto', 'Descripción de ejemplo de solicitud de cambio', 
-    'Razón: Ralentización dol FRONTEND', 'Impacto: Archivo o estructuras a modificar', 
-    'Acción propuesta: Usar framework', '2024-02-25', '2024-02-29', 'Aceptado', NULL);
+    FechaCreacion, FechaAceptada, IdEstadoAceptacion, IdDefecto, IdProyecto) 
+    VALUES ('Ejemplo de solicitud de cambio 2', 'Descripción de ejemplo de solicitud de cambio 2',
+    'Razón: Razón de ejemplo de solicitud de cambio 2', 'Impacto: Impacto de ejemplo de solicitud de cambio 2', 
+    'Acción propuesta: Acción propuesta de ejemplo de solicitud de cambio 3', '2024-02-25', '2024-02-29', 2, NULL, 1);
 INSERT INTO SolicitudCambio (Nombre, Descripcion, Razon, Impacto, AccionPropuesta, 
-    FechaCreacion, FechaAceptada, EstadoAceptacion, IdDefecto) 
-    VALUES ('Nombre de SC 3 CON defecto', 'Descripción de ejemplo de solicitud de cambio', 
-    'Razón: Ralentización del wifi', 'Impacto: Archivo o estructuras a modificar', 
-    'Acción propuesta: Comprar módem', '2024-03-10', '2024-03-12', 'Aceptado', 2);
+    FechaCreacion, FechaAceptada, IdEstadoAceptacion, IdDefecto, IdProyecto) 
+    VALUES ('Ejemplo de solicitud de cambio 3', 'Descripción de ejemplo de solicitud de cambio 3',
+    'Razón: Razón de ejemplo de solicitud de cambio 3', 'Impacto: Impacto de ejemplo de solicitud de cambio 3', 
+    'Acción propuesta: Acción propuesta de ejemplo de solicitud de cambio 3', '2024-03-10', '2024-03-12', 3, 2, NULL);

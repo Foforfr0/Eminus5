@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
+import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -64,6 +65,7 @@ public class FXMLSolicitudesCambioProyectoController implements Initializable {
                     "Intente más tarde"
                 );
             } else {
+                this.solicitudes.clear();
                 this.solicitudes.addAll((ObservableList<SolicitudCambio>) resultGetSolicitudes.getData());
                 this.tvSolicitudes.setItems(this.solicitudes);
             }
@@ -77,7 +79,14 @@ public class FXMLSolicitudesCambioProyectoController implements Initializable {
     private void initializeTable() {
         this.tcNombre.setCellValueFactory(new PropertyValueFactory("nombre"));
         this.tcFechaCreacion.setCellValueFactory(new PropertyValueFactory("fechaCreacion"));
-        this.tcFechaAceptada.setCellValueFactory(new PropertyValueFactory("fechaAceptada"));
+        //this.tcFechaAceptada.setCellValueFactory(new PropertyValueFactory("fechaAceptada"));
+        this.tcFechaAceptada.setCellValueFactory(dataCell -> {
+            if (dataCell.getValue().getFechaAceptada() == null){
+                return new ReadOnlyStringWrapper("Sin respuesta");
+            } else {
+                return new ReadOnlyStringWrapper(String.valueOf(dataCell.getValue().getFechaAceptada()));
+            }
+        });
         this.tvSolicitudes.setRowFactory(tv -> {
             TableRow<SolicitudCambio> row = new TableRow<>();
             row.setOnMouseClicked(event -> {

@@ -60,7 +60,7 @@ public class SolicitudCambioDAO {
                         0, 
                         null
                     );
-                    System.out.println("SolicitudCambioDAO//NO SE ENCONTRÓ SOLICITUD DE CAMBIO");
+                    System.out.println("SolicitudCambioDAO//NO SE ENCONTRÓ SOLICITUD DE CAMBIO PARA DEFECTO ID: "+idDefecto);
                 }
             } catch (SQLException sqlex) {
                 resultOperation = new ResultOperation(               
@@ -94,12 +94,14 @@ public class SolicitudCambioDAO {
         if (connectionDB != null) {    
             try {            
                 String sqlQuery = "SELECT SC.IdSolicitud, SC.Nombre, SC.Descripcion, SC.Razon, SC.Impacto, SC.AccionPropuesta, " +
-                                  "SC.FechaCreacion, SC.FechaAceptada, D.IdDefecto, D.Nombre " +
-                                  "FROM SolicitudCambio SC LEFT JOIN Defecto D ON SC.IdDefecto = D.IdDefecto " +
-                                  "LEFT JOIN Proyecto P ON D.IdProyecto = P.IdProyecto " +
-                                  "WHERE P.IdProyecto = ?;";
+                                  "SC.FechaCreacion, SC.FechaAceptada, ES.Nombre AS EstadoSolicitud " +
+                                  "FROM SolicitudCambio SC LEFT JOIN EstadoSolicitud ES ON SC.IdEstadoAceptacion = ES.IdSolicitud " +
+                                  "LEFT JOIN Defecto D ON SC.IdDefecto = D.IdDefecto " +
+                                  "LEFT JOIN Proyecto P ON SC.IdProyecto = P.IdProyecto " +
+                                  "WHERE P.IdProyecto = ? OR D.IdProyecto = ?;";
                 PreparedStatement prepareQuery = connectionDB.prepareStatement(sqlQuery);
                     prepareQuery.setInt(1, idProyecto);
+                    prepareQuery.setInt(2, idProyecto);
                 ResultSet resultQuery = prepareQuery.executeQuery();
                 
                 ObservableList<SolicitudCambio> listSolicitudes = FXCollections.observableArrayList();
@@ -113,8 +115,9 @@ public class SolicitudCambioDAO {
                             resultQuery.getString("Impacto"), 
                             resultQuery.getString("AccionPropuesta"), 
                             resultQuery.getString("FechaCreacion"), 
-                            resultQuery.getString("FechaAceptada").equals("") ? "Sin aceptar" : resultQuery.getString("FechaAceptada"), 
-                            resultQuery.getInt("IdDefecto")
+                            //resultQuery.getString("FechaAceptada").equals("") ? "Sin aceptar" : resultQuery.getString("FechaAceptada"), 
+                                resultQuery.getString("FechaAceptada"),
+                            0
                         )
                     );
                     resultOperation = new ResultOperation(            //It´s exists
@@ -166,7 +169,7 @@ public class SolicitudCambioDAO {
         if (connectionDB != null) { 
             try {            
                 PreparedStatement prepareQuery;
-                if (newSolicitud.getIdDefecto() <= 0) {
+                if (newSolicitud.getIdPadre()<= 0) {
                     String sqlQuery = "INSERT INTO SolicitudCambio (Nombre, Descripcion, Razon, Impacto, AccionPropuesta, " +
                                       "FechaCreacion, FechaAceptada, EstadoAceptacion, IdDefecto) " +
                                       "VALUES (?, ?, ?, ?, ?, (STR_TO_DATE(?, '%d-%m-%Y')), NULL, 'Sin aceptar', NULL);";
@@ -188,7 +191,7 @@ public class SolicitudCambioDAO {
                         prepareQuery.setString(4, newSolicitud.getImpacto());
                         prepareQuery.setString(5, newSolicitud.getAccionPropuesta());
                         prepareQuery.setString(6, newSolicitud.getFechaCreacion().replace("/}", "-"));
-                        prepareQuery.setInt(7, newSolicitud.getIdDefecto());
+                        prepareQuery.setInt(7, newSolicitud.getIdPadre());
                 }
                 int numberAffectedRows = prepareQuery.executeUpdate();
                 

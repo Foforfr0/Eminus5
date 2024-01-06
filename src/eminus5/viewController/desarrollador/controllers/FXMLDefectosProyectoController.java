@@ -60,9 +60,8 @@ public class FXMLDefectosProyectoController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        initializeData();
         initializeTable();
-        System.out.println("IDUser: "+idUser);
+        initializeData();
     }    
     
     private void initializeTable() {

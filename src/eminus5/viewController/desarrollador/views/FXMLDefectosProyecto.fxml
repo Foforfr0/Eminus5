@@ -30,6 +30,6 @@
       </Label>
       <Button layoutX="94.0" layoutY="105.0" mnemonicParsing="false" onMouseClicked="#clicAddDefecto" text="Registrar" />
       <Button fx:id="btModificarDefecto" layoutX="167.0" layoutY="105.0" mnemonicParsing="false" onMouseClicked="#clicModifyDefecto" text="Modificar" />
-      <Button layoutX="596.0" layoutY="447.0" mnemonicParsing="false" onMouseClicked="#clicGetSolicitudes" text="Solicitar cambio" />
+      <Button layoutX="604.0" layoutY="447.0" mnemonicParsing="false" onMouseClicked="#clicGetSolicitudes" text="Ver solicitudes" />
    </children>
 </AnchorPane>

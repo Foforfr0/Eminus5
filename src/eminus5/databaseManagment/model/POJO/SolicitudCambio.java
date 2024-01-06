@@ -15,12 +15,12 @@ public class SolicitudCambio {
     private String accionPropuesta;
     private String fechaCreacion;
     private String fechaAceptada;
-    private int idDefecto;
+    private int idPadre;
 
     public SolicitudCambio() {
     }
 
-    public SolicitudCambio(int idSolicitud, String nombre, String descripcion, String razon, String impacto, String accionPropuesta, String fechaCreacion, String fechaAceptada, int idDefecto) {
+    public SolicitudCambio(int idSolicitud, String nombre, String descripcion, String razon, String impacto, String accionPropuesta, String fechaCreacion, String fechaAceptada) {
         this.idSolicitud = idSolicitud;
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -29,9 +29,20 @@ public class SolicitudCambio {
         this.accionPropuesta = accionPropuesta;
         this.fechaCreacion = fechaCreacion;
         this.fechaAceptada = fechaAceptada;
-        this.idDefecto = idDefecto;
     }
-
+     
+      public SolicitudCambio(int idSolicitud, String nombre, String descripcion, String razon, String impacto, String accionPropuesta, String fechaCreacion, String fechaAceptada, int idPadre) {
+        this.idSolicitud = idSolicitud;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.razon = razon;
+        this.impacto = impacto;
+        this.accionPropuesta = accionPropuesta;
+        this.fechaCreacion = fechaCreacion;
+        this.fechaAceptada = fechaAceptada;
+        this.idPadre = idPadre;
+    }
+       
     public String getFechaCreacion() {
         return fechaCreacion;
     }
@@ -95,11 +106,11 @@ public class SolicitudCambio {
         this.accionPropuesta = accionPropuesta;
     }
 
-    public int getIdDefecto() {
-        return idDefecto;
+    public int getIdPadre() {
+        return idPadre;
     }
 
-    public void setIdDefecto(int idDefecto) {
-        this.idDefecto = idDefecto;
+    public void setIdPadre(int idPadre) {
+        this.idPadre = idPadre;
     }
 }

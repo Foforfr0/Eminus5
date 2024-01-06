@@ -61,7 +61,7 @@ public class FXMLDetallesSolicitudCambioController implements Initializable {
         this.lbFechaCreacion.setText(currentSolicitud.getFechaCreacion());
         //this.lbFechaAceptada.setText(currentSolicitud.getFechaAceptada().equals("") ? "Sin aceptar" : currentSolicitud.getFechaAceptada());
         if (currentSolicitud.getFechaAceptada() == null) {
-            this.lbFechaAceptada.setText("Sin aceptar");
+            this.lbFechaAceptada.setText("Sin respuesta");
         } else {
             this.lbFechaAceptada.setText(currentSolicitud.getFechaAceptada());
         }
