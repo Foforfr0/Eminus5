@@ -171,8 +171,8 @@ public class SolicitudCambioDAO {
                 PreparedStatement prepareQuery;
                 if (newSolicitud.getIdPadre()<= 0) {
                     String sqlQuery = "INSERT INTO SolicitudCambio (Nombre, Descripcion, Razon, Impacto, AccionPropuesta, " +
-                                      "FechaCreacion, FechaAceptada, EstadoAceptacion, IdDefecto) " +
-                                      "VALUES (?, ?, ?, ?, ?, (STR_TO_DATE(?, '%d-%m-%Y')), NULL, 'Sin aceptar', NULL);";
+                                      "FechaCreacion, FechaAceptada, IdEstadoAceptacion, IdDefecto) " +
+                                      "VALUES (?, ?, ?, ?, ?, (STR_TO_DATE(?, '%d-%m-%Y')), NULL, 1, NULL);";
                     prepareQuery = connectionDB.prepareStatement(sqlQuery);
                         prepareQuery.setString(1, newSolicitud.getNombre());
                         prepareQuery.setString(2, newSolicitud.getDescripcion());
@@ -182,8 +182,8 @@ public class SolicitudCambioDAO {
                         prepareQuery.setString(6, newSolicitud.getFechaCreacion().replace("/}", "-"));
                 } else {
                     String sqlQuery = "INSERT INTO SolicitudCambio (Nombre, Descripcion, Razon, Impacto, AccionPropuesta, " +
-                                      "FechaCreacion, FechaAceptada, EstadoAceptacion, IdDefecto) " +
-                                      "VALUES (?, ?, ?, ?, ?, (STR_TO_DATE(?, '%d-%m-%Y')), NULL, 'Sin aceptar', ?);";
+                                      "FechaCreacion, FechaAceptada, IdEstadoAceptacion, IdDefecto) " +
+                                      "VALUES (?, ?, ?, ?, ?, (STR_TO_DATE(?, '%d-%m-%Y')), NULL, 1, ?);";
                     prepareQuery = connectionDB.prepareStatement(sqlQuery);
                         prepareQuery.setString(1, newSolicitud.getNombre());
                         prepareQuery.setString(2, newSolicitud.getDescripcion());
