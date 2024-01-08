@@ -26,10 +26,10 @@
          </children></Pane>
       <Pane layoutY="80.0" prefHeight="550.0" prefWidth="170.0" style="-fx-background-color: lightGray;">
          <children>
-            <Button layoutX="10.0" layoutY="450.0" mnemonicParsing="false" onAction="#btnBitacoras" prefHeight="31.0" prefWidth="151.0" text="Bitacoras" />
-            <Button layoutX="10.0" layoutY="315.0" mnemonicParsing="false" onAction="#btnActividades" prefHeight="31.0" prefWidth="151.0" text="Actividades" />
-            <Button layoutX="10.0" layoutY="175.0" mnemonicParsing="false" onAction="#btnCambios" prefHeight="31.0" prefWidth="151.0" text="Cambios" />
             <Button layoutX="10.0" layoutY="50.0" mnemonicParsing="false" onAction="#btnDefectos" prefHeight="31.0" prefWidth="151.0" text="Defectos" />
+            <Button layoutX="10.0" layoutY="175.0" mnemonicParsing="false" onAction="#btnCambios" prefHeight="31.0" prefWidth="151.0" text="Cambios" />
+            <Button layoutX="10.0" layoutY="315.0" mnemonicParsing="false" onAction="#btnActividades" prefHeight="31.0" prefWidth="151.0" text="Actividades" />
+            <Button layoutX="10.0" layoutY="450.0" mnemonicParsing="false" onAction="#btnBitacoras" prefHeight="31.0" prefWidth="151.0" text="Bitacoras" />
          </children></Pane>
       <Label fx:id="lbTituloVentana" layoutX="170.0" layoutY="80.0">
          <font>
