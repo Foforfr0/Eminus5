@@ -38,10 +38,10 @@ public class BitacoraDAO {
                     newBitacora.setDescripcion(resultQuery.getString("Descripción"));
                     listBitacoras.add(newBitacora);
                     resultOperation = new ResultOperation(
-                            false,
-                            "Se encontraron bitacoras",
-                            listBitacoras.size(),
-                            listBitacoras
+                        false,
+                        "Se encontraron bitacoras",
+                        listBitacoras.size(),
+                        listBitacoras
                     );
                     System.out.println("BitacoraDAO//BITACORAS ENCONTRADAS: " + listBitacoras.size() + " DEL DESARROLLADOR ID" + idUser);
                 }
@@ -57,10 +57,10 @@ public class BitacoraDAO {
                 }
             } catch (SQLException sqlex) {
                 resultOperation = new ResultOperation(
-                        true,
-                        "Fallo la conexion con la base de datos",
-                        -1,
-                        null
+                    true,
+                    "Fallo la conexion con la base de datos",
+                    -1,
+                    null
                 );
                 System.out.println("Error de \"SQLException\" en archivo\"BitacoraDAO\" en metodo \"getBitacoras\"");
                 sqlex.printStackTrace();
@@ -69,13 +69,14 @@ public class BitacoraDAO {
             }
         } else {
             resultOperation = new ResultOperation(
-                    true,
-                    "Fallo la conexion con la base de datos",
-                    -1,
-                    null
+                true,
+                "Fallo la conexion con la base de datos",
+                -1,
+                null
             );
             showMessageFailureConnection();
         }
+        
         return resultOperation;
     }
 }

@@ -10,12 +10,12 @@
    <children>
       <TableView fx:id="tvActividades" layoutX="83.0" layoutY="88.0" prefHeight="390.0" prefWidth="834.0">
         <columns>
-          <TableColumn fx:id="tcNombre" prefWidth="188.0" text="Nombre" />
-          <TableColumn fx:id="tvAsignado" prefWidth="92.0" text="Asignado" />
-            <TableColumn fx:id="tcEstado" prefWidth="149.0" text="Estado" />
-            <TableColumn fx:id="tcTipo" prefWidth="136.0" text="Tipo" />
-            <TableColumn fx:id="tcFechaInicio" prefWidth="128.0" text="Fecha inicio" />
-            <TableColumn fx:id="tcFechaFin" prefWidth="140.0" text="Fecha termino" />
+          <TableColumn fx:id="tcNombre" prefWidth="225.0" text="Nombre" />
+          <TableColumn fx:id="tvAsignado" prefWidth="108.0" text="Asignado" />
+            <TableColumn fx:id="tcEstado" prefWidth="147.0" text="Estado" />
+            <TableColumn fx:id="tcTipo" prefWidth="107.0" text="Tipo" />
+            <TableColumn fx:id="tcFechaInicio" prefWidth="122.0" text="Fecha inicio" />
+            <TableColumn fx:id="tcFechaFin" prefWidth="121.0" text="Fecha termino" />
         </columns>
       </TableView>
       <Button layoutX="83.0" layoutY="56.0" mnemonicParsing="false" onMouseClicked="#clicAddActividad" text="Crear" />

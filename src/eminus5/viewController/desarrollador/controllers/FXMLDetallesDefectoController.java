@@ -59,7 +59,7 @@ public class FXMLDetallesDefectoController implements Initializable {
         if (currentDefecto.getFechaSolucionado() == null) {
             this.lbFechaSolucionado.setText("Sin solucionar");
         } else {
-            this.lbFechaSolucionado.setText(String.valueOf(currentDefecto.getFechaSolucionado())+" minutos");
+            this.lbFechaSolucionado.setText(String.valueOf(currentDefecto.getFechaSolucionado()));
         }
     }
     

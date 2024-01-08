@@ -9,7 +9,7 @@ public class Actividad {
     private int idActividad;
     private String nombre;
     private String descripcion;
-    private String isAsignado;
+    private String isAsignado = "";
     private String estado;
     private String tipo;
     private String fechaInicio;

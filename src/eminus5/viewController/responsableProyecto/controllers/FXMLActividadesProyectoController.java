@@ -108,6 +108,11 @@ public class FXMLActividadesProyectoController implements Initializable {
                 this.actividades = FXCollections.observableArrayList(
                     (ObservableList) ActividadDAO.getActividadesProyecto(resultGetProyecto.getNumberRowsAffected()).getData()
                 );
+                if (!actividades.isEmpty()) {
+                    if (actividades.get(0).getNombre() == null) {
+                        actividades.clear();
+                    }
+                }
                 this.tvActividades.setItems(this.actividades);
             }
         }catch(SQLException sqlex){
@@ -118,7 +123,7 @@ public class FXMLActividadesProyectoController implements Initializable {
         
         this.tvActividades.getSortOrder().add(this.tcNombre);
     }
-
+    
     @FXML
     private void clicAddActividad(MouseEvent event) {
         try {
@@ -138,7 +143,7 @@ public class FXMLActividadesProyectoController implements Initializable {
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                 alert.setTitle("¿Está seguro?");
                 alert.setHeaderText("¿Está seguro de cancelar?");
-                alert.setContentText("¿Ésta acción no se podrá revertir?");
+                alert.setContentText("No se guardarán los cambios realizados");
 
 
                 alert.showAndWait().ifPresent(response -> {
@@ -178,7 +183,7 @@ public class FXMLActividadesProyectoController implements Initializable {
                     Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                     alert.setTitle("¿Está seguro?");
                     alert.setHeaderText("¿Está seguro de cancelar?");
-                    alert.setContentText("¿Ésta acción no se podrá revertir?");
+                    alert.setContentText("No se guardarán los cambios realizados");
                         
                     alert.showAndWait().ifPresent(response -> {
                         String responseMessage = response.getText();
@@ -243,7 +248,7 @@ public class FXMLActividadesProyectoController implements Initializable {
             Alert confirmationDelete = new Alert(Alert.AlertType.CONFIRMATION);
                 confirmationDelete.setTitle("¿Está seguro de eliminar?");
                 confirmationDelete.setHeaderText("¿Está seguro de eliminar la actividad?");
-                confirmationDelete.setContentText("No se podrán revertir los cambios");
+                confirmationDelete.setContentText("No se podrá revertir la eliminación");
                 confirmationDelete.showAndWait().ifPresent(response -> {
                     String responseMessage = response.getText();
                     if (responseMessage.equals("Aceptar")) {
@@ -276,20 +281,6 @@ public class FXMLActividadesProyectoController implements Initializable {
                     (Stage) this.tvActividades.getScene().getWindow()
                 );
                 stageAsignActividad.initStyle(StageStyle.UTILITY);
-                /*stageAsignActividad.setOnCloseRequest(eventStage -> {
-                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                    alert.setTitle("¿Está seguro?");
-                    alert.setHeaderText("¿Está seguro de cancelar?");
-                    alert.setContentText("¿No se guardarán los cambios realizados?");
-                        
-                    alert.showAndWait().ifPresent(response -> {
-                        String responseMessage = response.getText();
-                        if (responseMessage.equals("Aceptar")) {
-                            stageAsignActividad.close(); 
-                        }
-                    });
-                });*/
-                //TODO Arreglar: eliminar pregunta cuando no es necesario
                 stageAsignActividad.showAndWait();
                 initializeData();
             } catch (IOException ioex) {

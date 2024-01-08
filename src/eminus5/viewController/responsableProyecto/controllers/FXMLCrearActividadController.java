@@ -149,54 +149,63 @@ public class FXMLCrearActividadController implements Initializable {
     
     @FXML
     private void clicAddActividad(ActionEvent event) {
-        if (validateFullFields() == true) {
-            ShowMessage.showMessage(
-                "ERROR", 
-                "Campos incompletos", 
-                "Faltan campos por ingresar", 
-                "Favor de ingresar datos faltantes e intente de nuevo"
-            );
-        } else {
-            try {
+        try {
+            if (validateFullFields() == true) {
+                ShowMessage.showMessage(
+                        "ERROR",
+                        "Campos incompletos",
+                        "Faltan campos por ingresar",
+                        "Favor de ingresar datos faltantes e intente de nuevo"
+                );
+            } else if (ActividadDAO.verifyDuplicatedName(tfNombre.getText()).getIsError() == true) {
+                showMessage(
+                    "ERROR", 
+                    "Duplicación de datos",
+                    "El nombre de actividad ya existe", 
+                    "Intente ingresando otro nombre"
+                );
+            } else {
+
                 Actividad newActividad = new Actividad();
-                    newActividad.setNombre(this.tfNombre.getText());
-                    newActividad.setDescripcion(this.tfDescripcion.getText());
-                    newActividad.setTipo(this.cbTipo.getValue());
-                    newActividad.setFechaInicio(this.dpFechaInicio.getValue().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
-                    newActividad.setFechaFin(this.dpFechaFin.getValue().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
-                
+                newActividad.setNombre(this.tfNombre.getText());
+                newActividad.setDescripcion(this.tfDescripcion.getText());
+                newActividad.setTipo(this.cbTipo.getValue());
+                newActividad.setFechaInicio(this.dpFechaInicio.getValue().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
+                newActividad.setFechaFin(this.dpFechaFin.getValue().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
+
                 ResultOperation resultGetProyecto = ProyectoDAO.getProyectoUsuario(idResponsable);
                 if (resultGetProyecto.getIsError() == true && resultGetProyecto.getData() == null || resultGetProyecto.getNumberRowsAffected() <= 0) {
                     showMessage(
-                        "ERROR", 
-                        "Error inesperado", 
-                        resultGetProyecto.getMessage(), 
-                        "Intente más tarde"
+                            "ERROR",
+                            "Error inesperado",
+                            resultGetProyecto.getMessage(),
+                            "Intente más tarde"
                     );
                 } else {
                     ResultOperation resultCreate = ActividadDAO.createActividad(resultGetProyecto.getNumberRowsAffected(), newActividad);
                     if (resultCreate.getIsError() == true) {
                         ShowMessage.showMessage(
-                            "ERROR", 
-                            "Error inesperado", 
-                            resultCreate.getMessage(), 
-                            "Intente más tarde"
+                                "ERROR",
+                                "Error inesperado",
+                                resultCreate.getMessage(),
+                                "Intente más tarde"
                         );
                     } else {
                         ShowMessage.showMessage(
-                                "INFORMATION", 
-                                "Se ha creado correctamente", 
-                                "Se creó con éxito la actividad", 
+                                "INFORMATION",
+                                "Se ha creado correctamente",
+                                "Se creó con éxito la actividad",
                                 ""
                         );
                         Stage currentStage = (Stage) this.tfNombre.getScene().getWindow();
                         currentStage.close();
                     }
                 }
-            } catch (SQLException sqlex) {
-                System.err.println("\"Error de \"SQLException\" en archivo \"FXMLCrearActividadController\" en método \"createActividad\"");
-                sqlex.printStackTrace();
+
             }
+        } catch (SQLException sqlex) {
+            System.err.println("\"Error de \"SQLException\" en archivo \"FXMLCrearActividadController\" en método \"createActividad\"");
+            sqlex.printStackTrace();
         }
     }
     

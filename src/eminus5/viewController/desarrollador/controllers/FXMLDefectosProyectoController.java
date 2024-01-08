@@ -68,7 +68,11 @@ public class FXMLDefectosProyectoController implements Initializable {
     this.tcNombre.setCellValueFactory(new PropertyValueFactory("nombre"));
         this.tcEstado.setCellValueFactory(new PropertyValueFactory("estado"));
         this.tcEsfuerzo.setCellValueFactory(dataCell -> {
-            return new ReadOnlyStringWrapper(String.valueOf(dataCell.getValue().getEsfuerzoMin()) + " min");
+            if (dataCell.getValue().getEsfuerzoMin()==0) {
+                return new ReadOnlyStringWrapper("Sin terminar");
+            } else {
+                return new ReadOnlyStringWrapper(String.valueOf(dataCell.getValue().getEsfuerzoMin()) + " min");
+            }
         });
         this.tcTipo.setCellValueFactory(new PropertyValueFactory("tipo"));
         this.tcSolCambio.setCellValueFactory(p -> {
@@ -128,19 +132,25 @@ public class FXMLDefectosProyectoController implements Initializable {
     
     private void initializeData(){
         try{   
-            this.defectos.clear();
-            int idProyecto = ProyectoDAO.getProyectoUsuario(idUser).getNumberRowsAffected();
-            ResultOperation resultGetDefectos = DefectoDAO.getDefectosProyecto(idProyecto);
+            defectos.clear();
+            ResultOperation resultGetProyecto = ProyectoDAO.getProyectoUsuario(idUser);
         
-            if (resultGetDefectos.getIsError() == true && resultGetDefectos.getData() == null || resultGetDefectos.getNumberRowsAffected() <= 0) {
+            if (resultGetProyecto.getIsError() == true && resultGetProyecto.getData() == null || resultGetProyecto.getNumberRowsAffected() <= 0) {
                 showMessage(
                     "ERROR", 
                     "Error inesperado", 
-                    resultGetDefectos.getMessage(), 
+                    resultGetProyecto.getMessage(), 
                     "Intente más tarde"
                 );
             } else {
-                this.defectos.addAll((ObservableList<Defecto>) resultGetDefectos.getData());
+                this.defectos = FXCollections.observableArrayList(
+                    (ObservableList) DefectoDAO.getDefectosProyecto(resultGetProyecto.getNumberRowsAffected()).getData()
+                );
+                if (!defectos.isEmpty()) {
+                    if (defectos.get(0).getNombre() == null) {
+                        defectos.clear();
+                    }
+                }
                 this.tvDefectos.setItems(this.defectos);
             }
         }catch(SQLException sqlex){
@@ -235,7 +245,7 @@ public class FXMLDefectosProyectoController implements Initializable {
                 });
             });
             clicRegistrarDefecto.showAndWait();
-        
+            initializeData();
         } catch (IOException ioex) {
             System.err.println("Error de \"IOException\" en archivo \"FXMLDefectosDController\""
                     + " en método \"clicRegistrarDefecto\"");
@@ -272,7 +282,8 @@ public class FXMLDefectosProyectoController implements Initializable {
                     });
                 });
                 modificarDefecto.showAndWait();
-                cargarDefectos();
+                initializeData();
+                //cargarDefectos();
             } catch (IOException ioex) {
                 System.err.println("Error de \"IOException\" en archivo \"FXMLFormularioModDefecto\" en método \"btModificarDefecto\"");
                 ioex.printStackTrace();

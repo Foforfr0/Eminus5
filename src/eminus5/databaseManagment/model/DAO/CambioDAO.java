@@ -97,13 +97,13 @@ public class CambioDAO {
     
     private static int getTipoCambioToInt (String idTipoCambio) {
         switch (idTipoCambio) {
-            case "Frontend":
-                return 1;
             case "Backend":
-                return 2;
+                return 1;
             case "Base de datos":
-                return 3;
+                return 2;
             case "Controlador":
+                return 3;
+            case "Frontend":
                 return 4;
             case "JavaScript":
                 return 5;

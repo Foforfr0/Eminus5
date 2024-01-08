@@ -12,7 +12,7 @@ import java.time.format.DateTimeFormatter;
 public class ConvertData {
     public static LocalDate convertStringToLocalDate(String string) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-            LocalDate localDate = LocalDate.parse(string, formatter);
-            return localDate;
+        LocalDate localDate = LocalDate.parse(string, formatter);
+        return localDate;
     }
 }

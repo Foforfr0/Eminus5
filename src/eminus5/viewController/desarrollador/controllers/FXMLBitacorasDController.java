@@ -37,6 +37,7 @@ public class FXMLBitacorasDController implements Initializable {
     @FXML
     private TableColumn<Bitacora, String> tcDescripcion;
     
+    
     public static int idUser = 0;
     private ObservableList<Bitacora> bitacoras = FXCollections.observableArrayList();
     private Bitacora bitacoraSeleccionada = null;
@@ -82,13 +83,14 @@ public class FXMLBitacorasDController implements Initializable {
         try{
             ResultOperation resultGetBitacoras = BitacoraDAO.getBitacoras(idUser);
             
-            if(resultGetBitacoras.getIsError() == true && resultGetBitacoras.getData() == null ||
-               resultGetBitacoras.getNumberRowsAffected() <= 0){
+            if(resultGetBitacoras.getIsError() == true && 
+                resultGetBitacoras.getData() == null ||
+                resultGetBitacoras.getNumberRowsAffected() <= 0){
                 showMessage(
-                        "ERROR",
-                        "Error inesperado",
-                        resultGetBitacoras.getMessage(),
-                        "Intente mas tarde"
+                    "ERROR",
+                    "Error inesperado",
+                    resultGetBitacoras.getMessage(),
+                    "Intente mas tarde"
                 );
             } else {
             this.bitacoras = FXCollections.observableArrayList(

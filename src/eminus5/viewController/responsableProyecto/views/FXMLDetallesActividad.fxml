@@ -30,7 +30,7 @@
                <font>
                   <Font size="14.0" />
                </font></Label>
-            <Label fx:id="lbDescripcion" alignment="TOP_LEFT" layoutX="53.0" layoutY="114.0" prefHeight="245.0" prefWidth="460.0" />
+            <Label fx:id="lbDescripcion" alignment="TOP_LEFT" layoutX="53.0" layoutY="114.0" prefHeight="245.0" prefWidth="460.0" wrapText="true" />
             <Label layoutX="370.0" layoutY="37.0" text="Tipo: ">
                <font>
                   <Font size="14.0" />
@@ -51,7 +51,7 @@
                   <Font size="14.0" />
                </font></Label>
             <Label fx:id="lbAsignado" alignment="TOP_LEFT" contentDisplay="TOP" layoutX="564.0" layoutY="166.0" prefHeight="141.0" prefWidth="183.0" wrapText="true" />
-            <Button fx:id="btAceptar" defaultButton="true" layoutX="699.0" layoutY="331.0" mnemonicParsing="false" onAction="#clicAceptar" text="Aceptar" />
+            <Button fx:id="btAceptar" defaultButton="true" layoutX="689.0" layoutY="313.0" mnemonicParsing="false" onAction="#clicAceptar" text="Aceptar" />
          </children>
       </Pane>
    </children>

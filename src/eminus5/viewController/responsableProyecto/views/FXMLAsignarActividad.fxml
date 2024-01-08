@@ -30,6 +30,14 @@
                   <Font size="15.0" />
                </font>
             </Label>
+            <Label layoutX="33.0" layoutY="37.0" text="De clic en &quot;Desasignar&quot; para quitar selección de desarrollador">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Button layoutX="531.0" layoutY="45.0" mnemonicParsing="false" onMouseClicked="#clicCancelAsignacion" text="Cancelar" />
+            <Button layoutX="603.0" layoutY="45.0" mnemonicParsing="false" onMouseClicked="#clicCleanAsignacion" text="Desasignar" />
+            <Button layoutX="688.0" layoutY="45.0" mnemonicParsing="false" onMouseClicked="#clicSaveAsignacion" text="Guardar" />
             <ScrollPane hbarPolicy="NEVER" layoutX="23.0" layoutY="76.0" prefHeight="282.0" prefWidth="724.0">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="280.0" prefWidth="722.0">
@@ -50,14 +58,6 @@
                   </AnchorPane>
               </content>
             </ScrollPane>
-            <Button layoutX="688.0" layoutY="45.0" mnemonicParsing="false" onMouseClicked="#clicSaveAsignacion" text="Guardar" />
-            <Button layoutX="603.0" layoutY="45.0" mnemonicParsing="false" onMouseClicked="#clicCleanAsignacion" text="Desasignar" />
-            <Button layoutX="531.0" layoutY="45.0" mnemonicParsing="false" onMouseClicked="#clicCancelAsignacion" text="Cancelar" />
-            <Label layoutX="33.0" layoutY="37.0" text="De clic en &quot;Desasignar&quot; para quitar selección de desarrollador">
-               <font>
-                  <Font size="15.0" />
-               </font>
-            </Label>
          </children>
       </Pane>
    </children>

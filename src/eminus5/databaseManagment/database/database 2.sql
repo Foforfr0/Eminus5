@@ -363,18 +363,18 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 /*ROLES SISTEMA--------------------------------------------------------------------------------------------------------------------*/
 INSERT INTO RolSistema (Nombre) VALUES ('Responsable');
 INSERT INTO RolSistema (Nombre) VALUES ('Desarrollador');
-/*ESTADO ACTIVIDAD--------------------------------------------------------------------------------------------------------------------------*/
+/*ESTADO SOLICITUD CAMBIO--------------------------------------------------------------------------------------------------------------------------*/
 INSERT INTO EstadoSolicitud (Nombre) VALUES ('Creado');
 INSERT INTO EstadoSolicitud (Nombre) VALUES ('Aceptado');
 INSERT INTO EstadoSolicitud (Nombre) VALUES ('Rechazado');
-/*ESTADO SOLICITUD CAMBIO--------------------------------------------------------------------------------------------------------------------------*/
+/*ESTADO ACTIVIDAD--------------------------------------------------------------------------------------------------------------------------*/
 INSERT INTO Estado (Nombre) VALUES ('Iniciado');
 INSERT INTO Estado (Nombre) VALUES ('Entregado');
 /*TIPO ACTIVIDAD----------------------------------------------------------------------------------------------------------------------------*/
-INSERT INTO TipoActividad (Nombre) VALUES ('Frontend');
 INSERT INTO TipoActividad (Nombre) VALUES ('Backend');
 INSERT INTO TipoActividad (Nombre) VALUES ('Base de datos');
 INSERT INTO TipoActividad (Nombre) VALUES ('Controlador');
+INSERT INTO TipoActividad (Nombre) VALUES ('Frontend');
 INSERT INTO TipoActividad (Nombre) VALUES ('JavaScript');
 /*PERIODO------------------------------------------------------------------------------------------------------------------------*/
 INSERT INTO Periodo (Inicio, Fin) VALUES ('2024-01-01', '2024-06-01');
@@ -401,13 +401,13 @@ INSERT INTO Usuario (Usuario, Password, Nombre, ApellidoPaterno, ApellidoMaterno
 USE Eminus5;
 INSERT INTO Actividad (Nombre, Descripcion, IdEstado, IdTipo, FechaInicio, FechaTermino, IdProyecto, IdDesarrollador) VALUES 
     ('Ejemplo Actividad 1', 'Descripción de ejemplo para la actividad 1', 
-    1, 3, '2024-01-15', '2024-01-25', 1, 2);
+    NULL, 3, '2024-01-15', '2024-01-25', 1, NULL);
 INSERT INTO Actividad (Nombre, Descripcion, IdEstado, IdTipo, FechaInicio, FechaTermino, IdProyecto, IdDesarrollador) VALUES 
     ('Ejemplo Actividad 2', 'Descripción de ejemplo para la actividad 2', 
     1, 1, '2024-01-14', '2024-01-14', 1, 3);
 INSERT INTO Actividad (Nombre, Descripcion, IdEstado, IdTipo, FechaInicio, FechaTermino, IdProyecto, IdDesarrollador) VALUES 
     ('Ejemplo Actividad 3', 'Descripción de ejemplo para la actividad 3', 
-    1, 4, '2024-02-01', '2024-02-03', 1, NULL);
+    NULL, 4, '2024-02-01', '2024-02-03', 1, NULL);
 INSERT INTO Actividad (Nombre, Descripcion, IdEstado, IdTipo, FechaInicio, FechaTermino, IdProyecto, IdDesarrollador) VALUES 
     ('Ejemplo Actividad 4', 'Descripción de ejemplo para la actividad 4', 
     1, 4, '2024-02-02', '2024-02-07', 1, 4);
@@ -424,10 +424,10 @@ INSERT INTO Actividad (Nombre, Descripcion, IdEstado, IdTipo, FechaInicio, Fecha
 
 INSERT INTO Actividad (Nombre, Descripcion, IdEstado, IdTipo, FechaInicio, FechaTermino, IdProyecto, IdDesarrollador) VALUES 
     ('Ejemplo Actividad 8', 'Descripción de ejemplo para la actividad 8', 
-    1, 2, '2024-04-02', '2024-12-09', 1, 4);
+    NULL, 2, '2024-04-02', '2024-12-09', 1, NULL);
 INSERT INTO Actividad (Nombre, Descripcion, IdEstado, IdTipo, FechaInicio, FechaTermino, IdProyecto, IdDesarrollador) VALUES 
     ('Ejemplo Actividad 9', 'Descripción de ejemplo para la actividad 9', 
-    2, 2, '2024-04-10', '2024-12-15', 1, 4);
+    NULL, 2, '2024-04-10', '2024-12-15', 1, NULL);
 INSERT INTO Actividad (Nombre, Descripcion, IdEstado, IdTipo, FechaInicio, FechaTermino, IdProyecto, IdDesarrollador) VALUES 
     ('Ejemplo Actividad 10', 'Descripción de ejemplo para la actividad 10', 
     1, 2, '2024-04-28', '2024-12-30', 1, 4);

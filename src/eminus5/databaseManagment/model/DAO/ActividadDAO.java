@@ -18,7 +18,7 @@ import javafx.collections.ObservableList;
 
 
 public class ActividadDAO {
-    public static ResultOperation getTiposActividad() throws SQLException{
+    public static ResultOperation getTiposActividad() throws SQLException {
         Connection connectionDB = OpenConnectionDB.getConnection();
         ResultOperation resultOperation = null;
         
@@ -73,7 +73,60 @@ public class ActividadDAO {
         return resultOperation;
     }
     
-    public static ResultOperation getActividadesProyecto(int idProyecto) throws SQLException{
+    public static ResultOperation verifyDuplicatedName(String newName) throws SQLException {
+        Connection connectionDB = OpenConnectionDB.getConnection();
+        ResultOperation resultOperation = null;
+        
+        if (connectionDB != null) {    
+            try {            
+                String sqlQuery = "SELECT Nombre FROM Actividad WHERE BINARY Nombre = ?;";
+                PreparedStatement prepareQuery = connectionDB.prepareStatement(sqlQuery);
+                    prepareQuery.setString(1, newName);
+                ResultSet resultQuery = prepareQuery.executeQuery();
+                
+                if (resultQuery.next()){
+                    resultOperation = new ResultOperation(            //It´s exists
+                        true, 
+                        "Nombre de actividad \""+newName+"\" ya existents", 
+                        1,
+                        null
+                    );
+                    System.err.println("ActividadDAO//NOMBRE YA EXISTENTE: "+newName);
+                } else {
+                    resultOperation = new ResultOperation(            //It doesn't exist but it wasn't an error
+                        false, 
+                        "El nombre de actividad \""+newName+"\" no ha sido usado", 
+                        0, 
+                        null
+                    );
+                    System.out.println("ActividadDAO//NO SE ENCONTRÓ NOMBRE DE ACTIVIDAD");
+                }
+            } catch (SQLException sqlex) {
+                resultOperation = new ResultOperation(               
+                    true, 
+                    "Falló conexión con la base de datos", 
+                    -1, 
+                    null
+                );
+                System.err.println("Error de \"SQLException\" en archivo \"ActividadDAO\" en método \"verifyDuplicatedName\"");
+                sqlex.printStackTrace();
+            } finally {
+                connectionDB.close();
+            }
+        } else {
+            resultOperation = new ResultOperation(                 //Could not connect to database
+                true, 
+                "Falló conexión con la base de datos", 
+                -1, 
+                null
+            );
+            showMessageFailureConnection();
+        }  
+        
+        return resultOperation;
+    }
+    
+    public static ResultOperation getActividadesProyecto(int idProyecto) throws SQLException {
         Connection connectionDB = OpenConnectionDB.getConnection();
         ResultOperation resultOperation = null;
         
@@ -98,16 +151,17 @@ public class ActividadDAO {
                         newActividad.setDescripcion(resultQuery.getString("Descripcion"));
                         if (resultQuery.getInt("IdDesarrollador") > 0) {
                             newActividad.setIsAsignado("Sí");
+                            newActividad.setEstado(resultQuery.getString("Estado"));
                         } else if (resultQuery.getInt("IdDesarrollador") <= 0) {
                             newActividad.setIsAsignado("No");
+                            newActividad.setEstado("Sin asignar");
                         }
-                        newActividad.setEstado(resultQuery.getString("Estado"));
                         newActividad.setTipo(resultQuery.getString("TipoActividad"));
                         newActividad.setFechaInicio(resultQuery.getString("FechaInicio"));
                         newActividad.setFechaFin(resultQuery.getString("FechaTermino"));
                         newActividad.setIdProyecto(resultQuery.getInt("IdProyecto"));
                         newActividad.setIdDesarrollador(resultQuery.getInt("IdDesarrollador"));
-                    listActividades.add(newActividad);
+                       listActividades.add(newActividad);
                     resultOperation = new ResultOperation(            //It´s exists
                         false, 
                         "Se encontraron actividades", 
@@ -150,7 +204,7 @@ public class ActividadDAO {
         return resultOperation;
     }
     
-    public static ResultOperation getDesarrolladorActividad(int idActividad) throws SQLException{
+    public static ResultOperation getDesarrolladorActividad(int idActividad) throws SQLException {
         Connection connectionDB = OpenConnectionDB.getConnection();
         ResultOperation resultOperation = null;
         
@@ -222,13 +276,13 @@ public class ActividadDAO {
     
     private static int getTipoActividadToInt (String idTipoAtividad) {
         switch (idTipoAtividad) {
-            case "Frontend":
-                return 1;
             case "Backend":
-                return 2;
+                return 1;
             case "Base de datos":
-                return 3;
+                return 2;
             case "Controlador":
+                return 3;
+            case "Frontend":
                 return 4;
             case "JavaScript":
                 return 5;
@@ -237,7 +291,7 @@ public class ActividadDAO {
         }
     }
     
-    public static ResultOperation createActividad(int idProyecto, Actividad newActividad) throws SQLException{
+    public static ResultOperation createActividad(int idProyecto, Actividad newActividad) throws SQLException {
         Connection connectionDB = OpenConnectionDB.getConnection();
         ResultOperation resultOperation = null;
         
@@ -245,15 +299,15 @@ public class ActividadDAO {
             try {            
                 String sqlQuery = "INSERT INTO Actividad (Nombre, Descripcion, IdEstado, IdTipo, " +
                                   "FechaInicio, FechaTermino, IdProyecto, IdDesarrollador) VALUES " +
-                                  "(?,?,?,?,(STR_TO_DATE(?, '%d-%m-%Y')),(STR_TO_DATE(?, '%d-%m-%Y')),?,NULL);";
+                                  "(?,?,NULL,?,(STR_TO_DATE(?, '%d-%m-%Y')),(STR_TO_DATE(?, '%d-%m-%Y')),?,NULL);";
                 PreparedStatement prepareQuery = connectionDB.prepareStatement(sqlQuery);
                     prepareQuery.setString(1, newActividad.getNombre());
                     prepareQuery.setString(2, newActividad.getDescripcion());
-                    prepareQuery.setInt(3, 1);
-                    prepareQuery.setInt(4, getTipoActividadToInt(newActividad.getTipo()));
-                    prepareQuery.setString(5, newActividad.getFechaInicio().replace("/}", "-"));
-                    prepareQuery.setString(6, newActividad.getFechaFin().replace("/}", "-"));
-                    prepareQuery.setInt(7, idProyecto);
+                    //prepareQuery.setInt(3, 1);
+                    prepareQuery.setInt(3, getTipoActividadToInt(newActividad.getTipo()));
+                    prepareQuery.setString(4, newActividad.getFechaInicio().replace("/}", "-"));
+                    prepareQuery.setString(5, newActividad.getFechaFin().replace("/}", "-"));
+                    prepareQuery.setInt(6, idProyecto);
                 int numberAffectedRows = prepareQuery.executeUpdate();
                 
                 if (numberAffectedRows > 0) {
@@ -298,7 +352,7 @@ public class ActividadDAO {
         return resultOperation;
     }
     
-    public static ResultOperation modifyActividad(Actividad newActividad) throws SQLException{
+    public static ResultOperation modifyActividad(Actividad newActividad) throws SQLException {
         Connection connectionDB = OpenConnectionDB.getConnection();
         ResultOperation resultOperation = null;
         
@@ -359,7 +413,7 @@ public class ActividadDAO {
         return resultOperation;
     }
     
-    public static ResultOperation deleteActividad(int idActividad) throws SQLException{
+    public static ResultOperation deleteActividad(int idActividad) throws SQLException {
         Connection connectionDB = OpenConnectionDB.getConnection();
         ResultOperation resultOperation = null;
         

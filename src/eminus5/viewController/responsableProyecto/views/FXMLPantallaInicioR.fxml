@@ -12,7 +12,7 @@
    <children>
       <Pane prefHeight="90.0" prefWidth="1000.0" style="-fx-background-color: #1C6CE3;">
          <children>
-            <Label fx:id="lbTittleWindow" contentDisplay="CENTER" layoutX="373.0" layoutY="19.0" nodeOrientation="LEFT_TO_RIGHT" style="-fx-text-alignment: center; -fx-alignment: center;" text="Menú principal" textAlignment="CENTER" textFill="WHITE" textOverrun="CENTER_WORD_ELLIPSIS">
+            <Label fx:id="lbTittleWindow" alignment="CENTER" contentDisplay="CENTER" layoutX="373.0" layoutY="19.0" nodeOrientation="LEFT_TO_RIGHT" style="-fx-text-alignment: center; -fx-alignment: center;" text="Menú principal" textFill="WHITE" textOverrun="CENTER_WORD_ELLIPSIS">
                <font>
                   <Font name="System Bold" size="35.0" />
                </font>

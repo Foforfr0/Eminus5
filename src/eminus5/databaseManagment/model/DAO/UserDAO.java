@@ -16,7 +16,7 @@ import java.sql.SQLException;
 
 
 public class UserDAO {
-    public static ResultOperation verifyUser(String user, String password) throws SQLException{
+    public static ResultOperation verifyUser(String user, String password) throws SQLException {
         Connection connectionDB = OpenConnectionDB.getConnection();
         ResultOperation resultOperation = null;
         
