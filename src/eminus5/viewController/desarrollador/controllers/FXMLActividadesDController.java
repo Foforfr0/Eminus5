@@ -85,8 +85,8 @@ public class FXMLActividadesDController implements Initializable {
             if (resultGetActividades.getIsError() == true && resultGetActividades.getData()  == null
                 || resultGetActividades.getNumberRowsAffected() <= 0) {
                 showMessage(
-                        "ERROR",
-                        "Error inesperado",
+                        "INFORMATION",
+                        "Sin registros",
                         resultGetActividades.getMessage(),
                         "Intente mas tarde"
                 );

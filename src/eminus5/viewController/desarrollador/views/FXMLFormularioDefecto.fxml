@@ -52,7 +52,7 @@
          <font>
             <Font size="24.0" />
          </font></Label>
-      <DatePicker fx:id="dpFechaEncontrado" layoutX="290.0" layoutY="315.0" prefHeight="31.0" prefWidth="187.0" />
+      <DatePicker fx:id="dpFechaEncontrado" editable="false" layoutX="290.0" layoutY="315.0" prefHeight="31.0" prefWidth="187.0" />
       <Label layoutX="290.0" layoutY="353.0" text="Esfuerzo">
          <font>
             <Font size="24.0" />

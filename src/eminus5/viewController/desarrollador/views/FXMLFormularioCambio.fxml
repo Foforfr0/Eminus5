@@ -52,12 +52,12 @@
          <font>
             <Font size="24.0" />
          </font></Label>
-      <DatePicker fx:id="dpFechaInicioCambio" layoutX="322.0" layoutY="311.0" prefHeight="31.0" prefWidth="187.0" />
+      <DatePicker fx:id="dpFechaInicioCambio" editable="false" layoutX="322.0" layoutY="311.0" prefHeight="31.0" prefWidth="187.0" />
       <Label layoutX="319.0" layoutY="358.0" text="Fecha de fin (*)">
          <font>
             <Font size="24.0" />
          </font></Label>
-      <DatePicker fx:id="dpFechaFinCambio" layoutX="322.0" layoutY="393.0" prefHeight="31.0" prefWidth="187.0" />
+      <DatePicker fx:id="dpFechaFinCambio" editable="false" layoutX="322.0" layoutY="393.0" prefHeight="31.0" prefWidth="187.0" />
       <Label layoutX="317.0" layoutY="431.0" text="Esfuerzo">
          <font>
             <Font size="24.0" />

@@ -86,8 +86,8 @@ public class FXMLCambiosDController implements Initializable {
             if(resultGetCambios.getIsError() == true && resultGetCambios.getData() == null
                 || resultGetCambios.getNumberRowsAffected() <= 0) {
                 showMessage(
-                    "ERROR", 
-                    "Error inesperado",
+                    "INFORMATION",
+                    "Sin registros",
                     resultGetCambios.getMessage(),
                     "Intente mas tarde"
                 );

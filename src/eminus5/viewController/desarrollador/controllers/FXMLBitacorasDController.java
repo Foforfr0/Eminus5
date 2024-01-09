@@ -87,8 +87,8 @@ public class FXMLBitacorasDController implements Initializable {
                 resultGetBitacoras.getData() == null ||
                 resultGetBitacoras.getNumberRowsAffected() <= 0){
                 showMessage(
-                    "ERROR",
-                    "Error inesperado",
+                    "INFORMATION",
+                    "Sin registros",
                     resultGetBitacoras.getMessage(),
                     "Intente mas tarde"
                 );

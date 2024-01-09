@@ -87,8 +87,8 @@ public class FXMLDefectosDController implements Initializable {
             if(resultGetProyecto.getIsError() == true && resultGetProyecto.getData() == null ||
                resultGetProyecto.getNumberRowsAffected() <= 0){
                 showMessage(
-                        "ERROR",
-                        "Error inesperado",
+                        "INFORMATION",
+                        "Sin registros",
                         resultGetProyecto.getMessage(),
                         "Intente mas tarde"
                 );
