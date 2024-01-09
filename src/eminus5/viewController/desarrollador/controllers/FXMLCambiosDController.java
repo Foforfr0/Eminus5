@@ -27,7 +27,6 @@ import javafx.stage.StageStyle;
 
 
 public class FXMLCambiosDController implements Initializable {
-
     @FXML
     private TableView<Cambio> tvCambios;
     @FXML
@@ -37,6 +36,7 @@ public class FXMLCambiosDController implements Initializable {
     @FXML
     private Button btModificarCambio;
 
+    
     public static int idUser = 0;
     private ObservableList<Cambio> cambios = FXCollections.observableArrayList();
     private Cambio selectedCambio = null;
@@ -63,7 +63,7 @@ public class FXMLCambiosDController implements Initializable {
                         stageCambio.setTitle("Cambio");
                         stageCambio.initModality(Modality.WINDOW_MODAL);
                         stageCambio.initOwner(
-                                (Stage) this.tvCambios.getScene().getWindow()
+                            (Stage) this.tvCambios.getScene().getWindow()
                         );
                         
                         stageCambio.initStyle(StageStyle.UTILITY);
@@ -86,14 +86,14 @@ public class FXMLCambiosDController implements Initializable {
             if(resultGetCambios.getIsError() == true && resultGetCambios.getData() == null
                 || resultGetCambios.getNumberRowsAffected() <= 0) {
                 showMessage(
-                        "ERROR", 
-                        "Error inesperado",
-                        resultGetCambios.getMessage(),
-                        "Intente mas tarde"
+                    "ERROR", 
+                    "Error inesperado",
+                    resultGetCambios.getMessage(),
+                    "Intente mas tarde"
                 );
             } else {
                 this.cambios = FXCollections.observableArrayList(
-                        (ObservableList) CambioDAO.getCambios(idUser).getData()
+                    (ObservableList) CambioDAO.getCambios(idUser).getData()
                 );
                 this.tvCambios.setItems(this.cambios);
             }
@@ -113,7 +113,7 @@ public class FXMLCambiosDController implements Initializable {
             clicRegistrarCambio.setTitle("Formulario cambio");
             clicRegistrarCambio.initModality(Modality.WINDOW_MODAL);
             clicRegistrarCambio.initOwner(
-                    (Stage) this.tvCambios.getScene().getWindow()
+                (Stage) this.tvCambios.getScene().getWindow()
             );
             clicRegistrarCambio.initStyle(StageStyle.UTILITY);
             clicRegistrarCambio.setOnCloseRequest(eventStage -> {
@@ -150,7 +150,7 @@ public class FXMLCambiosDController implements Initializable {
                 clicModificarCambio.setTitle("Modificar cambio");
                 clicModificarCambio.initModality(Modality.WINDOW_MODAL);
                 clicModificarCambio.initOwner(
-                        (Stage) this.tvCambios.getScene().getWindow()
+                    (Stage) this.tvCambios.getScene().getWindow()
                 );
                 clicModificarCambio.initStyle(StageStyle.UTILITY);
                 clicModificarCambio.setOnCloseRequest(eventStage -> {
@@ -175,10 +175,10 @@ public class FXMLCambiosDController implements Initializable {
             }
         } else {
             showMessage(
-                    "WARNING",
-                    "Seleccion requerida",
-                    "Primero selecciona un cambio",
-                    "Elije un cambio para modificarlo"
+                "WARNING",
+                "Seleccion requerida",
+                "Primero selecciona un cambio",
+                "Elije un cambio para modificarlo"
             );
         }
     }

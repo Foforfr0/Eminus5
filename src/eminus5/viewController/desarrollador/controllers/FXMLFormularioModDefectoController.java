@@ -4,7 +4,6 @@ import eminus5.databaseManagment.model.DAO.DefectoDAO;
 import eminus5.databaseManagment.model.POJO.Defecto;
 import eminus5.databaseManagment.model.ResultOperation;
 import eminus5.utils.ShowMessage;
-import static eminus5.viewController.desarrollador.controllers.FXMLFormularioModCambioController.currentCambio;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -53,8 +52,8 @@ public class FXMLFormularioModDefectoController implements Initializable {
     
     private void initializeData() {
         this.cbEstadoDefecto.getItems().setAll(
-                "Iniciado",
-                "Entregado"
+            "Iniciado",
+            "Entregado"
         );
         
         tfEsfuerzo.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -102,10 +101,10 @@ public class FXMLFormularioModDefectoController implements Initializable {
     private void btnGuardarDefecto(ActionEvent event) {
         if (validateFields() == true) {
             ShowMessage.showMessage(
-                    "ERROR",
-                    "Campos incompletos",
-                    "Faltan campos por ingresar",
-                    "Ingrese los datos faltantes"
+                "ERROR",
+                "Campos incompletos",
+                "Faltan campos por ingresar",
+                "Ingrese los datos faltantes"
             );
         } else {
             try {
@@ -119,17 +118,17 @@ public class FXMLFormularioModDefectoController implements Initializable {
                 ResultOperation resultModify = DefectoDAO.modificarDefecto(newDefecto);
                 if (resultModify.getIsError() == true) {
                     ShowMessage.showMessage(
-                            "Error",
-                            "Error inesperado",
-                            resultModify.getMessage(),
-                            "Intente mas tarde"
+                        "Error",
+                        "Error inesperado",
+                        resultModify.getMessage(),
+                        "Intente mas tarde"
                     );
                 } else {
                     ShowMessage.showMessage(
-                            "INFORMATION",
-                            "Se ha modificado correctamente",
-                            "Se modifico con exito",
-                            ""
+                        "INFORMATION",
+                        "Se ha modificado correctamente",
+                        "Se modifico con exito",
+                        ""
                     );
                     Stage currentStage = (Stage) this.tfTituloDefecto.getScene().getWindow();
                     currentStage.close();

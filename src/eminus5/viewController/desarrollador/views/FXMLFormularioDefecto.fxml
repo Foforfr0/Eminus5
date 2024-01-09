@@ -37,7 +37,7 @@
          <font>
             <Font size="24.0" />
          </font></Label>
-      <TextField fx:id="tfDescDefecto" layoutX="14.0" layoutY="304.0" prefHeight="133.0" prefWidth="187.0" />
+      <TextArea fx:id="tfDescDefecto" layoutX="14.0" layoutY="304.0" prefHeight="133.0" prefWidth="187.0" wrapText="true" />
       <Label layoutX="20.0" layoutY="438.0" prefHeight="35.0" prefWidth="97.0" text="Estado">
          <font>
             <Font size="24.0" />

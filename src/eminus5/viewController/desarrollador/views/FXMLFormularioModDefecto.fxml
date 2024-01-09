@@ -31,12 +31,12 @@
          <font>
             <Font size="24.0" />
          </font></Label>
-      <TextField fx:id="tfTituloDefecto" layoutX="34.0" layoutY="222.0" />
+      <TextField fx:id="tfTituloDefecto" layoutX="34.0" layoutY="222.0" prefHeight="25.0" prefWidth="187.0" />
       <Label layoutX="34.0" layoutY="273.0" text="Descripcion (*)">
          <font>
             <Font size="24.0" />
          </font></Label>
-      <TextArea fx:id="taDescripcion" layoutX="32.0" layoutY="310.0" prefHeight="100.0" prefWidth="187.0" />
+      <TextArea fx:id="taDescripcion" layoutX="32.0" layoutY="310.0" prefHeight="100.0" prefWidth="187.0" wrapText="true" />
       <Label layoutX="34.0" layoutY="413.0" text="Estado">
          <font>
             <Font size="24.0" />
@@ -51,12 +51,12 @@
          <font>
             <Font size="24.0" />
          </font></Label>
-      <DatePicker fx:id="dpFechaEncontrado" layoutX="327.0" layoutY="308.0" prefHeight="31.0" prefWidth="187.0" />
+      <DatePicker fx:id="dpFechaEncontrado" editable="false" layoutX="327.0" layoutY="308.0" prefHeight="31.0" prefWidth="187.0" />
       <Label layoutX="326.0" layoutY="343.0" text="Fecha solucionado (*)">
          <font>
             <Font size="24.0" />
          </font></Label>
-      <DatePicker fx:id="dpFechaSolucionado" layoutX="327.0" layoutY="379.0" prefHeight="31.0" prefWidth="187.0" />
+      <DatePicker fx:id="dpFechaSolucionado" editable="false" layoutX="327.0" layoutY="379.0" prefHeight="31.0" prefWidth="187.0" />
       <Label layoutX="330.0" layoutY="413.0" text="Esfuerzo">
          <font>
             <Font size="24.0" />

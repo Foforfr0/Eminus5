@@ -102,13 +102,13 @@ public class DefectoDAO {
     
     private static int getTipoDefectoToInt (String idTipoDefecto) {
         switch (idTipoDefecto) {
-            case "Frontend":
-                return 1;
             case "Backend":
+                return 1;
+            case "Base de datos":    
                 return 2;
-            case "Base de datos":
-                return 3;
             case "Controlador":
+                return 3;
+            case "Frontend":
                 return 4;
             case "JavaScript":
                 return 5;

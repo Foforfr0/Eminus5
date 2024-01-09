@@ -1,5 +1,6 @@
 -- MySQL Workbench Forward Engineering
 DROP DATABASE Eminus5;
+
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
@@ -264,10 +265,8 @@ CREATE TABLE IF NOT EXISTS `Eminus5`.`SolicitudCambio` (
   `IdDefecto` INT NULL,
   `IdProyecto` INT NULL,
   PRIMARY KEY (`IdSolicitud`),
-  UNIQUE INDEX `IDDefecto_UNIQUE` (`IdDefecto` ASC) VISIBLE,
   INDEX `IDProyecto_Solicitud_idx` (`IdProyecto` ASC) VISIBLE,
   INDEX `IDSolicitud_Estado_idx` (`IdEstadoAceptacion` ASC) VISIBLE,
-  UNIQUE INDEX `IdProyecto_UNIQUE` (`IdProyecto` ASC) VISIBLE,
   CONSTRAINT `IDDefecto_Solicitud`
     FOREIGN KEY (`IdDefecto`)
     REFERENCES `Eminus5`.`Defecto` (`IdDefecto`)
@@ -363,11 +362,11 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 /*ROLES SISTEMA--------------------------------------------------------------------------------------------------------------------*/
 INSERT INTO RolSistema (Nombre) VALUES ('Responsable');
 INSERT INTO RolSistema (Nombre) VALUES ('Desarrollador');
-/*ESTADO SOLICITUD CAMBIO--------------------------------------------------------------------------------------------------------------------------*/
+/*ESTADO ACTIVIDAD--------------------------------------------------------------------------------------------------------------------------*/
 INSERT INTO EstadoSolicitud (Nombre) VALUES ('Creado');
 INSERT INTO EstadoSolicitud (Nombre) VALUES ('Aceptado');
 INSERT INTO EstadoSolicitud (Nombre) VALUES ('Rechazado');
-/*ESTADO ACTIVIDAD--------------------------------------------------------------------------------------------------------------------------*/
+/*ESTADO SOLICITUD CAMBIO--------------------------------------------------------------------------------------------------------------------------*/
 INSERT INTO Estado (Nombre) VALUES ('Iniciado');
 INSERT INTO Estado (Nombre) VALUES ('Entregado');
 /*TIPO ACTIVIDAD----------------------------------------------------------------------------------------------------------------------------*/
@@ -401,13 +400,13 @@ INSERT INTO Usuario (Usuario, Password, Nombre, ApellidoPaterno, ApellidoMaterno
 USE Eminus5;
 INSERT INTO Actividad (Nombre, Descripcion, IdEstado, IdTipo, FechaInicio, FechaTermino, IdProyecto, IdDesarrollador) VALUES 
     ('Ejemplo Actividad 1', 'Descripción de ejemplo para la actividad 1', 
-    NULL, 3, '2024-01-15', '2024-01-25', 1, NULL);
+    1, 3, '2024-01-15', '2024-01-25', 1, 2);
 INSERT INTO Actividad (Nombre, Descripcion, IdEstado, IdTipo, FechaInicio, FechaTermino, IdProyecto, IdDesarrollador) VALUES 
     ('Ejemplo Actividad 2', 'Descripción de ejemplo para la actividad 2', 
     1, 1, '2024-01-14', '2024-01-14', 1, 3);
 INSERT INTO Actividad (Nombre, Descripcion, IdEstado, IdTipo, FechaInicio, FechaTermino, IdProyecto, IdDesarrollador) VALUES 
     ('Ejemplo Actividad 3', 'Descripción de ejemplo para la actividad 3', 
-    NULL, 4, '2024-02-01', '2024-02-03', 1, NULL);
+    1, 4, '2024-02-01', '2024-02-03', 1, NULL);
 INSERT INTO Actividad (Nombre, Descripcion, IdEstado, IdTipo, FechaInicio, FechaTermino, IdProyecto, IdDesarrollador) VALUES 
     ('Ejemplo Actividad 4', 'Descripción de ejemplo para la actividad 4', 
     1, 4, '2024-02-02', '2024-02-07', 1, 4);
@@ -424,10 +423,10 @@ INSERT INTO Actividad (Nombre, Descripcion, IdEstado, IdTipo, FechaInicio, Fecha
 
 INSERT INTO Actividad (Nombre, Descripcion, IdEstado, IdTipo, FechaInicio, FechaTermino, IdProyecto, IdDesarrollador) VALUES 
     ('Ejemplo Actividad 8', 'Descripción de ejemplo para la actividad 8', 
-    NULL, 2, '2024-04-02', '2024-12-09', 1, NULL);
+    1, 2, '2024-04-02', '2024-12-09', 1, 4);
 INSERT INTO Actividad (Nombre, Descripcion, IdEstado, IdTipo, FechaInicio, FechaTermino, IdProyecto, IdDesarrollador) VALUES 
     ('Ejemplo Actividad 9', 'Descripción de ejemplo para la actividad 9', 
-    NULL, 2, '2024-04-10', '2024-12-15', 1, NULL);
+    2, 2, '2024-04-10', '2024-12-15', 1, 4);
 INSERT INTO Actividad (Nombre, Descripcion, IdEstado, IdTipo, FechaInicio, FechaTermino, IdProyecto, IdDesarrollador) VALUES 
     ('Ejemplo Actividad 10', 'Descripción de ejemplo para la actividad 10', 
     1, 2, '2024-04-28', '2024-12-30', 1, 4);

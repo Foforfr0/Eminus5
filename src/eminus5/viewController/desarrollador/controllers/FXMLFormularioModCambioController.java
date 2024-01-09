@@ -17,6 +17,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -26,11 +27,10 @@ import javafx.stage.Stage;
  * @author abrah
  */
 public class FXMLFormularioModCambioController implements Initializable {
-
     @FXML
     private TextField tfTituloCambio;
     @FXML
-    private TextField tfDescCambio;
+    private TextArea tfDescCambio;
     @FXML
     private ComboBox<String> cbEstadoCambio;
     @FXML
@@ -42,8 +42,10 @@ public class FXMLFormularioModCambioController implements Initializable {
     @FXML
     private TextField tfEsfuerzo;
 
+    
     public static Cambio currentCambio = null;
     public static int idUser = 0;
+    
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -52,8 +54,8 @@ public class FXMLFormularioModCambioController implements Initializable {
 
     private void initializeData() {
         this.cbEstadoCambio.getItems().setAll(
-                "Iniciado",
-                "Entregado"
+            "Iniciado",
+            "Entregado"
         );
         
         tfEsfuerzo.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -103,10 +105,10 @@ public class FXMLFormularioModCambioController implements Initializable {
     private void btnGuardarCambio(ActionEvent event) {
         if (validateFields() == true) {
             ShowMessage.showMessage(
-                    "ERROR",
-                    "Campos incompletos",
-                    "Faltan campos por ingresar",
-                    "Ingrese los datos faltantes"
+                "ERROR",
+                "Campos incompletos",
+                "Faltan campos por ingresar",
+                "Ingrese los datos faltantes"
             );
         } else {
             try {
@@ -120,17 +122,17 @@ public class FXMLFormularioModCambioController implements Initializable {
                 ResultOperation resultModify = CambioDAO.modificarCambio(newCambio);
                 if (resultModify.getIsError() == true) {
                     ShowMessage.showMessage(
-                            "ERROR",
-                            "Error inesperado",
-                            resultModify.getMessage(),
-                            "Intente mas tarde"
+                        "ERROR",
+                        "Error inesperado",
+                        resultModify.getMessage(),
+                        "Intente mas tarde"
                     );
                 } else {
                     ShowMessage.showMessage(
-                            "INFORMATION",
-                            "Se ha modificado correctamente",
-                            "Se modifico con exito",
-                            ""
+                        "INFORMATION",
+                        "Se ha modificado correctamente",
+                        "Se modifico con exito",
+                        ""
                     );
                     Stage currentStage = (Stage) this.tfTituloCambio.getScene().getWindow();
                     currentStage.close();

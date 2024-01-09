@@ -15,7 +15,7 @@
           <TableColumn fx:id="tcDescripcionCambio" prefWidth="424.0" resizable="false" text="Descripcion" />
         </columns>
       </TableView>
-      <Button layoutX="474.0" layoutY="99.0" mnemonicParsing="false" onAction="#btnRegistrarCambio" text="Registrar cambio" />
+      <Button layoutX="505.0" layoutY="99.0" mnemonicParsing="false" onAction="#btnRegistrarCambio" text="Registrar cambio" />
       <Button fx:id="btModificarCambio" layoutX="626.0" layoutY="99.0" mnemonicParsing="false" onAction="#btnModificarCambio" text="Modificar cambio" />
       <Label layoutX="56.0" layoutY="25.0" text="Cambios del proyecto">
          <font>

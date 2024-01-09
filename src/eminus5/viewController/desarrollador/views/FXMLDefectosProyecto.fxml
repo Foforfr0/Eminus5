@@ -22,7 +22,7 @@
             </TableView>
          </content>
       </ScrollPane>
-      <Button layoutX="596.0" layoutY="105.0" mnemonicParsing="false" onMouseClicked="#clicAddSolicitud" text="Solicitar cambio" />
+      <Button layoutX="596.0" layoutY="105.0" mnemonicParsing="false" onMouseClicked="#clicAddSolicitudProyecto" text="Solicitar cambio" />
       <Label layoutX="94.0" layoutY="25.0" text="Defectos del proyecto">
          <font>
             <Font size="35.0" />

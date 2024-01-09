@@ -20,6 +20,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -29,7 +30,7 @@ public class FXMLFormularioDefectoController implements Initializable {
     @FXML
     private TextField tfTituloDefecto;
     @FXML
-    private TextField tfDescDefecto;
+    private TextArea tfDescDefecto;
     @FXML
     private ComboBox<String> cbEstadoDefecto;
     @FXML
@@ -49,16 +50,16 @@ public class FXMLFormularioDefectoController implements Initializable {
 
     private void initializeStage() {
         this.cbEstadoDefecto.getItems().setAll(
-                "Iniciado",
-                "Entregado"
+            "Iniciado",
+            "Entregado"
         );
         
         this.cbTipoDefecto.getItems().setAll(
-                "Frontend",
-                "Backend",
-                "Controladores",
-                "Base de datos",
-                "JavaScript"
+            "Backend",
+            "Base de datos",
+            "Controlador",
+            "Frontend",
+            "JavaScript"
         );
         
         this.tfEsfuerzo.setDisable(true);
@@ -93,10 +94,10 @@ public class FXMLFormularioDefectoController implements Initializable {
     private void btnGuardarDefecto(ActionEvent event) {
         if (validateFields() == true) {
             ShowMessage.showMessage(
-                    "ERROR",
-                    "Campos incompletos",
-                    "Faltan datos por ingresar",
-                    "Por favor ingrese los datos faltantes"
+                "ERROR",
+                "Campos incompletos",
+                "Faltan datos por ingresar",
+                "Por favor ingrese los datos faltantes"
             );
         } else {
             try {
@@ -121,17 +122,17 @@ public class FXMLFormularioDefectoController implements Initializable {
                     ResultOperation resultCreate = DefectoDAO.registrarDefecto(resultGetProyecto.getNumberRowsAffected(), newDefecto);
                     if (resultCreate.getIsError() == true) {
                         ShowMessage.showMessage(
-                                "ERROR",
-                                "Error inesperado",
-                                resultCreate.getMessage(),
-                                "Intente mas tarde"
+                            "ERROR",
+                            "Error inesperado",
+                            resultCreate.getMessage(),
+                            "Intente mas tarde"
                         );
                     } else {
                         ShowMessage.showMessage(
-                                "INFORMATION", 
-                                "Se ha creado correctamente", 
-                                "Se registró con exito el defecto", 
-                                ""
+                            "INFORMATION", 
+                            "Se ha creado correctamente", 
+                            "Se registró con exito el defecto", 
+                            ""
                         );
                         Stage currentStage = (Stage) this.tfTituloDefecto.getScene().getWindow();
                         currentStage.close();

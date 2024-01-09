@@ -31,12 +31,12 @@
          <font>
             <Font size="24.0" />
          </font></Label>
-      <TextField fx:id="tfTituloCambio" layoutX="23.0" layoutY="228.0" />
+      <TextField fx:id="tfTituloCambio" layoutX="23.0" layoutY="228.0" prefHeight="25.0" prefWidth="187.0" />
       <Label layoutX="22.0" layoutY="263.0" text="Descripcion (*)">
          <font>
             <Font size="24.0" />
          </font></Label>
-      <TextField fx:id="tfDescCambio" layoutX="23.0" layoutY="305.0" prefHeight="95.0" prefWidth="187.0" />
+      <TextArea fx:id="tfDescCambio" layoutX="23.0" layoutY="305.0" prefHeight="95.0" prefWidth="187.0" wrapText="true" />
       <Label layoutX="24.0" layoutY="419.0" prefHeight="35.0" prefWidth="110.0" text="Estado">
          <font>
             <Font size="24.0" />

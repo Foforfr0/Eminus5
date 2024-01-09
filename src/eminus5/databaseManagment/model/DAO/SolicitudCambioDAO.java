@@ -162,47 +162,34 @@ public class SolicitudCambioDAO {
         return resultOperation;
     }
     
-    public static ResultOperation createSolicitud(SolicitudCambio newSolicitud) throws SQLException{
+    public static ResultOperation createSolicitudCambioProyecto(SolicitudCambio newSolicitud) throws SQLException{
         Connection connectionDB = OpenConnectionDB.getConnection();
         ResultOperation resultOperation = null;
         
         if (connectionDB != null) { 
             try {            
                 PreparedStatement prepareQuery;
-                if (newSolicitud.getIdPadre()<= 0) {
-                    String sqlQuery = "INSERT INTO SolicitudCambio (Nombre, Descripcion, Razon, Impacto, AccionPropuesta, " +
-                                      "FechaCreacion, FechaAceptada, IdEstadoAceptacion, IdDefecto) " +
-                                      "VALUES (?, ?, ?, ?, ?, (STR_TO_DATE(?, '%d-%m-%Y')), NULL, 1, NULL);";
-                    prepareQuery = connectionDB.prepareStatement(sqlQuery);
-                        prepareQuery.setString(1, newSolicitud.getNombre());
-                        prepareQuery.setString(2, newSolicitud.getDescripcion());
-                        prepareQuery.setString(3, newSolicitud.getRazon());
-                        prepareQuery.setString(4, newSolicitud.getImpacto());
-                        prepareQuery.setString(5, newSolicitud.getAccionPropuesta());
-                        prepareQuery.setString(6, newSolicitud.getFechaCreacion().replace("/}", "-"));
-                } else {
-                    String sqlQuery = "INSERT INTO SolicitudCambio (Nombre, Descripcion, Razon, Impacto, AccionPropuesta, " +
-                                      "FechaCreacion, FechaAceptada, IdEstadoAceptacion, IdDefecto) " +
-                                      "VALUES (?, ?, ?, ?, ?, (STR_TO_DATE(?, '%d-%m-%Y')), NULL, 1, ?);";
-                    prepareQuery = connectionDB.prepareStatement(sqlQuery);
-                        prepareQuery.setString(1, newSolicitud.getNombre());
-                        prepareQuery.setString(2, newSolicitud.getDescripcion());
-                        prepareQuery.setString(3, newSolicitud.getRazon());
-                        prepareQuery.setString(4, newSolicitud.getImpacto());
-                        prepareQuery.setString(5, newSolicitud.getAccionPropuesta());
-                        prepareQuery.setString(6, newSolicitud.getFechaCreacion().replace("/}", "-"));
-                        prepareQuery.setInt(7, newSolicitud.getIdPadre());
-                }
+                String sqlQuery = "INSERT INTO SolicitudCambio (Nombre, Descripcion, Razon, Impacto, AccionPropuesta, " +
+                                  "FechaCreacion, FechaAceptada, IdEstadoAceptacion, IdDefecto, IdProyecto) " +
+                                  "VALUES (?, ?, ?, ?, ?, (STR_TO_DATE(?, '%d-%m-%Y')), NULL, 1, NULL, ?);";
+                prepareQuery = connectionDB.prepareStatement(sqlQuery);
+                    prepareQuery.setString(1, newSolicitud.getNombre());
+                    prepareQuery.setString(2, newSolicitud.getDescripcion());
+                    prepareQuery.setString(3, newSolicitud.getRazon());
+                    prepareQuery.setString(4, newSolicitud.getImpacto());
+                    prepareQuery.setString(5, newSolicitud.getAccionPropuesta());
+                    prepareQuery.setString(6, newSolicitud.getFechaCreacion().replace("/}", "-"));
+                    prepareQuery.setInt(7,newSolicitud.getIdPadre());
                 int numberAffectedRows = prepareQuery.executeUpdate();
                 
                 if (numberAffectedRows > 0) {
                     resultOperation = new ResultOperation(
                         false, 
-                        "Se ha registrado la solicitud de cambio", 
+                        "Se ha registrado la solicitud de cambio al proyecto: "+newSolicitud.getIdPadre(), 
                         numberAffectedRows, 
                         newSolicitud
                     );
-                    System.out.println("SolicitudCambioDAO//SE HA REGISTRADO LA SOLICITUD: "+newSolicitud.getNombre());
+                    System.out.println("SolicitudCambioDAO//SE HA REGISTRADO LA SOLICITUD: "+newSolicitud.getNombre()+" AL PROYECTO "+newSolicitud.getIdPadre());
                 } else {
                     resultOperation = new ResultOperation(
                         true, 
@@ -210,7 +197,7 @@ public class SolicitudCambioDAO {
                         numberAffectedRows, 
                         newSolicitud
                     );
-                    System.out.println("SolicitudDAO//NO SE REGISTRÓ LA SOLICITUD: "+newSolicitud.getNombre());
+                    System.out.println("SolicitudDAO//NO SE REGISTRÓ LA SOLICITUD: "+newSolicitud.getNombre()+" AL PROYECTO "+newSolicitud.getIdPadre());
                 }
             } catch (SQLException sqlex) {
                 resultOperation = new ResultOperation(               
@@ -219,7 +206,69 @@ public class SolicitudCambioDAO {
                     -1, 
                     null
                 );
-                System.err.println("Error de \"SQLException\" en archivo \"SolicitudCambioDAO\" en método \"createSolicitud\"");
+                System.err.println("Error de \"SQLException\" en archivo \"SolicitudCambioDAO\" en método \"createSolicitudCambioProyecto\"");
+                sqlex.printStackTrace();
+            } finally {
+                connectionDB.close();
+            }
+        } else {
+            resultOperation = new ResultOperation(                 //Could not connect to database
+                true, 
+                "Falló conexión con la base de datos", 
+                -1, 
+                null
+            );
+            showMessageFailureConnection();
+        }  
+        
+        return resultOperation;
+    }
+    
+    public static ResultOperation createSolicitudCambioDefecto(SolicitudCambio newSolicitud) throws SQLException{
+        Connection connectionDB = OpenConnectionDB.getConnection();
+        ResultOperation resultOperation = null;
+        
+        if (connectionDB != null) { 
+            try {            
+                PreparedStatement prepareQuery;
+                String sqlQuery = "INSERT INTO SolicitudCambio (Nombre, Descripcion, Razon, Impacto, AccionPropuesta, " +
+                                  "FechaCreacion, FechaAceptada, IdEstadoAceptacion, IdDefecto, IdProyecto) " +
+                                  "VALUES (?, ?, ?, ?, ?, (STR_TO_DATE(?, '%d-%m-%Y')), NULL, 1, ?, NULL);";
+                prepareQuery = connectionDB.prepareStatement(sqlQuery);
+                    prepareQuery.setString(1, newSolicitud.getNombre());
+                    prepareQuery.setString(2, newSolicitud.getDescripcion());
+                    prepareQuery.setString(3, newSolicitud.getRazon());
+                    prepareQuery.setString(4, newSolicitud.getImpacto());
+                    prepareQuery.setString(5, newSolicitud.getAccionPropuesta());
+                    prepareQuery.setString(6, newSolicitud.getFechaCreacion().replace("/}", "-"));
+                    prepareQuery.setInt(7,newSolicitud.getIdPadre());
+                int numberAffectedRows = prepareQuery.executeUpdate();
+                
+                if (numberAffectedRows > 0) {
+                    resultOperation = new ResultOperation(
+                        false, 
+                        "Se ha registrado la solicitud de cambio al defecto: "+newSolicitud.getIdPadre(), 
+                        numberAffectedRows, 
+                        newSolicitud
+                    );
+                    System.out.println("SolicitudCambioDAO//SE HA REGISTRADO LA SOLICITUD: "+newSolicitud.getNombre()+" AL DEFECTO "+newSolicitud.getIdPadre());
+                } else {
+                    resultOperation = new ResultOperation(
+                        true, 
+                        "No se ha registrado la solicitud", 
+                        numberAffectedRows, 
+                        newSolicitud
+                    );
+                    System.out.println("SolicitudDAO//NO SE REGISTRÓ LA SOLICITUD: "+newSolicitud.getNombre()+" AL DEFECTO "+newSolicitud.getIdPadre());
+                }
+            } catch (SQLException sqlex) {
+                resultOperation = new ResultOperation(               
+                    true, 
+                    "Falló conexión con la base de datos", 
+                    -1, 
+                    null
+                );
+                System.err.println("Error de \"SQLException\" en archivo \"SolicitudCambioDAO\" en método \"createSolicitudCambioDefecto\"");
                 sqlex.printStackTrace();
             } finally {
                 connectionDB.close();

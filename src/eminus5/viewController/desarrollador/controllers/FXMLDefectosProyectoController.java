@@ -93,7 +93,7 @@ public class FXMLDefectosProyectoController implements Initializable {
                 } else {
                     button = new Button("Crear");
                     button.setOnMouseClicked(event -> {
-                        createSolicitudCambio(p.getValue().getIdDefecto());
+                        createSolicitudDefecto(p.getValue().getIdDefecto(), true);
                         initializeData();
                     });
                 }   
@@ -178,10 +178,11 @@ public class FXMLDefectosProyectoController implements Initializable {
         }
     }
     
-    private void createSolicitudCambio(int idDefecto) {
+    private void createSolicitudDefecto(int idDefecto, boolean fromDefecto) {
         try {
             Stage clicAddSolicitud = new Stage();
-            FXMLCrearSolicitudCambioController.idDefecto = idDefecto;
+            FXMLCrearSolicitudCambioController.fromDefecto = fromDefecto;
+            FXMLCrearSolicitudCambioController.idPadre = idDefecto;
             
             clicAddSolicitud.setScene(loadScene("viewController/desarrollador/views/FXMLCrearSolicitudCambio.fxml"));
             clicAddSolicitud.setTitle("Crear solicitud de cambio");
@@ -208,14 +209,31 @@ public class FXMLDefectosProyectoController implements Initializable {
             clicAddSolicitud.showAndWait();
             initializeData();
         } catch (IOException ioex) {
-            System.err.println("Error de \"IOException\" en archivo \"FXMLActividadesProyectoController\" en método \"clicAddActividad\"");
+            System.err.println("Error de \"IOException\" en archivo \"FXMLActividadesProyectoController\" en método \"createSolicitudCambio\"");
             ioex.printStackTrace();
         } 
     }
     
     @FXML
-    private void clicAddSolicitud(MouseEvent event) {
-        createSolicitudCambio(0);
+    private void clicAddSolicitudProyecto(MouseEvent event) {
+        try{   
+            ResultOperation resultGetProyecto = ProyectoDAO.getProyectoUsuario(idUser);
+        
+            if (resultGetProyecto.getIsError() == true && resultGetProyecto.getData() == null || resultGetProyecto.getNumberRowsAffected() <= 0) {
+                showMessage(
+                    "ERROR", 
+                    "Error inesperado", 
+                    resultGetProyecto.getMessage(), 
+                    "Intente más tarde"
+                );
+            } else {
+                createSolicitudDefecto(resultGetProyecto.getNumberRowsAffected(), false);
+            }
+        }catch(SQLException sqlex){
+            showMessageFailureConnection();
+            System.err.println("Error de \"SQLException\" en archivo \"FXMLDefectosProyectoController\" en método \"initializeData\"");
+            sqlex.printStackTrace();
+        }
     }
 
     @FXML
@@ -247,8 +265,7 @@ public class FXMLDefectosProyectoController implements Initializable {
             clicRegistrarDefecto.showAndWait();
             initializeData();
         } catch (IOException ioex) {
-            System.err.println("Error de \"IOException\" en archivo \"FXMLDefectosDController\""
-                    + " en método \"clicRegistrarDefecto\"");
+            System.err.println("Error de \"IOException\" en archivo \"FXMLDefectosProyectoController\" en método \"clicAddDefecto\"");
             ioex.printStackTrace();
         }
     }
@@ -285,7 +302,7 @@ public class FXMLDefectosProyectoController implements Initializable {
                 initializeData();
                 //cargarDefectos();
             } catch (IOException ioex) {
-                System.err.println("Error de \"IOException\" en archivo \"FXMLFormularioModDefecto\" en método \"btModificarDefecto\"");
+                System.err.println("Error de \"IOException\" en archivo \"FXMLDefectosProyectoController\" en método \"clicModifyDefecto\"");
                 ioex.printStackTrace();
             }
         } else {
@@ -328,7 +345,7 @@ public class FXMLDefectosProyectoController implements Initializable {
             }
         } catch (SQLException sqlex) {
             showMessageFailureConnection();
-           System.out.println("\"Error de \"SQLException\" en archivo \"FXMLDefectosDController\"");
+           System.err.println("\"Error de \"SQLException\" en archivo \"FXMLDefectosProyectoController\" en método \"cargarDefectos\"");
            sqlex.printStackTrace();
         }
     }
@@ -354,7 +371,7 @@ public class FXMLDefectosProyectoController implements Initializable {
             stageConsultSolicitudes.showAndWait();
             cargarDefectos();
         } catch (IOException ioex) {
-            System.err.println("Error de \"IOException\" en archivo \"FXMLFormularioModDefecto\" en método \"btModificarDefecto\"");
+            System.err.println("Error de \"IOException\" en archivo \"FXMLDefectosProyectoController\" en método \"clicGetSolicitudes\"");
             ioex.printStackTrace();
         }
     }

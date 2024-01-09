@@ -49,7 +49,8 @@ public class FXMLCrearSolicitudCambioController implements Initializable {
     private Button btCancelAddActividad;
     
     
-    public static int idDefecto = 0;
+    public static int idPadre = 0;
+    public static boolean fromDefecto;
     private String fechaActual = "";
     
     
@@ -120,15 +121,20 @@ public class FXMLCrearSolicitudCambioController implements Initializable {
                     0, 
                     this.tfNombre.getText(), 
                     this.tfDescripcion.getText(), 
-                    this.tfRazon.getAccessibleHelp(), 
+                    this.tfRazon.getText(), 
                     this.tfImpacto.getText(), 
                     this.tfAccionPropuesta.getText(), 
                     LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")), 
                     null, 
-                    idDefecto
+                    idPadre
                 );
+                ResultOperation resultCreateSolicitud;
+                if (fromDefecto == true) {
+                    resultCreateSolicitud = SolicitudCambioDAO.createSolicitudCambioDefecto(newSolicitudCambio);
+                } else {
+                    resultCreateSolicitud = SolicitudCambioDAO.createSolicitudCambioProyecto(newSolicitudCambio);
+                }
                 
-                ResultOperation resultCreateSolicitud = SolicitudCambioDAO.createSolicitud(newSolicitudCambio);
                 if (resultCreateSolicitud.getIsError() == true) {
                     ShowMessage.showMessage(
                         "ERROR", 
