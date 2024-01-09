@@ -91,9 +91,11 @@ public class FXMLActividadesDController implements Initializable {
                         "Intente mas tarde"
                 );
             } else {
+                this.actividades.clear();
                 this.actividades = FXCollections.observableArrayList(
-                        (ObservableList) ActividadDAO.getActividadesDesarrollador(idUser).getData()
+                    (ObservableList) ActividadDAO.getActividadesDesarrollador(idUser).getData()
                 );
+                this.tvActividades.getItems().clear();
                 this.tvActividades.setItems(this.actividades);
             }
         } catch (SQLException sqlex) {
@@ -106,7 +108,6 @@ public class FXMLActividadesDController implements Initializable {
     @FXML
     private void btnEntregarActividad(ActionEvent event) {
         if (verifySelectedActividad() != null) {
-            
             try {
                 Stage stageActividad = new Stage();
                 FXMLDetallesActividadDController.currentActividad = verifySelectedActividad();
@@ -131,7 +132,7 @@ public class FXMLActividadesDController implements Initializable {
                     });
                 });
                 stageActividad.showAndWait();
-                
+                cargarActividades();
             } catch (IOException ioex) {
                 System.err.println("Error de \"IOException\" en archivo \"FXMLActividadesDController\""
                         + "en metodo \"btnEntregarActividad\"");
@@ -139,10 +140,10 @@ public class FXMLActividadesDController implements Initializable {
             }
         } else {
             showMessage(
-                    "WARNING",
-                    "Seleccion requerida",
-                    "Primero selecciona una actividad",
-                    "Elije una actividad para entregarla"
+                "WARNING",
+                "Seleccion requerida",
+                "Primero selecciona una actividad",
+                "Elije una actividad para entregarla"
             );
         }
     }

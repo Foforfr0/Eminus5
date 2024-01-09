@@ -535,11 +535,11 @@ public class ActividadDAO {
         
         if (connectionDB != null) {
             try {
-                String sqlQuery = "SELECT A.IdActividad, A.Nombre, A.Descripcion, E.Nombre AS 'Estado' \n" +
-                                  "FROM Actividad A \n" + 
-                                  "JOIN Estado E ON E.IdEstado = A.IdEstado \n" +
-                                  "JOIN Usuario U ON A.IdDesarrollador = U.IDUsuario \n" +
-                                  "WHERE IDUsuario = ? AND A.IdEstado = 1";
+                String sqlQuery = "SELECT A.IdActividad, A.Nombre, A.Descripcion, E.Nombre AS 'Estado' " +
+                                  "FROM Actividad A " + 
+                                  "JOIN Estado E ON E.IdEstado = A.IdEstado " +
+                                  "JOIN Usuario U ON A.IdDesarrollador = U.IDUsuario " +
+                                  "WHERE IDUsuario = ? AND A.IdEstado = 1;";
                 PreparedStatement prepareQuery = connectionDB.prepareStatement(sqlQuery);
                 prepareQuery.setInt(1, idUser);
                 ResultSet resultQuery = prepareQuery.executeQuery();
