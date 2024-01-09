@@ -114,7 +114,7 @@ public class FXMLFormularioCambioController implements Initializable {
     }
     
     private boolean validateFields() {
-        if (tfTituloCambio.getText().length() <= 0 || tfDescCambio.getText().length() <= 0) {
+        if (tfTituloCambio.getText().trim().length() <= 0 || tfDescCambio.getText().length() <= 0) {
             return true;
         }
         if (cbEstadoCambio.getValue() == null) {

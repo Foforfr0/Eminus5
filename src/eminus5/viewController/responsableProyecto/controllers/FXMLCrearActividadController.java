@@ -129,10 +129,10 @@ public class FXMLCrearActividadController implements Initializable {
     }
     
     private boolean validateFullFields() {      //faltanDatos ? return true : return false;
-        if (tfNombre.getText().length() <= 0) {
+        if (tfNombre.getText().trim().length() <= 0) {
             return true;
         }
-        if (tfDescripcion.getText().length() <= 0) {
+        if (tfDescripcion.getText().trim().length() <= 0) {
             return true;
         }
         if (cbTipo.getValue() == null) {
@@ -228,33 +228,3 @@ public class FXMLCrearActividadController implements Initializable {
         closeWindow((Stage) this.tfNombre.getScene().getWindow());
     }
 }
-
-/*
-this.dpFechaFin.setDisable(true);               //initializaDatePickers();
-        this.dpFechaInicio.setDayCellFactory(picker -> new DateCell() {
-            @Override
-            public void updateItem(LocalDate date, boolean empty) {
-                super.updateItem(date, empty);
-                setDisable(date.isBefore(LocalDate.now())); // Deshabilitar fechas anteriores a la fecha actual
-                if (dpFechaInicio.getValue() == null) {
-                    dpFechaFin.setDisable(true);
-                } else {
-                    dpFechaFin.setDisable(false);
-                }
-            }
-        });
-        this.dpFechaFin.setDayCellFactory(picker -> new DateCell() {
-            @Override
-            public void updateItem(LocalDate date, boolean empty) {
-                super.updateItem(date, empty);
-                setDisable(date.isBefore(LocalDate.now())); // Deshabilitar fechas anteriores a la fecha actual
-                dpFechaFin.setDayCellFactory(picker -> new DateCell() {
-                    @Override
-                    public void updateItem(LocalDate date, boolean empty) {
-                        super.updateItem(date, empty);
-                        setDisable(date.isBefore(dpFechaInicio.getValue())); // Deshabilitar fechas anteriores a la del primer DatePicker
-                    }
-                });
-            }
-        });
-*/

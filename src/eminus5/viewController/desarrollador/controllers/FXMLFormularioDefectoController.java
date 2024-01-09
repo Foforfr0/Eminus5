@@ -82,7 +82,7 @@ public class FXMLFormularioDefectoController implements Initializable {
     }
     
     private boolean validateFields() {
-        if (tfTituloDefecto.getText().length() <= 0 || tfDescDefecto.getText().length() <= 0) {
+        if (tfTituloDefecto.getText().trim().length() <= 0 || tfDescDefecto.getText().length() <= 0) {
             return true;
         }
         if (cbTipoDefecto.getValue() == null) {

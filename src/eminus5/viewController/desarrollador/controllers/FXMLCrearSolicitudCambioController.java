@@ -88,19 +88,19 @@ public class FXMLCrearSolicitudCambioController implements Initializable {
     }
 
     private boolean validateFullFields() {      //faltanDatos ? return true : return false;
-        if (tfNombre.getText().length() <= 0) {
+        if (tfNombre.getText().trim().length() <= 0) {
             return true;
         }
-        if (tfDescripcion.getText().length() <= 0) {
+        if (tfDescripcion.getText().trim().length() <= 0) {
             return true;
         }
-        if (tfRazon.getText().length() <= 0) {
+        if (tfRazon.getText().trim().length() <= 0) {
             return true;
         }
-        if (tfImpacto.getText().length() <= 0) {
+        if (tfImpacto.getText().trim().length() <= 0) {
             return true;
         }
-        if (tfAccionPropuesta.getText().length() <= 0) {
+        if (tfAccionPropuesta.getText().trim().length() <= 0) {
             return true;
         }
         return false; 

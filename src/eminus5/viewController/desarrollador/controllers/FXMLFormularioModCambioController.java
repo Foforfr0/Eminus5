@@ -21,6 +21,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -56,6 +57,8 @@ public class FXMLFormularioModCambioController implements Initializable {
     private Button btGuardar;
     @FXML
     private Button btCancelar;
+    @FXML
+    private Label lbTitulo;
     
     
     @Override
@@ -120,6 +123,8 @@ public class FXMLFormularioModCambioController implements Initializable {
             this.tfEsfuerzo.setDisable(true);
             this.btGuardar.setVisible(false);
             this.btCancelar.setVisible(false);
+            
+            this.lbTitulo.setText("Detalles de cambio");
             System.out.println("desahbilitado");
         }
         this.tfTituloCambio.setDisable(true);
