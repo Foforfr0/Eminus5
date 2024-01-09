@@ -43,7 +43,10 @@ public class FXMLFormularioModDefectoController implements Initializable {
     @FXML
     private TextField tfEsfuerzo;
 
+    
     public static Defecto currentDefecto = null; 
+    public static int idUser = 0;
+    
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -65,9 +68,9 @@ public class FXMLFormularioModDefectoController implements Initializable {
         this.tfTituloDefecto.setText(currentDefecto.getNombre());
         this.taDescripcion.setText(currentDefecto.getDescripcion());
         this.cbEstadoDefecto.setValue(currentDefecto.getEstado());
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        /*DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
             LocalDate localDate = LocalDate.parse(currentDefecto.getFechaEncontrado(), formatter);
-            this.dpFechaEncontrado.setValue(localDate);
+            this.dpFechaEncontrado.setValue(localDate);*/
         this.cbTipoDefecto.setValue(currentDefecto.getTipo());
         
         this.dpFechaSolucionado.setDayCellFactory(picker -> new DateCell(){

@@ -6,6 +6,7 @@ import eminus5.databaseManagment.model.POJO.Defecto;
 import eminus5.databaseManagment.model.ResultOperation;
 import eminus5.utils.ShowMessage;
 import static eminus5.utils.ShowMessage.showMessage;
+import static eminus5.utils.ConvertData.convertStringToLocalDate;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -40,8 +41,12 @@ public class FXMLFormularioDefectoController implements Initializable {
     @FXML
     private DatePicker dpFechaEncontrado;
 
+    
     public static int idUser = 0;
     public static Defecto currentDefecto = null;
+    private String fechaInicio = "";
+    private String fechaFin = "";
+    
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -63,11 +68,15 @@ public class FXMLFormularioDefectoController implements Initializable {
         );
         
         this.tfEsfuerzo.setDisable(true);
-        this.dpFechaEncontrado.setDayCellFactory(picker -> new DateCell() {
+        dpFechaEncontrado.setDayCellFactory(picker -> new DateCell() {
             @Override
-            public void updateItem(LocalDate date, boolean empty) {
+            public void updateItem(LocalDate date, boolean empty){
                 super.updateItem(date, empty);
-                setDisable(date.isBefore(LocalDate.now()));
+
+                setDisable(
+                    date.isAfter(convertStringToLocalDate(fechaFin)) ||
+                    date.isBefore(dpFechaEncontrado.getValue() == null ? LocalDate.now() : dpFechaEncontrado.getValue())
+                );
             }
         });
     }

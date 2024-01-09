@@ -1,9 +1,12 @@
 package eminus5.viewController.desarrollador.controllers;
 
 import eminus5.databaseManagment.model.DAO.CambioDAO;
+import eminus5.databaseManagment.model.DAO.ProyectoDAO;
 import eminus5.databaseManagment.model.POJO.Cambio;
+import eminus5.databaseManagment.model.POJO.Proyecto;
 import eminus5.databaseManagment.model.ResultOperation;
 import eminus5.utils.ShowMessage;
+import static eminus5.utils.ConvertData.convertStringToLocalDate;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -42,6 +45,9 @@ public class FXMLFormularioCambioController implements Initializable {
 
     public static Cambio currentCambio = null;
     public static int idUser = 0;
+    private String fechaInicio = "";
+    private String fechaFin = "";
+    
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -64,19 +70,45 @@ public class FXMLFormularioCambioController implements Initializable {
         
         this.dpFechaFinCambio.setDisable(true);
         this.tfEsfuerzo.setDisable(true);
-        this.dpFechaInicioCambio.setDayCellFactory(picker -> new DateCell(){
+        try {            
+            Proyecto currentProyecto = (Proyecto) ProyectoDAO.getProyectoUsuario(idUser).getData();
+            fechaInicio = String.valueOf(currentProyecto.getFechaInicio());
+            fechaFin = String.valueOf(currentProyecto.getFechaFin());
+        } catch (SQLException sqlex) {
+            System.err.println("Error de \"SQLException\" en archivo \"FXMLFormularioCambioController\" en método \"initializaData\"");
+            sqlex.printStackTrace();
+        }
+        dpFechaInicioCambio.setDayCellFactory(picker -> new DateCell() {
             @Override
             public void updateItem(LocalDate date, boolean empty) {
                 super.updateItem(date, empty);
-                setDisable(date.isBefore(LocalDate.now()));
+                /**
+                 * FECHA DE INICIO:
+                 * -No puede ser antes de la fecha actual.
+                 * -No puede ser después de la fecha de termino.
+                 * -No puede estar antes ni después del perido.
+                */
+                setDisable(
+                    date.isAfter(dpFechaFinCambio.getValue() == null ? convertStringToLocalDate(fechaFin) : dpFechaFinCambio.getValue() ) || 
+                    date.isAfter(convertStringToLocalDate(fechaFin)) || 
+                    date.isBefore(LocalDate.now()) ||
+                    date.isBefore(convertStringToLocalDate(fechaInicio))
+                );
             }
         });
-        
-        this.dpFechaFinCambio.setDayCellFactory(picker -> new DateCell(){
+        dpFechaFinCambio.setDayCellFactory(picker -> new DateCell() {
             @Override
-            public void updateItem(LocalDate date, boolean empty) {
+            public void updateItem(LocalDate date, boolean empty){
                 super.updateItem(date, empty);
-                setDisable(date.isBefore(dpFechaInicioCambio.getValue()));
+                /**
+                 * FECHA DE TERMINO:
+                 * -No puede estar antes de la fecha de inicio.
+                 * -No puede estar antes ni después del perido.
+                */
+                setDisable(
+                    date.isAfter(convertStringToLocalDate(fechaFin)) ||
+                    date.isBefore(dpFechaInicioCambio.getValue() == null ? LocalDate.now() : dpFechaInicioCambio.getValue())
+                );
             }
         });
     }

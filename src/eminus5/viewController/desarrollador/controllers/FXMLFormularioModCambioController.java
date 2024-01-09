@@ -1,9 +1,12 @@
 package eminus5.viewController.desarrollador.controllers;
 
 import eminus5.databaseManagment.model.DAO.CambioDAO;
+import eminus5.databaseManagment.model.DAO.ProyectoDAO;
 import eminus5.databaseManagment.model.POJO.Cambio;
+import eminus5.databaseManagment.model.POJO.Proyecto;
 import eminus5.databaseManagment.model.ResultOperation;
 import eminus5.utils.ShowMessage;
+import static eminus5.utils.ConvertData.convertStringToLocalDate;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -13,6 +16,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DateCell;
@@ -45,6 +49,13 @@ public class FXMLFormularioModCambioController implements Initializable {
     
     public static Cambio currentCambio = null;
     public static int idUser = 0;
+    private String fechaInicio = "";
+    private String fechaFin = "";
+    public static boolean consulta = false;
+    @FXML
+    private Button btGuardar;
+    @FXML
+    private Button btCancelar;
     
     
     @Override
@@ -66,21 +77,51 @@ public class FXMLFormularioModCambioController implements Initializable {
         
         this.tfTituloCambio.setText(currentCambio.getNombre());
         this.tfDescCambio.setText(currentCambio.getDescripcion());
+        this.cbTipoCambio.setValue(currentCambio.getTipo());
+        
+        
         this.cbEstadoCambio.setValue(currentCambio.getEstado());
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
             LocalDate localDate = LocalDate.parse(currentCambio.getFechaInicio(), formatter);
             this.dpFechaInicioCambio.setValue(localDate);
         
-        this.cbTipoCambio.setValue(currentCambio.getTipo());
         
-        this.dpFechaFinCambio.setDayCellFactory(picker -> new DateCell(){
+        try {            
+            Proyecto currentProyecto = (Proyecto) ProyectoDAO.getProyectoUsuario(idUser).getData();
+            fechaInicio = String.valueOf(currentProyecto.getFechaInicio());
+            fechaFin = String.valueOf(currentProyecto.getFechaFin());
+        } catch (SQLException sqlex) {
+            System.err.println("Error de \"SQLException\" en archivo \"FXMLFormularioCambioController\" en método \"initializaData\"");
+            sqlex.printStackTrace();
+        }
+        dpFechaFinCambio.setDayCellFactory(picker -> new DateCell() {
             @Override
-            public void updateItem(LocalDate date, boolean empty) {
+            public void updateItem(LocalDate date, boolean empty){
                 super.updateItem(date, empty);
-                setDisable(date.isBefore(LocalDate.now()));
+                /**
+                 * FECHA DE TERMINO:
+                 * -No puede estar antes de la fecha de inicio.
+                 * -No puede estar antes ni después del perido.
+                */
+                setDisable(
+                    date.isAfter(convertStringToLocalDate(fechaFin)) ||
+                    date.isBefore(dpFechaInicioCambio.getValue() == null ? LocalDate.now() : dpFechaInicioCambio.getValue())
+                );
             }
         });
         
+        if (consulta == true) {
+            this.tfTituloCambio.setDisable(true);
+            this.tfDescCambio.setDisable(true);
+            this.cbEstadoCambio.setDisable(true);
+            this.cbTipoCambio.setDisable(true);
+            this.dpFechaInicioCambio.setDisable(true);
+            this.dpFechaFinCambio.setDisable(true);
+            this.tfEsfuerzo.setDisable(true);
+            this.btGuardar.setVisible(false);
+            this.btCancelar.setVisible(false);
+            System.out.println("desahbilitado");
+        }
         this.tfTituloCambio.setDisable(true);
         this.tfDescCambio.setDisable(true);
         this.cbTipoCambio.setDisable(true);

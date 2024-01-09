@@ -62,7 +62,7 @@
             <Font size="24.0" />
          </font></Label>
       <TextField fx:id="tfEsfuerzo" layoutX="324.0" layoutY="458.0" />
-      <Button layoutX="435.0" layoutY="505.0" mnemonicParsing="false" onAction="#btnGuardarCambio" text="Guardar" />
-      <Button layoutX="527.0" layoutY="505.0" mnemonicParsing="false" onAction="#btnCancelarCambio" text="Cancelar" />
+      <Button fx:id="btGuardar" layoutX="456.0" layoutY="505.0" mnemonicParsing="false" onAction="#btnGuardarCambio" text="Guardar" />
+      <Button fx:id="btCancelar" layoutX="527.0" layoutY="505.0" mnemonicParsing="false" onAction="#btnCancelarCambio" text="Cancelar" />
    </children>
 </AnchorPane>

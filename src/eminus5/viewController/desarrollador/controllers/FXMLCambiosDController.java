@@ -58,9 +58,11 @@ public class FXMLCambiosDController implements Initializable {
                     selectedCambio = row.getItem();
                     try {
                         Stage stageCambio = new Stage();
-                        FXMLFormularioCambioController.currentCambio = selectedCambio;
+                        FXMLFormularioModCambioController.idUser = idUser;
+                        FXMLFormularioModCambioController.consulta = true;
+                        FXMLFormularioModCambioController.currentCambio = selectedCambio;
                         stageCambio.setScene(loadScene("viewController/desarrollador/views/FXMLFormularioModCambio.fxml"));
-                        stageCambio.setTitle("Cambio");
+                        stageCambio.setTitle("Detalles de cambio");
                         stageCambio.initModality(Modality.WINDOW_MODAL);
                         stageCambio.initOwner(
                             (Stage) this.tvCambios.getScene().getWindow()
@@ -145,6 +147,9 @@ public class FXMLCambiosDController implements Initializable {
             this.btModificarCambio.setVisible(true);
             try {
                 Stage clicModificarCambio = new Stage();
+                
+                FXMLFormularioModCambioController.idUser = idUser;
+                FXMLFormularioModCambioController.consulta = false;
                 FXMLFormularioModCambioController.currentCambio = verifySelectedCambio();
                 clicModificarCambio.setScene(loadScene("viewController/desarrollador/views/FXMLFormularioModCambio.fxml"));
                 clicModificarCambio.setTitle("Modificar cambio");

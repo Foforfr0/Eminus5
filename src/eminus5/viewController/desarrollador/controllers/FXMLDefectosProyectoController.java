@@ -276,6 +276,7 @@ public class FXMLDefectosProyectoController implements Initializable {
             this.btModificarDefecto.setVisible(true);
             try {
                 Stage modificarDefecto = new Stage();
+                FXMLFormularioModDefectoController.idUser = idUser;
                 FXMLFormularioModDefectoController.currentDefecto = verifySelectedDefecto();
                 modificarDefecto.setScene(loadScene("viewController/desarrollador/views/FXMLFormularioModDefecto.fxml"));
                 modificarDefecto.setTitle("Modificar defecto");
