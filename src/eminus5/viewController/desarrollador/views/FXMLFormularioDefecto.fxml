@@ -32,33 +32,25 @@
          <font>
             <Font size="24.0" />
          </font></Label>
-      <TextField fx:id="tfTituloDefecto" layoutX="14.0" layoutY="216.0" />
+      <TextField fx:id="tfTituloDefecto" layoutX="14.0" layoutY="216.0" prefHeight="31.0" prefWidth="239.0" promptText="Nombre del defecto" />
       <Label layoutX="14.0" layoutY="268.0" text="Descripcion (*)">
          <font>
             <Font size="24.0" />
          </font></Label>
-      <TextArea fx:id="tfDescDefecto" layoutX="14.0" layoutY="304.0" prefHeight="133.0" prefWidth="187.0" wrapText="true" />
-      <Label layoutX="20.0" layoutY="438.0" prefHeight="35.0" prefWidth="97.0" text="Estado">
+      <TextArea fx:id="tfDescDefecto" layoutX="14.0" layoutY="304.0" prefHeight="161.0" prefWidth="239.0" promptText="Descripcion del defecto" wrapText="true" />
+      <ComboBox fx:id="cbEstadoDefecto" disable="true" layoutX="18.0" layoutY="484.0" prefHeight="31.0" prefWidth="187.0" visible="false" />
+      <Label layoutX="315.0" layoutY="179.0" text="Tipo (*)">
          <font>
             <Font size="24.0" />
          </font></Label>
-      <ComboBox fx:id="cbEstadoDefecto" layoutX="18.0" layoutY="484.0" prefHeight="31.0" prefWidth="187.0" />
-      <Label layoutX="290.0" layoutY="179.0" text="Tipo (*)">
+      <ComboBox fx:id="cbTipoDefecto" layoutX="315.0" layoutY="216.0" prefHeight="31.0" prefWidth="239.0" />
+      <Label layoutX="315.0" layoutY="269.0" text="Fecha de reporte (*)">
          <font>
             <Font size="24.0" />
          </font></Label>
-      <ComboBox fx:id="cbTipoDefecto" layoutX="290.0" layoutY="216.0" prefHeight="31.0" prefWidth="187.0" />
-      <Label layoutX="290.0" layoutY="275.0" text="Fecha de reporte (*)">
-         <font>
-            <Font size="24.0" />
-         </font></Label>
-      <DatePicker fx:id="dpFechaEncontrado" editable="false" layoutX="290.0" layoutY="315.0" prefHeight="31.0" prefWidth="187.0" />
-      <Label layoutX="290.0" layoutY="353.0" text="Esfuerzo">
-         <font>
-            <Font size="24.0" />
-         </font></Label>
-      <TextField fx:id="tfEsfuerzo" layoutX="290.0" layoutY="406.0" />
-      <Button layoutX="446.0" layoutY="515.0" mnemonicParsing="false" onAction="#btnCancelarDefecto" text="Cancelar" />
-      <Button layoutX="525.0" layoutY="515.0" mnemonicParsing="false" onAction="#btnGuardarDefecto" text="Guardar" />
+      <DatePicker fx:id="dpFechaEncontrado" editable="false" layoutX="315.0" layoutY="313.0" prefHeight="31.0" prefWidth="239.0" promptText="dd-mm-aaaa" />
+      <TextField fx:id="tfEsfuerzo" disable="true" editable="false" layoutX="290.0" layoutY="406.0" visible="false" />
+      <Button layoutX="516.0" layoutY="515.0" mnemonicParsing="false" onAction="#btnCancelarDefecto" text="Cancelar" />
+      <Button layoutX="421.0" layoutY="515.0" mnemonicParsing="false" onAction="#btnGuardarDefecto" text="Guardar" />
    </children>
 </AnchorPane>

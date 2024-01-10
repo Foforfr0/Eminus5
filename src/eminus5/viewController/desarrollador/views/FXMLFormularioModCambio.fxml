@@ -27,42 +27,38 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <Label layoutX="24.0" layoutY="191.0" text="Titulo (*)">
+      <Label layoutX="24.0" layoutY="191.0" text="Titulo ">
          <font>
             <Font size="24.0" />
          </font></Label>
-      <TextField fx:id="tfTituloCambio" layoutX="23.0" layoutY="228.0" prefHeight="25.0" prefWidth="187.0" />
-      <Label layoutX="22.0" layoutY="263.0" text="Descripcion (*)">
+      <TextField fx:id="tfTituloCambio" layoutX="23.0" layoutY="228.0" prefHeight="31.0" prefWidth="240.0" />
+      <Label layoutX="22.0" layoutY="263.0" text="Descripcion ">
          <font>
             <Font size="24.0" />
          </font></Label>
-      <TextArea fx:id="tfDescCambio" layoutX="23.0" layoutY="305.0" prefHeight="95.0" prefWidth="187.0" wrapText="true" />
-      <Label layoutX="24.0" layoutY="419.0" prefHeight="35.0" prefWidth="110.0" text="Estado">
+      <TextArea fx:id="tfDescCambio" layoutX="23.0" layoutY="305.0" prefHeight="140.0" prefWidth="240.0" wrapText="true" />
+      <ComboBox fx:id="cbEstadoCambio" disable="true" layoutX="28.0" layoutY="458.0" prefHeight="31.0" prefWidth="187.0" visible="false" />
+      <Label layoutX="342.0" layoutY="191.0" text="Tipo ">
          <font>
             <Font size="24.0" />
          </font></Label>
-      <ComboBox fx:id="cbEstadoCambio" layoutX="28.0" layoutY="458.0" prefHeight="31.0" prefWidth="187.0" />
-      <Label layoutX="327.0" layoutY="191.0" text="Tipo (*)">
+      <ComboBox fx:id="cbTipoCambio" layoutX="342.0" layoutY="228.0" prefHeight="31.0" prefWidth="240.0" />
+      <Label layoutX="342.0" layoutY="263.0" text="Fecha de inicio ">
          <font>
             <Font size="24.0" />
          </font></Label>
-      <ComboBox fx:id="cbTipoCambio" layoutX="321.0" layoutY="228.0" prefHeight="31.0" prefWidth="187.0" />
-      <Label layoutX="320.0" layoutY="263.0" text="Fecha de inicio (*)">
+      <DatePicker fx:id="dpFechaInicioCambio" editable="false" layoutX="342.0" layoutY="298.0" prefHeight="31.0" prefWidth="240.0" />
+      <Label layoutX="338.0" layoutY="334.0" text="Fecha de fin (*)">
          <font>
             <Font size="24.0" />
          </font></Label>
-      <DatePicker fx:id="dpFechaInicioCambio" editable="false" layoutX="321.0" layoutY="298.0" prefHeight="31.0" prefWidth="187.0" />
-      <Label layoutX="319.0" layoutY="332.0" text="Fecha de fin (*)">
+      <DatePicker fx:id="dpFechaFinCambio" editable="false" layoutX="342.0" layoutY="369.0" prefHeight="31.0" prefWidth="240.0" promptText="dd-mm-aaaa" />
+      <Label layoutX="342.0" layoutY="410.0" text="Esfuerzo (*)">
          <font>
             <Font size="24.0" />
          </font></Label>
-      <DatePicker fx:id="dpFechaFinCambio" editable="false" layoutX="321.0" layoutY="369.0" prefHeight="31.0" prefWidth="187.0" />
-      <Label layoutX="324.0" layoutY="419.0" text="Esfuerzo">
-         <font>
-            <Font size="24.0" />
-         </font></Label>
-      <TextField fx:id="tfEsfuerzo" layoutX="324.0" layoutY="458.0" />
-      <Button fx:id="btGuardar" layoutX="456.0" layoutY="505.0" mnemonicParsing="false" onAction="#btnGuardarCambio" text="Guardar" />
+      <TextField fx:id="tfEsfuerzo" layoutX="343.0" layoutY="443.0" promptText="MINUTOS" />
+      <Button fx:id="btGuardar" layoutX="436.0" layoutY="505.0" mnemonicParsing="false" onAction="#btnGuardarCambio" text="Guardar" />
       <Button fx:id="btCancelar" layoutX="527.0" layoutY="505.0" mnemonicParsing="false" onAction="#btnCancelarCambio" text="Cancelar" />
    </children>
 </AnchorPane>

@@ -117,9 +117,6 @@ public class FXMLFormularioCambioController implements Initializable {
         if (tfTituloCambio.getText().trim().length() <= 0 || tfDescCambio.getText().length() <= 0) {
             return true;
         }
-        if (cbEstadoCambio.getValue() == null) {
-            return true;
-        }
         if (cbTipoCambio.getValue() == null) {
             return true;
         }
@@ -150,7 +147,7 @@ public class FXMLFormularioCambioController implements Initializable {
                 newCambio.setDescripcion(this.tfDescCambio.getText());
                 newCambio.setFechaInicio(this.dpFechaInicioCambio.getValue().format
                 (DateTimeFormatter.ofPattern("dd-MM-yyyy")));
-                newCambio.setEstado(this.cbEstadoCambio.getValue());
+                newCambio.setEstado("Iniciado");
                 newCambio.setTipo(this.cbTipoCambio.getValue());
                 
                 ResultOperation  resultCreate = CambioDAO.registrarCambio(idUser, newCambio);

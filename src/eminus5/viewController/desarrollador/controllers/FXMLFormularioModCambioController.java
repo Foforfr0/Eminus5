@@ -27,9 +27,10 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 /**
- * FXML Controller class
  *
- * @author abrah
+ * Autor: Abraham Vazquez
+ * Fecha de creacion: noviembre 2023
+ * Ultima fecha de modificacion: 10 enero 2024
  */
 public class FXMLFormularioModCambioController implements Initializable {
     @FXML
@@ -125,7 +126,7 @@ public class FXMLFormularioModCambioController implements Initializable {
             this.btCancelar.setVisible(false);
             
             this.lbTitulo.setText("Detalles de cambio");
-            System.out.println("desahbilitado");
+            System.out.println("deshabilitado");
         }
         this.tfTituloCambio.setDisable(true);
         this.tfDescCambio.setDisable(true);
@@ -160,7 +161,7 @@ public class FXMLFormularioModCambioController implements Initializable {
             try {
                 Cambio newCambio = new Cambio();
                     newCambio.setIdCambio(currentCambio.getIdCambio());
-                    newCambio.setEstado(this.cbEstadoCambio.getValue());
+                    newCambio.setEstado("Entregado");
                     newCambio.setFechaFin(this.dpFechaFinCambio.getValue()
                     .format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
                     newCambio.setEsfuerzo(Integer.parseInt(this.tfEsfuerzo.getText()));

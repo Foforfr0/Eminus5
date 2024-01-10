@@ -9,6 +9,6 @@ public class ConstantsConnectionDB {
     public static final String DATABASE = "eminus5";
     public static final String HOSTNAME = "127.0.0.1";
     public static final String PORT = "3306";
-    public static final String USER = "CoronelTocino";
-    public static final String PASSWORD = "Q1W2e3r4@";
+    public static final String USER = "3776";
+    public static final String PASSWORD = "saijiki";
 }
