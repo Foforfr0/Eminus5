@@ -433,11 +433,33 @@ INSERT INTO Actividad (Nombre, Descripcion, IdEstado, IdTipo, FechaInicio, Fecha
 /*BITACORA-------------------------------------------------------------------------------------------------------------------------*/
 INSERT INTO BitacoraActividad (NumBitacora, Nombre, Descripción, IdActividad, IdDesarrollador)
     VALUES (1, 'Ejemplo bitácora 1', 'Descripción de ejemplo de bitácora 1', 4, 4);
+INSERT INTO BitacoraActividad (NumBitacora, Nombre, Descripción, IdActividad, IdDesarrollador)
+    VALUES (1, 'Ejemplo bitácora 2', 'Descripción de ejemplo de bitácora 2', 4, 4);
+INSERT INTO BitacoraActividad (NumBitacora, Nombre, Descripción, IdActividad, IdDesarrollador)
+    VALUES (1, 'Ejemplo bitácora 3', 'Descripción de ejemplo de bitácora 3', 4, 4);
+INSERT INTO BitacoraActividad (NumBitacora, Nombre, Descripción, IdActividad, IdDesarrollador)
+    VALUES (1, 'Ejemplo bitácora 4', 'Descripción de ejemplo de bitácora 4', 4, 4);
+INSERT INTO BitacoraActividad (NumBitacora, Nombre, Descripción, IdActividad, IdDesarrollador)
+    VALUES (1, 'Ejemplo bitácora 5', 'Descripción de ejemplo de bitácora 5', 4, 4);
+INSERT INTO BitacoraActividad (NumBitacora, Nombre, Descripción, IdActividad, IdDesarrollador)
+    VALUES (1, 'Ejemplo bitácora 6', 'Descripción de ejemplo de bitácora 6', 4, 4);
+INSERT INTO BitacoraActividad (NumBitacora, Nombre, Descripción, IdActividad, IdDesarrollador)
+    VALUES (1, 'Ejemplo bitácora 7', 'Descripción de ejemplo de bitácora 7', 4, 4);
 /*CAMBIO-------------------------------------------------------------------------------------------------------------------------*/
 INSERT INTO Cambio (Nombre, Descripcion, FechaInicio, IdDesarrollador, IdEstado, IdTipo)
     VALUES ('Ejemplo de cambio 1', 'Descripción de ejemplo de cambio 1', '2024-02-21', 4, 1, 2);
 INSERT INTO Cambio (Nombre, Descripcion, FechaInicio, IdDesarrollador, IdEstado, IdTipo)
-    VALUES ('Ejemplo de cambio 2', 'Descripción de ejemplo de cambio 2', '2024-02-23', 4,  2, 2);
+    VALUES ('Ejemplo de cambio 2', 'Descripción de ejemplo de cambio 2', '2024-02-23', 4, 2, 2);
+INSERT INTO Cambio (Nombre, Descripcion, FechaInicio, IdDesarrollador, IdEstado, IdTipo)
+    VALUES ('Ejemplo de cambio 3', 'Descripción de ejemplo de cambio 3', '2024-02-23', 4, 1, 2);
+INSERT INTO Cambio (Nombre, Descripcion, FechaInicio, IdDesarrollador, IdEstado, IdTipo)
+    VALUES ('Ejemplo de cambio 4', 'Descripción de ejemplo de cambio 4', '2024-03-23', 4, 2, 2);
+INSERT INTO Cambio (Nombre, Descripcion, FechaInicio, IdDesarrollador, IdEstado, IdTipo)
+    VALUES ('Ejemplo de cambio 5', 'Descripción de ejemplo de cambio 5', '2024-04-23', 4, 1, 2);
+INSERT INTO Cambio (Nombre, Descripcion, FechaInicio, IdDesarrollador, IdEstado, IdTipo)
+    VALUES ('Ejemplo de cambio 6', 'Descripción de ejemplo de cambio 6', '2024-04-23', 4, 2, 2);
+INSERT INTO Cambio (Nombre, Descripcion, FechaInicio, IdDesarrollador, IdEstado, IdTipo)
+    VALUES ('Ejemplo de cambio 7', 'Descripción de ejemplo de cambio 7', '2024-03-23', 4, 1, 2);
 /*DEFECTO-------------------------------------------------------------------------------------------------------------------------*/
 INSERT INTO Defecto (Nombre, Descripcion, Esfuerzo, FechaEncontrado, IdProyecto, IdEstado, IdTipo)
     VALUES ('Ejemplo defecto 1', 'Descripción de ejemplo defecto 1', 50, '2024-02-16', 1, 1, 3);
@@ -446,7 +468,17 @@ INSERT INTO Defecto (Nombre, Descripcion, Esfuerzo, FechaEncontrado, IdProyecto,
 INSERT INTO Defecto (Nombre, Descripcion, Esfuerzo, FechaEncontrado, IdProyecto, IdEstado, IdTipo)
     VALUES ('Ejemplo defecto 3', 'Descripción de ejemplo defecto 3', 60, '2024-03-10', 1, 1, 1);
 INSERT INTO Defecto (Nombre, Descripcion, Esfuerzo, FechaEncontrado, IdProyecto, IdEstado, IdTipo)
-    VALUES ('Ejemplo defecto 4', 'Descripción de ejemplo defecto 3', 120, '2024-03-19', 1, 1, 3);
+    VALUES ('Ejemplo defecto 4', 'Descripción de ejemplo defecto 4', 160, '2024-03-19', 1, 1, 3);
+INSERT INTO Defecto (Nombre, Descripcion, Esfuerzo, FechaEncontrado, IdProyecto, IdEstado, IdTipo)
+    VALUES ('Ejemplo defecto 5', 'Descripción de ejemplo defecto 5', 120, '2024-03-19', 1, 1, 3);
+INSERT INTO Defecto (Nombre, Descripcion, Esfuerzo, FechaEncontrado, IdProyecto, IdEstado, IdTipo)
+    VALUES ('Ejemplo defecto 6', 'Descripción de ejemplo defecto 6', 2700, '2024-03-19', 1, 1, 3);
+INSERT INTO Defecto (Nombre, Descripcion, Esfuerzo, FechaEncontrado, IdProyecto, IdEstado, IdTipo)
+    VALUES ('Ejemplo defecto 7', 'Descripción de ejemplo defecto 7', 40, '2024-03-19', 1, 1, 3);
+INSERT INTO Defecto (Nombre, Descripcion, Esfuerzo, FechaEncontrado, IdProyecto, IdEstado, IdTipo)
+    VALUES ('Ejemplo defecto 8', 'Descripción de ejemplo defecto 8', 30, '2024-03-19', 1, 1, 3);
+INSERT INTO Defecto (Nombre, Descripcion, Esfuerzo, FechaEncontrado, IdProyecto, IdEstado, IdTipo)
+    VALUES ('Ejemplo defecto 9', 'Descripción de ejemplo defecto 9', 100, '2024-03-19', 1, 1, 3);
 /*SOLICITUD DE CAMBIO-------------------------------------------------------------------------------------------------------------------------*/
 INSERT INTO SolicitudCambio (Nombre, Descripcion, Razon, Impacto, AccionPropuesta, 
     FechaCreacion, FechaAceptada, IdEstadoAceptacion, IdDefecto, IdProyecto) 
