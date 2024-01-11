@@ -11,7 +11,10 @@
    <children>
       <Pane fx:id="pnPrincipalD" prefHeight="480.0" prefWidth="700.0">
          <children>
-            <Label fx:id="lbDetallesBitacora" layoutX="5.0" layoutY="163.0" prefHeight="249.0" prefWidth="692.0" textAlignment="JUSTIFY" />
+            <Label fx:id="lbDetallesBitacora" layoutX="5.0" layoutY="248.0" prefHeight="161.0" prefWidth="315.0" text="Aqui va la descripcion de la bitacora" textAlignment="JUSTIFY">
+               <font>
+                  <Font size="18.0" />
+               </font></Label>
             <Pane prefHeight="80.0" prefWidth="700.0" style="-fx-background-color: #18419D;">
                <children>
                   <Label layoutX="14.0" layoutY="30.0" text="Detalles bitacora ">
@@ -20,12 +23,34 @@
                      </font>
                   </Label>
                </children></Pane>
-            <Label fx:id="lbNombreBitacora" layoutX="14.0" layoutY="93.0" prefHeight="35.0" prefWidth="561.0">
+            <Label fx:id="lbNombreBitacora" layoutX="14.0" layoutY="128.0" prefHeight="35.0" prefWidth="287.0" text="Aqui va el titulo de la bitacora">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Button layoutX="326.0" layoutY="423.0" mnemonicParsing="false" onAction="#btnSalir" text="Salir" />
+            <Label layoutX="14.0" layoutY="97.0" text="Nombre de la bitacora: ">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label layoutX="14.0" layoutY="178.0" text="Descripcion:">
                <font>
                   <Font size="24.0" />
                </font>
             </Label>
-            <Button layoutX="326.0" layoutY="423.0" mnemonicParsing="false" onAction="#btnSalir" text="Salir" />
+            <Label layoutX="368.0" layoutY="104.0" text="Nombre de la actividad/cambio">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbNombreCA" layoutX="368.0" layoutY="138.0" prefHeight="80.0" prefWidth="255.0" text="Aqui va el nombre de la actividad/cambio a la que pertenece la bitacora" wrapText="true" />
+            <Label layoutX="368.0" layoutY="318.0" text="Autor:">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbAutor" layoutX="443.0" layoutY="321.0" text="Aqui va el nombre del desarrollador" />
          </children>
       </Pane>
    </children>

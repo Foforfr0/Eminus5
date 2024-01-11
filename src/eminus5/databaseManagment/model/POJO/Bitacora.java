@@ -14,11 +14,14 @@ public class Bitacora {
     int idDesarrollador;
     int idActividad;
     int idCambio;
-
+    String nombreActividad;
+    String nombreCambio;
+    String autor;
+    
     public Bitacora() {
     }
 
-    public Bitacora(int idBitacora, int numBitacora, String nombre, String descripcion, int idEstado, int idDesarrollador, int idActividad, int idCambio) {
+    public Bitacora(int idBitacora, int numBitacora, String nombre, String descripcion, int idEstado, int idDesarrollador, int idActividad, int idCambio, String nombreActividad, String nombreCambio, String autor) {
         this.idBitacora = idBitacora;
         this.numBitacora = numBitacora;
         this.nombre = nombre;
@@ -27,6 +30,9 @@ public class Bitacora {
         this.idDesarrollador = idDesarrollador;
         this.idActividad = idActividad;
         this.idCambio = idCambio;
+        this.nombreActividad = nombreActividad;
+        this.nombreCambio = nombreCambio;
+        this.autor = autor;
     }
 
     public int getIdBitacora() {
@@ -92,5 +98,31 @@ public class Bitacora {
     public void setIdCambio(int idCambio) {
         this.idCambio = idCambio;
     }
+
+    public String getNombreActividad() {
+        return nombreActividad;
+    }
+
+    public void setNombreActividad(String nombreActividad) {
+        this.nombreActividad = nombreActividad;
+    }
+
+    public String getNombreCambio() {
+        return nombreCambio;
+    }
+
+    public void setNombreCambio(String nombreCambio) {
+        this.nombreCambio = nombreCambio;
+    }
+
+    public String getAutor() {
+        return autor;
+    }
+
+    public void setAutor(String autor) {
+        this.autor = autor;
+    }
+
+    
     
 }

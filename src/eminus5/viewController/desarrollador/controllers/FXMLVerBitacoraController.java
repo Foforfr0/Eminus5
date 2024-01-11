@@ -31,6 +31,10 @@ public class FXMLVerBitacoraController implements Initializable {
     private Label lbNombreBitacora;
     @FXML
     private Label lbDetallesBitacora;
+    @FXML
+    private Label lbNombreCA;
+    @FXML
+    private Label lbAutor;
 
     public static Bitacora currentBitacora = null;
 
@@ -43,6 +47,8 @@ public class FXMLVerBitacoraController implements Initializable {
     private void initializeData(){
         this.lbNombreBitacora.setText(currentBitacora.getNombre());
         this.lbDetallesBitacora.setText(currentBitacora.getDescripcion());
+        this.lbNombreCA.setText(currentBitacora.getNombreActividad());
+        this.lbAutor.setText(currentBitacora.getAutor());
         
         try {
             ResultOperation resultGetDesarrollador = DesarrolladorDAO.getDesarrollador(currentBitacora.getIdDesarrollador());

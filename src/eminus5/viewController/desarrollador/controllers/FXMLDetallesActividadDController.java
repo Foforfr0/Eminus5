@@ -16,9 +16,10 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 /**
- * FXML Controller class
  *
- * @author abrah
+ * Autor: Abraham Vazquez
+ * Fecha creacion: noviembre 2023
+ * Ultima modificacion: 10 enero 2024
  */
 public class FXMLDetallesActividadDController implements Initializable {
 
@@ -26,6 +27,14 @@ public class FXMLDetallesActividadDController implements Initializable {
     private Label lbTituloActividad;
     @FXML
     private Label lbDescripcionActividad;
+    @FXML
+    private Label lbFechaInicio;
+    @FXML
+    private Label lbFechaFin;
+    @FXML
+    private Label lbTipoActividad;
+    @FXML
+    private Label lbDesarrollador;
 
     public static Actividad currentActividad = null;
     
@@ -37,6 +46,14 @@ public class FXMLDetallesActividadDController implements Initializable {
     private void initializeData() {
         this.lbTituloActividad.setText(currentActividad.getNombre());
         this.lbDescripcionActividad.setText(currentActividad.getDescripcion());
+        this.lbFechaInicio.setText(currentActividad.getFechaInicio());
+        if (currentActividad.getFechaFin() == null) {
+            this.lbFechaFin.setText("Sin fecha de termino");
+        } else {
+            this.lbFechaFin.setText(currentActividad.getFechaFin());
+        }
+        this.lbTipoActividad.setText(currentActividad.getTipo());
+        this.lbDesarrollador.setText(currentActividad.getNombreDesarrollador());
     }
     
     @FXML

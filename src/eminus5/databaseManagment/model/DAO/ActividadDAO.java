@@ -535,9 +535,12 @@ public class ActividadDAO {
         
         if (connectionDB != null) {
             try {
-                String sqlQuery = "SELECT A.IdActividad, A.Nombre, A.Descripcion, E.Nombre AS 'Estado' " +
+                String sqlQuery = "SELECT A.IdActividad, A.Nombre, A.Descripcion, E.Nombre AS 'Estado', " +
+                                  "TA.Nombre AS 'Tipo', DATE_FORMAT(A.FechaInicio, '%d-%m-%Y') AS FechaInicio, " +
+                                  "DATE_FORMAT(A.FechaTermino, '%d-%m-%Y') AS FechaTermino, U.Nombre AS 'Desarrollador asignado' " +
                                   "FROM Actividad A " + 
                                   "JOIN Estado E ON E.IdEstado = A.IdEstado " +
+                                  "JOIN TipoActividad TA ON TA.IdTipoActividad = A.IdTipo " +
                                   "JOIN Usuario U ON A.IdDesarrollador = U.IDUsuario " +
                                   "WHERE IDUsuario = ? AND A.IdEstado = 1;";
                 PreparedStatement prepareQuery = connectionDB.prepareStatement(sqlQuery);
@@ -551,6 +554,10 @@ public class ActividadDAO {
                     newActividad.setNombre(resultQuery.getString("Nombre"));
                     newActividad.setDescripcion(resultQuery.getString("Descripcion"));
                     newActividad.setEstado(resultQuery.getString("Estado"));
+                    newActividad.setTipo(resultQuery.getString("Tipo"));
+                    newActividad.setFechaInicio(resultQuery.getString("FechaInicio"));
+                    newActividad.setFechaFin(resultQuery.getString("FechaTermino"));
+                    newActividad.setNombreDesarrollador(resultQuery.getString("Desarrollador asignado"));
                     listActividadesD.add(newActividad);
                     resultOperation = new ResultOperation(
                             false,

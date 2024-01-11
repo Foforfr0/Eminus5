@@ -13,23 +13,23 @@
          <content>
             <TableView fx:id="tvDefectos" prefHeight="300.0" prefWidth="600.0">
               <columns>
-                <TableColumn fx:id="tcNombre" prefWidth="223.0" text="Nombre" />
-                  <TableColumn fx:id="tcEstado" prefWidth="79.0" text="Estado" />
-                <TableColumn fx:id="tcEsfuerzo" prefWidth="116.0" text="Esfuerzo" />
-                  <TableColumn fx:id="tcTipo" prefWidth="88.0" text="Tipo" />
-                  <TableColumn fx:id="tcSolCambio" prefWidth="90.0" text="Sol. cambio" />
+                <TableColumn fx:id="tcNombre" prefWidth="223.0" resizable="false" text="Nombre" />
+                  <TableColumn fx:id="tcEstado" prefWidth="79.0" resizable="false" text="Estado" />
+                <TableColumn fx:id="tcEsfuerzo" prefWidth="116.0" resizable="false" text="Esfuerzo" />
+                  <TableColumn fx:id="tcTipo" prefWidth="88.0" resizable="false" text="Tipo" />
+                  <TableColumn fx:id="tcSolCambio" prefWidth="93.0" resizable="false" text="Sol. cambio" />
               </columns>
             </TableView>
          </content>
       </ScrollPane>
-      <Button layoutX="596.0" layoutY="105.0" mnemonicParsing="false" onMouseClicked="#clicAddSolicitudProyecto" text="Solicitar cambio" />
+      <Button layoutX="571.0" layoutY="90.0" mnemonicParsing="false" onMouseClicked="#clicAddSolicitudProyecto" text="Solicitar cambio" />
       <Label layoutX="94.0" layoutY="25.0" text="Defectos del proyecto">
          <font>
             <Font size="35.0" />
          </font>
       </Label>
-      <Button layoutX="94.0" layoutY="105.0" mnemonicParsing="false" onMouseClicked="#clicAddDefecto" text="Registrar" />
-      <Button fx:id="btModificarDefecto" layoutX="167.0" layoutY="105.0" mnemonicParsing="false" onMouseClicked="#clicModifyDefecto" text="Modificar" />
-      <Button layoutX="604.0" layoutY="447.0" mnemonicParsing="false" onMouseClicked="#clicGetSolicitudes" text="Ver solicitudes" />
+      <Button layoutX="94.0" layoutY="90.0" mnemonicParsing="false" onMouseClicked="#clicAddDefecto" text="Registrar" />
+      <Button fx:id="btModificarDefecto" layoutX="181.0" layoutY="90.0" mnemonicParsing="false" onMouseClicked="#clicModifyDefecto" text="Modificar" />
+      <Button layoutX="580.0" layoutY="465.0" mnemonicParsing="false" onMouseClicked="#clicGetSolicitudes" text="Ver solicitudes" />
    </children>
 </AnchorPane>

@@ -22,7 +22,7 @@
             <Font name="System Bold" size="64.0" />
          </font>
       </Label>
-      <Label fx:id="lbTituloActividad" layoutX="13.0" layoutY="183.0" prefHeight="98.0" prefWidth="974.0" wrapText="true">
+      <Label fx:id="lbTituloActividad" layoutX="25.0" layoutY="184.0" prefHeight="64.0" prefWidth="339.0" text="Titulo actividad" wrapText="true">
          <font>
             <Font size="18.0" />
          </font>
@@ -32,6 +32,30 @@
             <Font name="System Bold" size="36.0" />
          </font>
       </Label>
-      <Label fx:id="lbDescripcionActividad" layoutX="14.0" layoutY="334.0" prefHeight="218.0" prefWidth="961.0" wrapText="true" />
+      <Label fx:id="lbDescripcionActividad" layoutX="14.0" layoutY="334.0" prefHeight="220.0" prefWidth="406.0" text="Descripcion de actividad" wrapText="true" />
+      <Label layoutX="478.0" layoutY="118.0" text="Fecha de inicio: ">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="783.0" layoutY="118.0" text="Fecha de fin:">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <Label fx:id="lbFechaInicio" layoutX="486.0" layoutY="163.0" text="Aqui va la fecha de inicio" />
+      <Label fx:id="lbFechaFin" layoutX="781.0" layoutY="163.0" text="Aqui va la fecha de fin" />
+      <Label layoutX="478.0" layoutY="297.0" text="Tipo de actividad: ">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <Label fx:id="lbTipoActividad" layoutX="478.0" layoutY="334.0" text="Aqui va el tipo de actividad" />
+      <Label fx:id="lbDesarrollador" layoutX="781.0" layoutY="334.0" text="Actividad asignada a:" />
+      <Label layoutX="781.0" layoutY="297.0" text="Para:">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

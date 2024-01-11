@@ -19,11 +19,15 @@ public class BitacoraDAO {
 
         if(connectionDB != null){
             try{
-                String sqlQuery = "SELECT BA.Nombre, BA.Descripción FROM BitacoraActividad BA " +
+                String sqlQuery = "SELECT BA.Nombre, BA.Descripción, A.Nombre AS 'Nombre actividad', U.Nombre AS 'Autor' " +
+                                  "FROM BitacoraActividad BA " +
+                                  "JOIN Actividad A ON A.IdActividad = BA.IdActividad " +
                                   "JOIN Usuario U ON BA.IdDesarrollador = U.IDUsuario " +
                                   "WHERE U.IDUsuario = ? " +
                                   "UNION " +
-                                  "SELECT BC.Nombre, BC.Descripción FROM BitacoraCambio BC " +
+                                  "SELECT BC.Nombre, BC.Descripción, C.Nombre AS 'Nombre cambio', U.Nombre AS 'Autor' " +
+                                  "FROM BitacoraCambio BC " +
+                                  "JOIN Cambio C ON C.IdCambio = BC.IdCambio " +
                                   "JOIN Usuario U ON BC.IdDesarrollador = U.IDUsuario " +
                                   "WHERE U.IDUsuario = ?; ";
                 PreparedStatement prepareQuery = connectionDB.prepareStatement(sqlQuery);
@@ -36,6 +40,8 @@ public class BitacoraDAO {
                     Bitacora newBitacora = new Bitacora();
                     newBitacora.setNombre(resultQuery.getString("Nombre"));
                     newBitacora.setDescripcion(resultQuery.getString("Descripción"));
+                    newBitacora.setNombreActividad(resultQuery.getString("Nombre actividad"));
+                    newBitacora.setAutor(resultQuery.getString("Autor"));
                     listBitacoras.add(newBitacora);
                     resultOperation = new ResultOperation(
                         false,

@@ -495,3 +495,22 @@ INSERT INTO SolicitudCambio (Nombre, Descripcion, Razon, Impacto, AccionPropuest
     VALUES ('Ejemplo de solicitud de cambio 3', 'Descripción de ejemplo de solicitud de cambio 3',
     'Razón: Razón de ejemplo de solicitud de cambio 3', 'Impacto: Impacto de ejemplo de solicitud de cambio 3', 
     'Acción propuesta: Acción propuesta de ejemplo de solicitud de cambio 3', '2024-03-10', '2024-03-12', 3, 2, NULL);
+    
+SELECT A.IdActividad, A.Nombre, A.Descripcion, E.Nombre AS 'Estado', TA.Nombre AS 'Tipo', A.FechaInicio, A.FechaTermino, U.Nombre AS 'Desarrollador asignado'
+FROM Actividad A 
+JOIN Estado E ON E.IdEstado = A.IdEstado
+JOIN TipoActividad TA ON TA.IdTipoActividad = A.IdTipo
+JOIN Usuario U ON A.IdDesarrollador = U.IDUsuario
+WHERE IDUsuario = 4 AND A.IdEstado = 1; 
+
+SELECT BA.Nombre, BA.Descripción, A.Nombre AS 'Nombre actividad'
+FROM BitacoraActividad BA
+JOIN Actividad A ON A.IdActividad = BA.IdActividad
+JOIN Usuario U ON BA.IdDesarrollador = U.IDUsuario 
+WHERE U.IDUsuario = 4
+UNION 
+SELECT BC.Nombre, BC.Descripción, C.Nombre AS 'Nombre cambio'
+FROM BitacoraCambio BC 
+JOIN Cambio C ON C.IdCambio = BA.IdCambio
+JOIN Usuario U ON BC.IdDesarrollador = U.IDUsuario 
+WHERE U.IDUsuario = 4;
