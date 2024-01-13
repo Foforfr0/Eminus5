@@ -3,6 +3,7 @@ package eminus5.viewController.desarrollador.controllers;
 import eminus5.databaseManagment.model.DAO.DefectoDAO;
 import eminus5.databaseManagment.model.DAO.ProyectoDAO;
 import eminus5.databaseManagment.model.POJO.Defecto;
+import eminus5.databaseManagment.model.POJO.Proyecto;
 import eminus5.databaseManagment.model.ResultOperation;
 import eminus5.utils.ShowMessage;
 import static eminus5.utils.ShowMessage.showMessage;
@@ -50,6 +51,7 @@ public class FXMLFormularioDefectoController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        initializeData();
         initializeStage();
     }    
 
@@ -68,7 +70,7 @@ public class FXMLFormularioDefectoController implements Initializable {
         );
         
         this.tfEsfuerzo.setDisable(true);
-        dpFechaEncontrado.setDayCellFactory(picker -> new DateCell() {
+        /*dpFechaEncontrado.setDayCellFactory(picker -> new DateCell() {
             @Override
             public void updateItem(LocalDate date, boolean empty){
                 super.updateItem(date, empty);
@@ -78,7 +80,35 @@ public class FXMLFormularioDefectoController implements Initializable {
                     date.isBefore(dpFechaEncontrado.getValue() == null ? LocalDate.now() : dpFechaEncontrado.getValue())
                 );
             }
+        });*/
+        this.dpFechaEncontrado.setDayCellFactory(picker -> new DateCell() {
+            @Override
+            public void updateItem(LocalDate date, boolean empty) {
+                super.updateItem(date, empty);
+                /**
+                 * FECHA ENCONTRADO:
+                 * -No puede ser despues de la fecha acual.
+                 * -No puede estar antes ni después del perido.
+                */
+                setDisable( 
+                    date.isAfter(LocalDate.now()) || 
+                    date.isAfter(convertStringToLocalDate(fechaFin)) || 
+                    date.isBefore(convertStringToLocalDate(fechaInicio))
+                );
+            }
         });
+    }
+    
+    private void initializeData() {
+        try {
+            Proyecto currentProyecto = (Proyecto) ProyectoDAO.getProyectoUsuario(idUser).getData();
+            this.fechaInicio = currentProyecto.getFechaInicio();
+            this.fechaFin = currentProyecto.getFechaFin();
+        } catch (SQLException sqlex) {
+            System.err.println("\"Error de \"SQLException\" en archivo " + 
+                                   "\"FXMLFormularioDefectoController\" en método \"initializaData\"");
+                sqlex.printStackTrace();
+        }
     }
     
     private boolean validateFields() {
