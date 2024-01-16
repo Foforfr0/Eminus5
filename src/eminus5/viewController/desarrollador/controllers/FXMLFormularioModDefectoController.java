@@ -1,9 +1,13 @@
 package eminus5.viewController.desarrollador.controllers;
 
 import eminus5.databaseManagment.model.DAO.DefectoDAO;
+import eminus5.databaseManagment.model.DAO.ProyectoDAO;
 import eminus5.databaseManagment.model.POJO.Defecto;
+import eminus5.databaseManagment.model.POJO.Proyecto;
 import eminus5.databaseManagment.model.ResultOperation;
+import static eminus5.utils.ConvertData.convertStringToLocalDate;
 import eminus5.utils.ShowMessage;
+import static eminus5.viewController.desarrollador.controllers.FXMLFormularioModCambioController.idUser;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -46,6 +50,8 @@ public class FXMLFormularioModDefectoController implements Initializable {
     
     public static Defecto currentDefecto = null; 
     public static int idUser = 0;
+    private String fechaInicio = "";
+    private String fechaFin = "";
     
     
     @Override
@@ -73,11 +79,28 @@ public class FXMLFormularioModDefectoController implements Initializable {
             this.dpFechaEncontrado.setValue(localDate);
         this.cbTipoDefecto.setValue(currentDefecto.getTipo());
         
-        this.dpFechaSolucionado.setDayCellFactory(picker -> new DateCell(){
+        try {            
+            Proyecto currentProyecto = (Proyecto) ProyectoDAO.getProyectoUsuario(idUser).getData();
+            fechaInicio = String.valueOf(currentProyecto.getFechaInicio());
+            fechaFin = String.valueOf(currentProyecto.getFechaFin());
+        } catch (SQLException sqlex) {
+            System.err.println("Error de \"SQLException\" en archivo \"FXMLFormularioCambioController\" en método \"initializaData\"");
+            sqlex.printStackTrace();
+        }
+        
+        dpFechaSolucionado.setDayCellFactory(picker -> new DateCell() {
             @Override
-            public void updateItem(LocalDate date, boolean empty) {
+            public void updateItem(LocalDate date, boolean empty){
                 super.updateItem(date, empty);
-                setDisable(date.isBefore(LocalDate.now()));
+                /**
+                 * FECHA DE TERMINO:
+                 * -No puede estar antes de la fecha de inicio.
+                 * -No puede estar antes ni después del perido.
+                */
+                setDisable(
+                    date.isAfter(convertStringToLocalDate(fechaFin)) ||
+                    date.isBefore(dpFechaEncontrado.getValue() == null ? LocalDate.now() : dpFechaEncontrado.getValue())
+                );
             }
         });
         this.tfTituloDefecto.setDisable(true);
@@ -114,7 +137,7 @@ public class FXMLFormularioModDefectoController implements Initializable {
                 Defecto newDefecto = new Defecto();
                     newDefecto.setIdDefecto(currentDefecto.getIdDefecto());
                     newDefecto.setEsfuerzoMin(Integer.parseInt(this.tfEsfuerzo.getText()));
-                    newDefecto.setEstado(this.cbEstadoDefecto.getValue());
+                    newDefecto.setEstado("Entregado");
                     newDefecto.setFechaSolucionado(this.dpFechaSolucionado.getValue().
                             format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
                     

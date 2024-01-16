@@ -143,7 +143,7 @@ public class FXMLFormularioDefectoController implements Initializable {
                 Defecto newDefecto = new Defecto();
                 newDefecto.setNombre(this.tfTituloDefecto.getText());
                 newDefecto.setDescripcion(this.tfDescDefecto.getText());
-                newDefecto.setEstado(this.cbEstadoDefecto.getValue());
+                newDefecto.setEstado("Iniciado");
                 newDefecto.setTipo(this.cbTipoDefecto.getValue());
                 newDefecto.setFechaEncontrado(this.dpFechaEncontrado.getValue().format
                 (DateTimeFormatter.ofPattern("dd-MM-yyy")));

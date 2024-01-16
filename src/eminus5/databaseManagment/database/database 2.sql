@@ -503,14 +503,16 @@ JOIN TipoActividad TA ON TA.IdTipoActividad = A.IdTipo
 JOIN Usuario U ON A.IdDesarrollador = U.IDUsuario
 WHERE IDUsuario = 4 AND A.IdEstado = 1; 
 
-SELECT BA.Nombre, BA.Descripción, A.Nombre AS 'Nombre actividad'
+SELECT BA.Nombre, BA.Descripción, A.Nombre AS 'Nombre actividad', U.Nombre AS 'Autor'
 FROM BitacoraActividad BA
 JOIN Actividad A ON A.IdActividad = BA.IdActividad
 JOIN Usuario U ON BA.IdDesarrollador = U.IDUsuario 
 WHERE U.IDUsuario = 4
 UNION 
-SELECT BC.Nombre, BC.Descripción, C.Nombre AS 'Nombre cambio'
+SELECT BC.Nombre, BC.Descripción, C.Nombre AS 'Nombre cambio', U.Nombre AS 'Autor'
 FROM BitacoraCambio BC 
-JOIN Cambio C ON C.IdCambio = BA.IdCambio
+JOIN Cambio C ON C.IdCambio = BC.IdCambio
 JOIN Usuario U ON BC.IdDesarrollador = U.IDUsuario 
 WHERE U.IDUsuario = 4;
+
+SELECT * FROM BitacoraActividad;
